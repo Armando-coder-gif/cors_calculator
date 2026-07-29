@@ -79,6 +79,27 @@ body{
 
 }
 
+.bs-stepper-content{
+
+    max-height:520px;
+    overflow-y:auto;
+    scroll-behavior:smooth;
+
+}
+
+.bs-stepper-content::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.bs-stepper-content::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+    border-radius:3px;
+
+}
+
 .bs-stepper .content {
     transition: opacity 0.3s ease;
 }

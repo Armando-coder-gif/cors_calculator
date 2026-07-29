@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.stepper = new Stepper(stepperElement);
 
+    const content = stepperElement.querySelector(".bs-stepper-content");
+
+    stepperElement.addEventListener("shown.bs-stepper", () => {
+        if (content) content.scrollTop = 0;
+    });
+
     document.querySelectorAll(".next").forEach(btn => {
         btn.addEventListener("click", () => {
             window.stepper.next();
