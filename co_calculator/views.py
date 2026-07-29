@@ -9,32 +9,26 @@ def index(request):
         {
             "id": "coffee",
             "name": "Café",
-            "icon": "☕"
         },
         {
             "id": "cocoa",
             "name": "Cacao",
-            "icon": "🍫"
         },
         {
             "id": "oil_palm",
             "name": "Palma",
-            "icon": "🌴"
         },
         {
             "id": "sugarcane",
             "name": "Caña de azúcar",
-            "icon": "🎋"
         },
         {
             "id": "citrus",
             "name": "Cítricos",
-            "icon": "🍊"
         },
         {
             "id": "poultry",
             "name": "Avícola",
-            "icon": "🐔"
         },
     ]
    return render(request, "../templates/index.html", {
