@@ -1,0 +1,124 @@
+<div id="results" class="content">
+
+    <h2 class="mb-4 fw-bold">
+        Tu diagnóstico financiero
+    </h2>
+
+    <!-- Cuadro principal FOMO -->
+    <div class="card border-0 shadow mb-4" style="background: linear-gradient(135deg, #2d2d2d, #1a1a1a)">
+
+        <div class="card-body text-center py-5">
+
+            <p class="text-uppercase small mb-1" style="color: #aaa; letter-spacing: 2px">
+                Dinero que dejas en el campo
+            </p>
+
+            <h1 class="fw-bold mb-2" style="color: var(--primary); font-size: 3rem" id="moneyLeft">
+                $0 USD/Año
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- Métricas de impacto -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body text-center py-4">
+
+                    <div style="font-size: 2.5rem" class="mb-2">💰</div>
+
+                    <div class="text-muted small text-uppercase mb-1">Valor biofertilizante</div>
+
+                    <h3 class="fw-bold" style="color: var(--primary-dark)" id="fbbValue">$0</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body text-center py-4">
+
+                    <div style="font-size: 2.5rem" class="mb-2">🌱</div>
+
+                    <div class="text-muted small text-uppercase mb-1">Hectáreas que podrías revitalizar</div>
+
+                    <h3 class="fw-bold" style="color: var(--primary-dark)" id="hectaresResult">0 Ha</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body text-center py-4">
+
+                    <div style="font-size: 2.5rem" class="mb-2">☁️</div>
+
+                    <div class="text-muted small text-uppercase mb-1">CO₂ neto removido</div>
+
+                    <h3 class="fw-bold" style="color: var(--primary-dark)" id="co2Removed">0 tCO₂e</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body text-center py-4">
+
+                    <div style="font-size: 2.5rem" class="mb-2">🪴</div>
+
+                    <div class="text-muted small text-uppercase mb-1">Bolsas de biofertilizante</div>
+
+                    <h3 class="fw-bold" style="color: var(--primary-dark)" id="bagsResult">0 unidades</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Gráfico -->
+    <div class="card mb-4 border-0 shadow-sm">
+
+        <div class="card-body">
+
+            <h5 class="mb-3 fw-semibold">
+                💸 Lo que podrías estar ganando
+            </h5>
+
+            <canvas id="fomoChart" height="250"></canvas>
+
+            <small class="text-muted mt-2 d-block">
+                * No incluye inversión en hardware de pirólisis.
+            </small>
+
+        </div>
+
+    </div>
+
+    <button class="btn btn-secondary previous mt-2">
+        ← Atrás
+    </button>
+
+</div>

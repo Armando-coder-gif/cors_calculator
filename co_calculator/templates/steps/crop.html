@@ -1,0 +1,99 @@
+<div id="crop" class="content">
+
+    <h3 class="mb-2 fw-bold">
+        Deja de perder dinero. Empieza a secuestrar carbono.
+    </h3>
+
+    <p class="text-muted mb-4">
+        Calcula el valor oculto de tus residuos agrícolas.
+    </p>
+
+    <div class="row g-4">
+
+        <div class="col-12">
+
+            <label class="form-label fw-semibold">
+                Selecciona tu cultivo
+            </label>
+
+           <select
+                id="cropType"
+                class="form-select form-select-lg">
+
+                <option selected disabled value="">
+                    Elige un cultivo...
+                </option>
+
+                {% for crop in crops %}
+
+                    <option value="{{ crop.id }}">
+
+                        {{ crop.icon }} {{ crop.name }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <div class="col-12 col-md-6">
+
+            <label class="form-label fw-semibold">
+                Toneladas de biomasa residual / año
+            </label>
+
+            <div class="input-group input-group-lg">
+
+                <input
+                    id="tons"
+                    type="number"
+                    class="form-control"
+                    placeholder="Ej. 250"
+                    min="0"
+                    step="0.01">
+
+                <span class="input-group-text">
+                    t
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-md-6">
+
+            <label class="form-label fw-semibold">
+                Hectáreas en producción
+            </label>
+
+            <div class="input-group input-group-lg">
+
+                <input
+                    id="hectares"
+                    type="number"
+                    class="form-control"
+                    placeholder="Ej. 120"
+                    min="0"
+                    step="0.01">
+
+                <span class="input-group-text">
+                    ha
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="d-flex justify-content-end mt-5">
+
+        <button class="btn btn-agro btn-lg px-4" id="calculateBtn">
+            CALCULAR MIS ACTIVOS OCULTOS
+        </button>
+
+    </div>
+
+</div>

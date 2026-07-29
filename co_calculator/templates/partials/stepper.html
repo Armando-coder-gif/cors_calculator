@@ -1,0 +1,45 @@
+<div id="stepper" class="bs-stepper shadow-card">
+
+    <div class="bs-stepper-header">
+
+        <div class="step" data-target="#crop">
+
+            <button class="step-trigger">
+
+                <span class="bs-stepper-circle">1</span>
+
+                <span class="bs-stepper-label">
+                    Cultivo
+                </span>
+
+            </button>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step" data-target="#results">
+
+            <button class="step-trigger">
+
+                <span class="bs-stepper-circle">2</span>
+
+                <span class="bs-stepper-label">
+                    Resultados
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="bs-stepper-content">
+
+        {% include "steps/crop.html" %}
+
+        {% include "steps/results.html" %}
+
+    </div>
+
+</div>

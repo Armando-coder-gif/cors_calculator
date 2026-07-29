@@ -1,0 +1,30 @@
+[
+  {
+    "id": "coffee",
+    "name": "Café"
+  },
+  {
+    "id": "sugarcane",
+    "name": "Caña de azúcar"
+  },
+  {
+    "id": "corn",
+    "name": "Maíz"
+  },
+  {
+    "id": "rice",
+    "name": "Arroz"
+  },
+  {
+    "id": "banana",
+    "name": "Banano"
+  },
+  {
+    "id": "pineapple",
+    "name": "Piña"
+  },
+  {
+    "id": "oil_palm",
+    "name": "Palma aceitera"
+  }
+]
