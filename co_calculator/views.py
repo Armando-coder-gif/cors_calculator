@@ -1,36 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .services.calculator import CalculatorService
+from .constants.crops import CROPS
 
 
 def index(request):
    # TODO: VER SI SE PUEDE COLOCAR EN OTRO LUGAR
-   crops = [
-        {
-            "id": "coffee",
-            "name": "Café",
-        },
-        {
-            "id": "cocoa",
-            "name": "Cacao",
-        },
-        {
-            "id": "oil_palm",
-            "name": "Palma",
-        },
-        {
-            "id": "sugarcane",
-            "name": "Caña de azúcar",
-        },
-        {
-            "id": "citrus",
-            "name": "Cítricos",
-        },
-        {
-            "id": "poultry",
-            "name": "Avícola",
-        },
-    ]
+   crops =  CROPS
    return render(request, "../templates/index.html", {
         "crops": crops
     })
