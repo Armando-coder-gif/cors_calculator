@@ -1,5 +1,6 @@
 from ..constants.crops import CROPS
 from ..constants.economic import *
+from ..constants.data_constants import *
 
 class CalculatorService:
 
@@ -7,13 +8,9 @@ class CalculatorService:
 
         crop_data = next(c for c in CROPS if c["id"] == crop)
 
-        humidity_ratio = crop_data["humidity_ratio"]
-        pyrolysis_yield = crop_data["pyrolysis_yield"]
-        removal_factor = crop_data["removal_factor"]
-
-        dry_biomass = tons * humidity_ratio
-        biochar = dry_biomass * pyrolysis_yield
-        co2_removed = biochar * removal_factor
+        dry_biomass = tons * HUMIDITY_RATIO
+        biochar = dry_biomass * PYROLYSIS_YIELD
+        co2_removed = biochar * REMOVAL_FACTOR
 
         # CORCs
         corcs_value = co2_removed * CORC_PRICE
