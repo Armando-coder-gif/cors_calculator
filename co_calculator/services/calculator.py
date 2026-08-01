@@ -5,7 +5,7 @@ from ..constants.data_constants import *
 class CalculatorService:
 
      def calculate(self, crop, tons, hectares):
-
+        # TODO: ATRAPAR EL VALOR SI INGRESAN UN CULTIVO QUE ES INDEVIDO
         crop_data = next(c for c in CROPS if c["id"] == crop)
 
         dry_biomass = tons * HUMIDITY_RATIO
