@@ -1,12 +1,27 @@
 <div id="stepper" class="bs-stepper shadow-card">
 
     <div class="bs-stepper-header">
+        <div class="step" data-target="#info">
+
+            <button class="step-trigger">
+
+                <span class="bs-stepper-circle">1</span>
+
+                <span class="bs-stepper-label">
+                    Información
+                </span>
+
+            </button>
+
+        </div>
+
+        <div class="line"></div>
 
         <div class="step" data-target="#crop">
 
             <button class="step-trigger">
 
-                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-circle">2</span>
 
                 <span class="bs-stepper-label">
                     Cultivo
@@ -22,7 +37,7 @@
 
             <button class="step-trigger">
 
-                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-circle">3</span>
 
                 <span class="bs-stepper-label">
                     Volumen
@@ -35,6 +50,7 @@
     </div>
 
     <div class="bs-stepper-content">
+        {% include "steps/info.html" %}
 
         {% include "steps/crop.html" %}
 
