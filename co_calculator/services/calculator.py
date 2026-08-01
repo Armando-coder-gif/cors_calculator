@@ -5,7 +5,7 @@ class CalculatorService:
 
      def calculate(self, crop, tons, hectares):
 
-        crop_data = CROPS[crop]
+        crop_data = next(c for c in CROPS if c["id"] == crop)
 
         humidity_ratio = crop_data["humidity_ratio"]
         pyrolysis_yield = crop_data["pyrolysis_yield"]
@@ -36,7 +36,7 @@ class CalculatorService:
 
     "inputs": {
 
-        "crop": crop_data["name"],
+        "crop": crop_data["id"],
 
         "tons": tons,
 
