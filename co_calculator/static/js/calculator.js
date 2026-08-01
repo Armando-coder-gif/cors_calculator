@@ -135,6 +135,7 @@ function renderFomoChart(calculations) {
             }]
         },
         options: {
+            indexAxis: "y",
             responsive: true,
             plugins: {
                 legend: { display: false },
@@ -145,7 +146,7 @@ function renderFomoChart(calculations) {
                 }
             },
             scales: {
-                y: {
+                x: {
                     beginAtZero: true,
                     ticks: {
                         callback: value => `$${value.toLocaleString()}`
