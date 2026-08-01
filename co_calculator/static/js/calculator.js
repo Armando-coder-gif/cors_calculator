@@ -116,7 +116,7 @@ function renderFomoChart(calculations) {
     fomoChartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["Valor CORCs", "Inversión AgroCognitive", "Ganancia neta"],
+            labels: ["Ingresos Por Créditos De Carbono", "Servicio AgroCognitive", "Ganancia Neta"],
             datasets: [{
                 label: "$",
                 data: [corcsValue, agroCost, netGain],
