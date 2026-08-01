@@ -89,17 +89,11 @@ function renderResults(result) {
     document.getElementById("moneyLeft").textContent =
         `$${calc.corcs_value.toLocaleString()} USD/Año`;
 
-    document.getElementById("fbbValue").textContent =
-        `$${calc.fbb_value.toLocaleString()}`;
-
     document.getElementById("hectaresResult").textContent =
         `${hectares} Ha`;
 
     document.getElementById("co2Removed").textContent =
         `${calc.co2_removed} tCO₂e`;
-
-    document.getElementById("bagsResult").textContent =
-        `${calc.bags.toLocaleString()} unidades`;
 
     renderFomoChart(calc);
 
