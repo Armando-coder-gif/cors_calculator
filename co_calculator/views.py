@@ -5,10 +5,8 @@ from .constants.crops import CROPS
 
 
 def index(request):
-   # TODO: VER SI SE PUEDE COLOCAR EN OTRO LUGAR
-   crops =  CROPS
    return render(request, "../templates/index.html", {
-        "crops": crops
+        "crops": CROPS
     })
 
 def calculate(request):
