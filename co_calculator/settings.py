@@ -119,3 +119,13 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "co_calculator" / "static",
 ]
+
+# Email — usar consola en desarrollo, cambiar a SMTP en producción
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.SmtpEmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'tu_correo@gmail.com'
+# EMAIL_HOST_PASSWORD = 'tu_app_password'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'noreply@agrocognitive.com'

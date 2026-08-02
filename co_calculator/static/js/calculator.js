@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     calculateBtn.addEventListener("click", calculate);
 
+    document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
+    document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
+
 });
 
 function getCookie(name) {
@@ -156,4 +159,79 @@ function renderFomoChart(calculations) {
         }
     });
 
+}
+
+function _getReportData() {
+    const chartCanvas = document.getElementById("fomoChart");
+    const chartImage = chartCanvas ? chartCanvas.toDataURL("image/png") : "";
+
+    return {
+        crop: document.getElementById("cropType").value,
+        tons: document.getElementById("tons").value,
+        hectares: document.getElementById("hectares").value,
+        company_name: document.getElementById("companyName").value,
+        company_email: document.getElementById("companyEmail").value,
+        company_country: document.getElementById("companyCountry").selectedOptions[0]?.text || "",
+        chart_image: chartImage,
+    };
+}
+
+async function downloadPdf() {
+    try {
+        const response = await fetch("/download-pdf/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(_getReportData()),
+        });
+
+        if (!response.ok) throw new Error("Error al generar el PDF.");
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "diagnostico_agrocognitive.pdf";
+        a.click();
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    }
+}
+
+async function sendPdfEmail() {
+    const btn = document.getElementById("sendEmailBtn");
+    const data = _getReportData();
+
+    if (!data.company_email) {
+        alert("Ingresa un correo electrónico en el paso anterior.");
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+
+    try {
+        const response = await fetch("/send-pdf-email/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) throw new Error("Error al enviar el correo.");
+
+        alert("¡Correo enviado exitosamente!");
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "✉️ Enviar por correo";
+    }
 }

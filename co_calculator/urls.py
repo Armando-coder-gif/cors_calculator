@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.index, name="index"),
     path("calculate/", views.calculate, name="calculate"),
+    path("download-pdf/", views.download_pdf, name="download_pdf"),
+    path("send-pdf-email/", views.send_pdf_email, name="send_pdf_email"),
 ]

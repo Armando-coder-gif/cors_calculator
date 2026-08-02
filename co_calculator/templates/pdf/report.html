@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            color: #20232A;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #9CCB3B;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #7BAE22;
+            font-size: 24px;
+            margin: 0 0 5px;
+        }
+
+        .header p {
+            color: #666;
+            margin: 0;
+            font-size: 11px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 16px;
+            color: #7BAE22;
+            border-bottom: 1px solid #E5E5E5;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+        }
+
+        .info-table {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .info-table td {
+            width: 50%;
+            padding: 4px 10px;
+            vertical-align: top;
+        }
+
+        .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        .value {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .highlight-box .small-label {
+            text-transform: uppercase;
+            font-size: 10px;
+            color: #aaa;
+            letter-spacing: 2px;
+        }
+
+        .highlight-box .big-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #9CCB3B;
+            margin: 5px 0;
+        }
+
+        .metrics-table {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .metrics-table td {
+            width: 50%;
+            border: 1px solid #E5E5E5;
+            padding: 15px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        .metric-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        .metric-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #7BAE22;
+        }
+
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .detail-table th, .detail-table td {
+            text-align: left;
+            padding: 8px 10px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        .detail-table th {
+            background-color: #f5f5f5;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        .detail-table td.val {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .net-row {
+            background-color: #f0f7e4;
+        }
+
+        .net-row td.val {
+            color: #7BAE22;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            border-top: 1px solid #E5E5E5;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>AgroCognitive</h1>
+        <p>Diagn&oacute;stico Financiero &mdash; Calculadora de Cr&eacute;ditos de Carbono</p>
+    </div>
+
+    <div class="section">
+        <h2>Informaci&oacute;n de la empresa</h2>
+        <table class="info-table">
+            <tr>
+                <td>
+                    <div class="label">Empresa</div>
+                    <div class="value">{{ company_name }}</div>
+                </td>
+                <td>
+                    <div class="label">Correo electr&oacute;nico</div>
+                    <div class="value">{{ company_email }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="label">Pa&iacute;s</div>
+                    <div class="value">{{ company_country }}</div>
+                </td>
+                <td>
+                    <div class="label">Cultivo</div>
+                    <div class="value">{{ crop }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="label">Toneladas de residuos</div>
+                    <div class="value">{{ tons }}</div>
+                </td>
+                <td>
+                    <div class="label">Hect&aacute;reas</div>
+                    <div class="value">{{ hectares }}</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="highlight-box">
+        <div class="small-label">Dinero que dejas en el campo</div>
+        <div class="big-number">${{ corcs_value }} USD/A&ntilde;o</div>
+    </div>
+
+    <table class="metrics-table">
+        <tr>
+            <td>
+                <div class="metric-label">Hect&aacute;reas que podr&iacute;as revitalizar</div>
+                <div class="metric-value">{{ hectares }} Ha</div>
+            </td>
+            <td>
+                <div class="metric-label">CO2 neto removido</div>
+                <div class="metric-value">{{ co2_removed }} tCO2e</div>
+            </td>
+        </tr>
+    </table>
+
+    {% if chart_image %}
+    <div class="section" style="page-break-before: always;">
+        <h2>Dinero perdido vs Dinero ganado</h2>
+        <img src="{{ chart_image }}" style="width: 100%;" />
+    </div>
+    {% endif %}
+
+    <div class="section">
+        <h2>Detalle de c&aacute;lculos</h2>
+        <table class="detail-table">
+            <tr>
+                <th>Concepto</th>
+                <th style="text-align:right">Valor</th>
+            </tr>
+            <tr>
+                <td>Biomasa seca</td>
+                <td class="val">{{ dry_biomass }} t</td>
+            </tr>
+            <tr>
+                <td>Biochar producido</td>
+                <td class="val">{{ biochar }} t</td>
+            </tr>
+            <tr>
+                <td>CO2 removido</td>
+                <td class="val">{{ co2_removed }} tCO2e</td>
+            </tr>
+            <tr>
+                <td>Ingresos por cr&eacute;ditos de carbono (CORCs)</td>
+                <td class="val">${{ corcs_value }} USD</td>
+            </tr>
+            <tr>
+                <td>Servicio AgroCognitive</td>
+                <td class="val">${{ agrocognitive_cost }} USD</td>
+            </tr>
+            <tr class="net-row">
+                <td><strong>Ganancia neta</strong></td>
+                <td class="val">${{ net_gain }} USD</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>* No incluye inversi&oacute;n en hardware de pir&oacute;lisis.</p>
+        <p>Generado por AgroCognitive &mdash; {{ date }}</p>
+    </div>
+
+</body>
+</html>
