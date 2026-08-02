@@ -1,10 +1,10 @@
 <div id="info" class="content">
 
-    <h3 class="mb-2 fw-bold">
+    <h3 class="mb-2 fw-bold" data-i18n="info_title">
         Cuéntanos sobre tu empresa
     </h3>
 
-    <p class="text-muted mb-4">
+    <p class="text-muted mb-4" data-i18n="info_subtitle">
         Para personalizar tu diagnóstico financiero.
     </p>
 
@@ -12,7 +12,7 @@
 
         <div class="col-12">
 
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold" data-i18n="info_company_name">
                 Nombre de la empresa
             </label>
 
@@ -20,13 +20,14 @@
                 id="companyName"
                 type="text"
                 class="form-control"
-                placeholder="Ej. Finca El Roble">
+                placeholder="Ej. Finca El Roble"
+                data-i18n-placeholder="info_company_name_placeholder">
 
         </div>
 
         <div class="col-12 col-md-6">
 
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold" data-i18n="info_email">
                 Correo electrónico
             </label>
 
@@ -34,19 +35,20 @@
                 id="companyEmail"
                 type="email"
                 class="form-control"
-                placeholder="Ej. contacto@empresa.com">
+                placeholder="Ej. contacto@empresa.com"
+                data-i18n-placeholder="info_email_placeholder">
 
         </div>
 
         <div class="col-12 col-md-6">
 
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold" data-i18n="info_country">
                 País
             </label>
 
             <select id="companyCountry" class="form-select">
 
-                <option selected disabled value="">Selecciona un país...</option>
+                <option selected disabled value="" data-i18n="info_country_placeholder">Selecciona un país...</option>
                 <option value="CO">Colombia</option>
                 <option value="MX">México</option>
                 <option value="CR">Costa Rica</option>
@@ -68,7 +70,7 @@
 
     <div class="d-grid d-md-flex justify-content-md-end mt-5">
 
-        <button class="btn btn-agro py-2 px-4 next" id="nextToCalcBtn">
+        <button class="btn btn-agro py-2 px-4 next" id="nextToCalcBtn" data-i18n="info_next">
             SIGUIENTE
         </button>
 

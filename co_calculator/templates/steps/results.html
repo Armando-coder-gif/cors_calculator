@@ -1,6 +1,6 @@
 <div id="volume" class="content">
 
-    <h2 class="mb-4 fw-bold">
+    <h2 class="mb-4 fw-bold" data-i18n="results_title">
         Tu diagnóstico financiero
     </h2>
 
@@ -9,11 +9,11 @@
 
         <div class="card-body text-center py-5">
 
-            <p class="text-uppercase small mb-1" style="color: #aaa; letter-spacing: 2px">
+            <p class="text-uppercase small mb-1" style="color: #aaa; letter-spacing: 2px" data-i18n="results_money_label">
                 Dinero que dejas en el campo
             </p>
 
-            <h1 class="fw-bold mb-2" style="color: var(--primary); font-size: 3rem" id="moneyLeft">
+            <h1 class="fw-bold mb-2" style="color: var(--primary); font-size: 3rem" id="moneyLeft" data-i18n="results_money_default">
                 $0 USD/Año
             </h1>
 
@@ -32,7 +32,7 @@
 
                     <div style="font-size: 2.5rem" class="mb-2">🌱</div>
 
-                    <div class="text-muted small text-uppercase mb-1">Hectáreas que podrías revitalizar</div>
+                    <div class="text-muted small text-uppercase mb-1" data-i18n="results_hectares_label">Hectáreas que podrías revitalizar</div>
 
                     <h3 class="fw-bold" style="color: var(--primary-dark)" id="hectaresResult">0 Ha</h3>
 
@@ -50,7 +50,7 @@
 
                     <div style="font-size: 2.5rem" class="mb-2">☁️</div>
 
-                    <div class="text-muted small text-uppercase mb-1">CO₂ neto removido</div>
+                    <div class="text-muted small text-uppercase mb-1" data-i18n="results_co2_label">CO₂ neto removido</div>
 
                     <h3 class="fw-bold" style="color: var(--primary-dark)" id="co2Removed">0 tCO₂e</h3>
 
@@ -69,7 +69,7 @@
 
             <canvas id="fomoChart" height="100"></canvas>
 
-            <small class="text-muted mt-1 d-block">
+            <small class="text-muted mt-1 d-block" data-i18n="results_chart_note">
                 * No incluye inversión en hardware de pirólisis.
             </small>
 
@@ -77,16 +77,12 @@
 
     </div>
 
-    <button class="btn btn-secondary previous mt-2">
+    <button class="btn btn-secondary previous mt-2" data-i18n="btn_back">
         Atrás
     </button>
 
-    <button class="btn btn-agro mt-2 ms-2" id="downloadPdfBtn">
-        📄 Descargar PDF
-    </button>
-
-    <button class="btn btn-agro mt-2 ms-2" id="sendEmailBtn">
-        ✉️ Enviar por correo
+    <button class="btn btn-agro mt-2 ms-2 next" id="goToReportBtn" data-i18n="info_next">
+        SIGUIENTE
     </button>
 
 </div>

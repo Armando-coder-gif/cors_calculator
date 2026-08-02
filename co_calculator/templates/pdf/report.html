@@ -161,39 +161,39 @@
 
     <div class="header">
         <h1>AgroCognitive</h1>
-        <p>Diagn&oacute;stico Financiero &mdash; Calculadora de Cr&eacute;ditos de Carbono</p>
+        <p>{{ t.pdf_title }} &mdash; {{ t.pdf_subtitle }}</p>
     </div>
 
     <div class="section">
-        <h2>Informaci&oacute;n de la empresa</h2>
+        <h2>{{ t.pdf_company_section }}</h2>
         <table class="info-table">
             <tr>
                 <td>
-                    <div class="label">Empresa</div>
+                    <div class="label">{{ t.pdf_company }}</div>
                     <div class="value">{{ company_name }}</div>
                 </td>
                 <td>
-                    <div class="label">Correo electr&oacute;nico</div>
+                    <div class="label">{{ t.pdf_email }}</div>
                     <div class="value">{{ company_email }}</div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class="label">Pa&iacute;s</div>
+                    <div class="label">{{ t.pdf_country }}</div>
                     <div class="value">{{ company_country }}</div>
                 </td>
                 <td>
-                    <div class="label">Cultivo</div>
+                    <div class="label">{{ t.pdf_crop }}</div>
                     <div class="value">{{ crop }}</div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class="label">Toneladas de residuos</div>
+                    <div class="label">{{ t.pdf_tons }}</div>
                     <div class="value">{{ tons }}</div>
                 </td>
                 <td>
-                    <div class="label">Hect&aacute;reas</div>
+                    <div class="label">{{ t.pdf_hectares }}</div>
                     <div class="value">{{ hectares }}</div>
                 </td>
             </tr>
@@ -201,18 +201,18 @@
     </div>
 
     <div class="highlight-box">
-        <div class="small-label">Dinero que dejas en el campo</div>
-        <div class="big-number">${{ corcs_value }} USD/A&ntilde;o</div>
+        <div class="small-label">{{ t.pdf_money_label }}</div>
+        <div class="big-number">${{ corcs_value }} {{ t.money_suffix }}</div>
     </div>
 
     <table class="metrics-table">
         <tr>
             <td>
-                <div class="metric-label">Hect&aacute;reas que podr&iacute;as revitalizar</div>
+                <div class="metric-label">{{ t.pdf_hectares_metric }}</div>
                 <div class="metric-value">{{ hectares }} Ha</div>
             </td>
             <td>
-                <div class="metric-label">CO2 neto removido</div>
+                <div class="metric-label">{{ t.pdf_co2_metric }}</div>
                 <div class="metric-value">{{ co2_removed }} tCO2e</div>
             </td>
         </tr>
@@ -220,48 +220,48 @@
 
     {% if chart_image %}
     <div class="section" style="page-break-before: always;">
-        <h2>Dinero perdido vs Dinero ganado</h2>
+        <h2>{{ t.pdf_chart_title }}</h2>
         <img src="{{ chart_image }}" style="width: 100%;" />
     </div>
     {% endif %}
 
     <div class="section">
-        <h2>Detalle de c&aacute;lculos</h2>
+        <h2>{{ t.pdf_detail_title }}</h2>
         <table class="detail-table">
             <tr>
-                <th>Concepto</th>
-                <th style="text-align:right">Valor</th>
+                <th>{{ t.pdf_col_concept }}</th>
+                <th style="text-align:right">{{ t.pdf_col_value }}</th>
             </tr>
             <tr>
-                <td>Biomasa seca</td>
+                <td>{{ t.pdf_dry_biomass }}</td>
                 <td class="val">{{ dry_biomass }} t</td>
             </tr>
             <tr>
-                <td>Biochar producido</td>
+                <td>{{ t.pdf_biochar }}</td>
                 <td class="val">{{ biochar }} t</td>
             </tr>
             <tr>
-                <td>CO2 removido</td>
+                <td>{{ t.pdf_co2_removed }}</td>
                 <td class="val">{{ co2_removed }} tCO2e</td>
             </tr>
             <tr>
-                <td>Ingresos por cr&eacute;ditos de carbono (CORCs)</td>
+                <td>{{ t.pdf_corcs }}</td>
                 <td class="val">${{ corcs_value }} USD</td>
             </tr>
             <tr>
-                <td>Servicio AgroCognitive</td>
+                <td>{{ t.pdf_service }}</td>
                 <td class="val">${{ agrocognitive_cost }} USD</td>
             </tr>
             <tr class="net-row">
-                <td><strong>Ganancia neta</strong></td>
+                <td><strong>{{ t.pdf_net_gain }}</strong></td>
                 <td class="val">${{ net_gain }} USD</td>
             </tr>
         </table>
     </div>
 
     <div class="footer">
-        <p>* No incluye inversi&oacute;n en hardware de pir&oacute;lisis.</p>
-        <p>Generado por AgroCognitive &mdash; {{ date }}</p>
+        <p>* {{ t.pdf_footer_note }}</p>
+        <p>{{ t.pdf_footer_generated }} &mdash; {{ date }}</p>
     </div>
 
 </body>

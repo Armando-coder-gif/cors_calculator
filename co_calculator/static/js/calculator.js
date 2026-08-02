@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+    await i18n.init();
 
     const calculateBtn = document.getElementById("calculateBtn");
 
@@ -6,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     calculateBtn.addEventListener("click", calculate);
 
+    document.getElementById("goToReportBtn").addEventListener("click", loadReportPreview);
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
@@ -36,7 +39,7 @@ async function calculate() {
 
         if (!crop || !tons || !hectares) {
 
-            alert("Todos los campos son obligatorios.");
+            alert(i18n.t("alert_required"));
 
             return;
 
@@ -64,7 +67,7 @@ async function calculate() {
 
         if (!response.ok) {
 
-            throw new Error("Error al calcular.");
+            throw new Error(i18n.t("alert_calc_error"));
 
         }
 
@@ -90,7 +93,7 @@ function renderResults(result) {
     const hectares = result.inputs.hectares;
 
     document.getElementById("moneyLeft").textContent =
-        `$${calc.corcs_value.toLocaleString()} USD/Año`;
+        `$${calc.corcs_value.toLocaleString()} ${i18n.t("money_suffix")}`;
 
     document.getElementById("hectaresResult").textContent =
         `${hectares} Ha`;
@@ -119,7 +122,7 @@ function renderFomoChart(calculations) {
     fomoChartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["Ingresos Por Créditos De Carbono", "Servicio AgroCognitive", "Ganancia Neta"],
+            labels: [i18n.t("chart_income"), i18n.t("chart_service"), i18n.t("chart_net")],
             datasets: [{
                 label: "$",
                 data: [corcsValue, agroCost, netGain],
@@ -144,7 +147,7 @@ function renderFomoChart(calculations) {
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "Dinero perdido vs Dinero ganado",
+                    text: i18n.t("chart_title"),
                     font: { size: 16 }
                 }
             },
@@ -173,7 +176,32 @@ function _getReportData() {
         company_email: document.getElementById("companyEmail").value,
         company_country: document.getElementById("companyCountry").selectedOptions[0]?.text || "",
         chart_image: chartImage,
+        lang: i18n.getLang(),
     };
+}
+
+async function loadReportPreview() {
+    try {
+        const response = await fetch("/preview-report/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(_getReportData()),
+        });
+
+        if (!response.ok) throw new Error(i18n.t("alert_calc_error"));
+
+        const html = await response.text();
+        const iframe = document.getElementById("reportPreview");
+        iframe.srcdoc = html;
+
+        window.stepper.next();
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    }
 }
 
 async function downloadPdf() {
@@ -187,7 +215,7 @@ async function downloadPdf() {
             body: JSON.stringify(_getReportData()),
         });
 
-        if (!response.ok) throw new Error("Error al generar el PDF.");
+        if (!response.ok) throw new Error(i18n.t("alert_pdf_error"));
 
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
@@ -207,12 +235,12 @@ async function sendPdfEmail() {
     const data = _getReportData();
 
     if (!data.company_email) {
-        alert("Ingresa un correo electrónico en el paso anterior.");
+        alert(i18n.t("alert_email_missing"));
         return;
     }
 
     btn.disabled = true;
-    btn.textContent = "Enviando...";
+    btn.textContent = i18n.t("alert_email_sending");
 
     try {
         const response = await fetch("/send-pdf-email/", {
@@ -224,14 +252,14 @@ async function sendPdfEmail() {
             body: JSON.stringify(data),
         });
 
-        if (!response.ok) throw new Error("Error al enviar el correo.");
+        if (!response.ok) throw new Error(i18n.t("alert_email_error"));
 
-        alert("¡Correo enviado exitosamente!");
+        alert(i18n.t("alert_email_success"));
     } catch (error) {
         console.error(error);
         alert(error.message);
     } finally {
         btn.disabled = false;
-        btn.textContent = "✉️ Enviar por correo";
+        btn.textContent = i18n.t("results_send_email");
     }
 }

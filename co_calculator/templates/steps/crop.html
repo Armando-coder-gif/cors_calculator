@@ -1,10 +1,10 @@
 <div id="crop" class="content">
 
-    <h3 class="mb-2 fw-bold">
+    <h3 class="mb-2 fw-bold" data-i18n="crop_title">
         Deja de perder dinero. Empieza a secuestrar carbono.
     </h3>
 
-    <p class="text-muted mb-4">
+    <p class="text-muted mb-4" data-i18n="crop_subtitle">
         Calcula el valor oculto de tus residuos agrícolas.
     </p>
 
@@ -12,7 +12,7 @@
 
         <div class="col-12">
 
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold" data-i18n="crop_select_label">
                 Selecciona tu cultivo
             </label>
 
@@ -20,7 +20,7 @@
                 id="cropType"
                 class="form-select">
 
-                <option selected disabled value="">
+                <option selected disabled value="" data-i18n="crop_select_placeholder">
                     Elige un cultivo...
                 </option>
 
@@ -40,7 +40,7 @@
 
         <div class="col-12 col-md-6">
 
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold" data-i18n="crop_tons_label">
                 Toneladas de biomasa residual / año
             </label>
 
@@ -51,6 +51,7 @@
                     type="number"
                     class="form-control"
                     placeholder="Ej. 250"
+                    data-i18n-placeholder="crop_tons_placeholder"
                     min="0"
                     step="0.01">
 
@@ -64,7 +65,7 @@
 
         <div class="col-12 col-md-6">
 
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold" data-i18n="crop_hectares_label">
                 Hectáreas en producción
             </label>
 
@@ -75,6 +76,7 @@
                     type="number"
                     class="form-control"
                     placeholder="Ej. 120"
+                    data-i18n-placeholder="crop_hectares_placeholder"
                     min="0"
                     step="0.01">
 
@@ -90,11 +92,11 @@
 
     <div class="d-flex justify-content-between mt-5">
 
-        <button class="btn btn-secondary previous py-2 px-4">
+        <button class="btn btn-secondary previous py-2 px-4" data-i18n="btn_back">
             Atrás
         </button>
 
-        <button class="btn btn-agro py-2 px-4" id="calculateBtn">
+        <button class="btn btn-agro py-2 px-4" id="calculateBtn" data-i18n="crop_calculate">
             CALCULAR MIS ACTIVOS OCULTOS
         </button>
 

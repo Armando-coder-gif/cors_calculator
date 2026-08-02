@@ -7,7 +7,7 @@
 
                 <span class="bs-stepper-circle">1</span>
 
-                <span class="bs-stepper-label">
+                <span class="bs-stepper-label" data-i18n="step_info">
                     Información
                 </span>
 
@@ -23,7 +23,7 @@
 
                 <span class="bs-stepper-circle">2</span>
 
-                <span class="bs-stepper-label">
+                <span class="bs-stepper-label" data-i18n="step_crop">
                     Cultivo
                 </span>
 
@@ -39,8 +39,24 @@
 
                 <span class="bs-stepper-circle">3</span>
 
-                <span class="bs-stepper-label">
+                <span class="bs-stepper-label" data-i18n="step_volume">
                     Volumen
+                </span>
+
+            </button>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step" data-target="#results">
+
+            <button class="step-trigger">
+
+                <span class="bs-stepper-circle">4</span>
+
+                <span class="bs-stepper-label" data-i18n="step_results">
+                    Resultados
                 </span>
 
             </button>
@@ -55,6 +71,8 @@
         {% include "steps/crop.html" %}
 
         {% include "steps/results.html" %}
+
+        {% include "steps/report.html" %}
 
     </div>
 
