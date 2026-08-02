@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.index, name="index"),
+    path("api/countries/", views.countries, name="countries"),
     path("calculate/", views.calculate, name="calculate"),
     path("preview-report/", views.preview_report, name="preview_report"),
     path("download-pdf/", views.download_pdf, name="download_pdf"),

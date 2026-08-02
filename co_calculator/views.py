@@ -3,6 +3,7 @@ import json
 from datetime import date
 from pathlib import Path
 
+import pycountry
 from django.shortcuts import render
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
@@ -27,6 +28,16 @@ def index(request):
    return render(request, "../templates/index.html", {
         "crops": CROPS
     })
+
+
+def countries(request):
+    data = [
+        {"code": c.alpha_2, "name": c.name}
+        for c in pycountry.countries
+    ]
+    data.sort(key=lambda c: c["name"])
+    return JsonResponse(data, safe=False)
+
 
 def calculate(request):
 
