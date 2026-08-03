@@ -46,6 +46,8 @@
   "chart_title": "Money You're Missing Out On vs. Profit Earned",
 
   "alert_required": "All fields are required.",
+  "alert_tons_invalid": "Tons must be a value between 0.01 and 100,000.",
+  "alert_hectares_invalid": "Hectares must be a value between 0.01 and 50,000.",
   "alert_calc_error": "Error calculating.",
   "alert_pdf_error": "Error generating PDF.",
   "alert_email_missing": "Enter an email address in the previous step.",

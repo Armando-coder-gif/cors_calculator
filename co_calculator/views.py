@@ -41,20 +41,20 @@ def countries(request):
 
 def calculate(request):
 
-    crop = request.POST["crop"]
+    crop = request.POST.get("crop", "")
 
-    tons = float(request.POST["tons"])
-
-    hectares = float(request.POST["hectares"])
-
+    try:
+        tons = float(request.POST.get("tons", 0))
+        hectares = float(request.POST.get("hectares", 0))
+    except (ValueError, TypeError):
+        return JsonResponse({"error": "Valores numéricos inválidos."}, status=400)
 
     service = CalculatorService()
 
-    result = service.calculate(
-        crop,
-        tons,
-        hectares
-    )
+    try:
+        result = service.calculate(crop, tons, hectares)
+    except ValueError as e:
+        return JsonResponse({"error": str(e)}, status=400)
 
     return JsonResponse(result)
 

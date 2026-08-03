@@ -39,15 +39,25 @@ async function calculate() {
     try {
 
         const crop = document.getElementById("cropType").value;
-        const tons = document.getElementById("tons").value;
-        const hectares = document.getElementById("hectares").value;
+        const tonsRaw = document.getElementById("tons").value;
+        const hectaresRaw = document.getElementById("hectares").value;
 
-        if (!crop || !tons || !hectares) {
-
+        if (!crop || !tonsRaw || !hectaresRaw) {
             alert(i18n.t("alert_required"));
-
             return;
+        }
 
+        const tons = parseFloat(tonsRaw);
+        const hectares = parseFloat(hectaresRaw);
+
+        if (isNaN(tons) || tons <= 0 || tons > 100000) {
+            alert(i18n.t("alert_tons_invalid"));
+            return;
+        }
+
+        if (isNaN(hectares) || hectares <= 0 || hectares > 50000) {
+            alert(i18n.t("alert_hectares_invalid"));
+            return;
         }
 
         const formData = new FormData();

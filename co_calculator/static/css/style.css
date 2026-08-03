@@ -100,13 +100,31 @@ body{
 .bs-stepper-circle{
 
     background:var(--primary)!important;
+    width:32px;
+    height:32px;
+    font-size:14px;
+    line-height:32px;
 
 }
 
 .bs-stepper-label{
 
     font-weight:600;
+    font-size:12px;
 
+}
+
+.bs-stepper-header{
+    justify-content:center;
+    gap:0;
+}
+
+.bs-stepper-header .step{
+    flex:0 1 auto;
+}
+
+.bs-stepper-header .line{
+    flex:0 1 30px;
 }
 
 .bs-stepper-content{
@@ -193,6 +211,59 @@ body{
 }
 
 /* Mobile responsive */
+@media (max-width: 768px){
+
+    .shadow-card{
+        padding:20px;
+        border-radius:14px;
+    }
+
+    .bs-stepper-header{
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        gap:0;
+        padding-bottom:8px;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .bs-stepper-header::-webkit-scrollbar{
+        display:none;
+    }
+
+    .bs-stepper-label{
+        font-size:10px;
+        white-space:nowrap;
+    }
+
+    .bs-stepper-circle{
+        width:30px;
+        height:30px;
+        font-size:13px;
+        line-height:30px;
+    }
+
+    .line{
+        flex:0 0 auto;
+        min-width:8px;
+        max-width:15px;
+    }
+
+    .step{
+        flex-shrink:0;
+    }
+
+    h2, h3{
+        font-size:1.3rem;
+    }
+
+    .container.py-5{
+        padding-top:1.5rem!important;
+        padding-bottom:1.5rem!important;
+        padding-left:12px!important;
+        padding-right:12px!important;
+    }
+}
+
 @media (max-width: 576px){
 
     .shadow-card{
@@ -200,22 +271,15 @@ body{
         border-radius:12px;
     }
 
-    .bs-stepper-header{
-        flex-wrap:nowrap;
-        overflow-x:auto;
-        gap:0;
-        padding-bottom:8px;
-    }
-
     .bs-stepper-label{
-        font-size:11px;
+        font-size:9px;
     }
 
     .bs-stepper-circle{
-        width:28px;
-        height:28px;
-        font-size:12px;
-        line-height:28px;
+        width:26px;
+        height:26px;
+        font-size:11px;
+        line-height:26px;
     }
 
     .bs-stepper-content{
@@ -224,16 +288,15 @@ body{
     }
 
     .title{
-        font-size:1.8rem;
+        font-size:1.6rem;
     }
 
-    .container.py-5{
-        padding-top:1.5rem!important;
-        padding-bottom:1.5rem!important;
+    h2, h3{
+        font-size:1.15rem;
     }
 
     #moneyLeft{
-        font-size:1.8rem!important;
+        font-size:1.6rem!important;
     }
 
     #fomoChart{
@@ -241,20 +304,45 @@ body{
         min-height:150px;
     }
 
-    .row.g-4{
-        gap:0.5rem;
-    }
-
     .card-body.py-4{
         padding:0.75rem!important;
     }
 
     .card-body.py-5{
-        padding:1.5rem!important;
+        padding:1.25rem!important;
     }
 
-    .line{
-        flex:0 0 auto;
-        min-width:10px;
+    .subtitle{
+        font-size:0.85rem;
+        margin-bottom:15px;
+    }
+
+    .form-control, .form-select{
+        font-size:14px;
+    }
+
+    .btn{
+        font-size:13px;
+    }
+
+    /* Hook step mobile */
+    #hook .d-flex.align-items-center.justify-content-center{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+
+    #hook .d-flex.align-items-center.justify-content-center .me-3{
+        margin-right:0!important;
+    }
+
+    #hookCard .d-flex.justify-content-between{
+        flex-direction:column;
+        gap:4px;
+        text-align:center;
+    }
+
+    #hookCard h4{
+        font-size:1.1rem;
     }
 }

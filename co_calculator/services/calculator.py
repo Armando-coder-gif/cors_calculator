@@ -1,14 +1,21 @@
-from ..constants.crops import CROPS
+from ..constants.crops import CROPS, MAX_TONS, MAX_HECTARES
 from ..constants.economic import *
 from ..constants.data_constants import *
 
 class CalculatorService:
 
      def calculate(self, crop, tons, hectares):
-        # TODO: ATRAPAR EL VALOR SI INGRESAN UN CULTIVO QUE ES INDEVIDO
-        crop_data = next(c for c in CROPS if c["id"] == crop)
+        crop_data = next((c for c in CROPS if c["id"] == crop), None)
+        if not crop_data:
+            raise ValueError(f"Cultivo no válido: {crop}")
 
-        dry_biomass = tons * HUMIDITY_RATIO
+        if tons <= 0 or tons > MAX_TONS:
+            raise ValueError(f"Toneladas fuera de rango: {tons}")
+        if hectares <= 0 or hectares > MAX_HECTARES:
+            raise ValueError(f"Hectáreas fuera de rango: {hectares}")
+
+        moisture = crop_data.get("moisture", 0.50)
+        dry_biomass = tons * (1 - moisture)
         biochar = dry_biomass * PYROLYSIS_YIELD
         co2_removed = biochar * REMOVAL_FACTOR
 

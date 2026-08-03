@@ -46,6 +46,8 @@
   "chart_title": "Dinero que estás dejando de ganar vs Ganancia obtenida",
 
   "alert_required": "Todos los campos son obligatorios.",
+  "alert_tons_invalid": "Las toneladas deben ser un valor entre 0.01 y 100,000.",
+  "alert_hectares_invalid": "Las hectáreas deben ser un valor entre 0.01 y 50,000.",
   "alert_calc_error": "Error al calcular.",
   "alert_pdf_error": "Error al generar el PDF.",
   "alert_email_missing": "Ingresa un correo electrónico en el paso anterior.",
