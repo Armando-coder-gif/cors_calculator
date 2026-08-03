@@ -1,7 +1,14 @@
 :root{
 
-    --primary:#9CCB3B;
+    --primary:#a4c635;
     --primary-dark:#7BAE22;
+    --primary-btn-bg-color:#ff9800;
+    --primary-btn-bg-hover:#e68900;
+
+    --main-color:#a4c635;
+    --containers-color:#fff;
+    --main-bg-color:#eee;
+    --icono-font-size:15px;
 
     --background:#F9FBF8;
 
@@ -51,7 +58,7 @@ body{
 
 .btn-agro{
 
-    background:var(--primary);
+    background:var(--primary-btn-bg-color);
 
     color:white;
 
@@ -63,7 +70,7 @@ body{
 
 .btn-agro:hover{
 
-    background:var(--primary-dark);
+    background:var(--primary-btn-bg-hover);
 
     color:white;
 

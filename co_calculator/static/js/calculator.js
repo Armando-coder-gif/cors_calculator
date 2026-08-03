@@ -127,13 +127,13 @@ function renderFomoChart(calculations) {
                 label: "$",
                 data: [corcsValue, agroCost, netGain],
                 backgroundColor: [
-                    "rgba(108, 117, 125, 0.6)",
-                    "rgba(156, 203, 59, 0.5)",
+                    "rgba(164, 198, 53, 0.6)",
+                    "rgba(255, 152, 0, 0.6)",
                     "rgba(123, 174, 34, 0.7)"
                 ],
                 borderColor: [
-                    "rgba(108, 117, 125, 1)",
-                    "rgba(156, 203, 59, 1)",
+                    "rgba(164, 198, 53, 1)",
+                    "rgba(255, 152, 0, 1)",
                     "rgba(123, 174, 34, 1)"
                 ],
                 borderWidth: 2,
