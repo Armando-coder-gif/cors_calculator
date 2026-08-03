@@ -169,3 +169,70 @@ body{
 .lang-text{
     letter-spacing:.5px;
 }
+
+/* Mobile responsive */
+@media (max-width: 576px){
+
+    .shadow-card{
+        padding:15px;
+        border-radius:12px;
+    }
+
+    .bs-stepper-header{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        gap:0;
+        padding-bottom:8px;
+    }
+
+    .bs-stepper-label{
+        font-size:11px;
+    }
+
+    .bs-stepper-circle{
+        width:28px;
+        height:28px;
+        font-size:12px;
+        line-height:28px;
+    }
+
+    .bs-stepper-content{
+        max-height:none;
+        overflow-y:visible;
+    }
+
+    .title{
+        font-size:1.8rem;
+    }
+
+    .container.py-5{
+        padding-top:1.5rem!important;
+        padding-bottom:1.5rem!important;
+    }
+
+    #moneyLeft{
+        font-size:1.8rem!important;
+    }
+
+    #fomoChart{
+        height:auto!important;
+        min-height:150px;
+    }
+
+    .row.g-4{
+        gap:0.5rem;
+    }
+
+    .card-body.py-4{
+        padding:0.75rem!important;
+    }
+
+    .card-body.py-5{
+        padding:1.5rem!important;
+    }
+
+    .line{
+        flex:0 0 auto;
+        min-width:10px;
+    }
+}
