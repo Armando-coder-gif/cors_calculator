@@ -6,6 +6,7 @@
   "step_crop": "Cultivo",
   "step_volume": "Volumen",
   "step_results": "Resultados",
+  "step_hook": "Inversión",
 
   "info_title": "Cuéntanos sobre tu empresa",
   "info_subtitle": "Para personalizar tu diagnóstico financiero.",
@@ -54,6 +55,16 @@
 
   "money_suffix": "USD/Año",
 
+  "hook_title": "¿Listos para capturar este valor?",
+  "hook_subtitle": "Descubre cuánto cuesta implementar la solución.",
+  "hook_toggle_label": "Mostrar costo de implementación AgroCognitive",
+  "hook_service_label": "AgroCognitive Managed Service",
+  "hook_service_detail": "SaaS + dMRV + Carbon Mgmt",
+  "hook_net_label": "Ganancia Neta Potencial",
+  "hook_net_detail": "Después de servicios",
+  "hook_disclaimer": "* No incluye inversión en hardware de pirólisis.",
+  "hook_year": "Año",
+
   "pdf_title": "Diagnóstico Financiero",
   "pdf_subtitle": "Calculadora de Créditos de Carbono",
   "pdf_company_section": "Información de la empresa",
@@ -66,7 +77,7 @@
   "pdf_money_label": "Dinero que dejas en el campo",
   "pdf_hectares_metric": "Hectáreas que podrías revitalizar",
   "pdf_co2_metric": "CO2 neto removido",
-  "pdf_chart_title": "Dinero perdido vs Dinero ganado",
+  "pdf_chart_title": "Dinero que estás dejando de ganar vs Ganancia obtenida",
   "pdf_detail_title": "Detalle de cálculos",
   "pdf_col_concept": "Concepto",
   "pdf_col_value": "Valor",

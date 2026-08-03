@@ -6,6 +6,7 @@
   "step_crop": "Crop Type",
   "step_volume": "Volume",
   "step_results": "Results",
+  "step_hook": "Investment",
 
   "info_title": "Tell us about your company",
   "info_subtitle": "To personalize your financial report.",
@@ -42,7 +43,7 @@
   "chart_income": "Carbon Credit Revenue",
   "chart_service": "AgroCognitive Service",
   "chart_net": "Net Profit",
-  "chart_title": "Money lost vs Money earned",
+  "chart_title": "Money You're Missing Out On vs. Profit Earned",
 
   "alert_required": "All fields are required.",
   "alert_calc_error": "Error calculating.",
@@ -53,6 +54,16 @@
   "alert_email_success": "Email sent successfully!",
 
   "money_suffix": "USD/Year",
+
+  "hook_title": "Ready to capture this value?",
+  "hook_subtitle": "Discover how much implementation costs.",
+  "hook_toggle_label": "Show AgroCognitive Implementation Cost",
+  "hook_service_label": "AgroCognitive Managed Service",
+  "hook_service_detail": "SaaS + dMRV + Carbon Mgmt",
+  "hook_net_label": "Potential Net Profit",
+  "hook_net_detail": "After services",
+  "hook_disclaimer": "* Excludes Pyrolysis hardware investment.",
+  "hook_year": "Year",
 
   "pdf_title": "Financial Report",
   "pdf_subtitle": "Carbon Credit Calculator",

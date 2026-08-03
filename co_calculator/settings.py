@@ -124,6 +124,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "co_calculator" / "static",
 ]
 
+# Recuerda cambiar el email
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

@@ -8,9 +8,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     calculateBtn.addEventListener("click", calculate);
 
-    document.getElementById("goToReportBtn").addEventListener("click", loadReportPreview);
+    document.getElementById("goToReportFromHook").addEventListener("click", loadReportPreview);
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
+
+    document.getElementById("hookToggle").addEventListener("change", function () {
+        const card = document.getElementById("hookCard");
+        card.style.display = this.checked ? "block" : "none";
+    });
 
 });
 
@@ -100,6 +105,15 @@ function renderResults(result) {
 
     document.getElementById("co2Removed").textContent =
         `${calc.co2_removed} tCO₂e`;
+
+    document.getElementById("hookCost").textContent =
+        `$${calc.agrocognitive_cost.toLocaleString()} USD/${i18n.t("hook_year")}`;
+
+    document.getElementById("hookNet").textContent =
+        `$${calc.net_gain.toLocaleString()} USD`;
+
+    document.getElementById("hookToggle").checked = false;
+    document.getElementById("hookCard").style.display = "none";
 
     renderFomoChart(calc);
 

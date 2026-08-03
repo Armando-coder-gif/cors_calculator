@@ -111,9 +111,7 @@ body{
 
 .bs-stepper-content{
 
-    max-height:520px;
-    overflow-y:auto;
-    scroll-behavior:smooth;
+    overflow-y:visible;
 
 }
 
@@ -168,6 +166,30 @@ body{
 
 .lang-text{
     letter-spacing:.5px;
+}
+
+.toggle-agro{
+    width:3rem!important;
+    height:1.5rem;
+    cursor:pointer;
+}
+
+.toggle-agro:checked{
+    background-color:var(--primary-btn-bg-color)!important;
+    border-color:var(--primary-btn-bg-color)!important;
+}
+
+.toggle-agro:focus{
+    box-shadow:0 0 0 .2rem rgba(255,152,0,.25)!important;
+}
+
+#hookCard{
+    animation:slideDown .4s ease;
+}
+
+@keyframes slideDown{
+    from{opacity:0;transform:translateY(-10px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
 /* Mobile responsive */

@@ -49,11 +49,27 @@
 
         <div class="line"></div>
 
-        <div class="step" data-target="#results">
+        <div class="step" data-target="#hook">
 
             <button class="step-trigger">
 
                 <span class="bs-stepper-circle">4</span>
+
+                <span class="bs-stepper-label" data-i18n="step_hook">
+                    Inversión
+                </span>
+
+            </button>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step" data-target="#results">
+
+            <button class="step-trigger">
+
+                <span class="bs-stepper-circle">5</span>
 
                 <span class="bs-stepper-label" data-i18n="step_results">
                     Resultados
@@ -71,6 +87,8 @@
         {% include "steps/crop.html" %}
 
         {% include "steps/results.html" %}
+
+        {% include "steps/hook.html" %}
 
         {% include "steps/report.html" %}
 
