@@ -70,7 +70,7 @@
         }
 
         .highlight-box {
-            background-color: #575757;
+            background-color: #a4c635;
             color: white;
             text-align: center;
             padding: 25px;
@@ -169,6 +169,16 @@
         <table class="info-table">
             <tr>
                 <td>
+                    <div class="label">{{ t.pdf_person_name }}</div>
+                    <div class="value">{{ person_name }}</div>
+                </td>
+                <td>
+                    <div class="label">{{ t.pdf_phone }}</div>
+                    <div class="value">{{ person_phone }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <div class="label">{{ t.pdf_company }}</div>
                     <div class="value">{{ company_name }}</div>
                 </td>
@@ -213,7 +223,7 @@
             </td>
             <td>
                 <div class="metric-label">{{ t.pdf_co2_metric }}</div>
-                <div class="metric-value">{{ co2_removed }} tCO2e</div>
+                <div class="metric-value">{{ co2_removed }} toneladas CO2e</div>
             </td>
         </tr>
     </table>
@@ -222,6 +232,12 @@
     <div class="section" style="page-break-before: always;">
         <h2>{{ t.pdf_chart_title }}</h2>
         <img src="{{ chart_image }}" style="width: 100%;" />
+        <p style="font-size: 10px; color: #999; margin-top: 8px;">
+            {{ t.results_chart_note }}<br>
+            {{ t.results_legend_humidity }}<br>
+            {{ t.results_legend_pyrolysis }}<br>
+            {{ t.results_legend_removal }}
+        </p>
     </div>
     {% endif %}
 
@@ -242,7 +258,7 @@
             </tr>
             <tr>
                 <td>{{ t.pdf_co2_removed }}</td>
-                <td class="val">{{ co2_removed }} tCO2e</td>
+                <td class="val">{{ co2_removed }} toneladas CO₂ₑ</td>
             </tr>
             <tr>
                 <td>{{ t.pdf_corcs }}</td>

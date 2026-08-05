@@ -114,7 +114,7 @@ function renderResults(result) {
         `${hectares} Ha`;
 
     document.getElementById("co2Removed").textContent =
-        `${calc.co2_removed} tCO₂e`;
+        `${calc.co2_removed} Toneladas CO₂ₑ`;
 
     document.getElementById("hookCost").textContent =
         `$${calc.agrocognitive_cost.toLocaleString()} USD/${i18n.t("hook_year")}`;
@@ -196,6 +196,8 @@ function _getReportData() {
         crop: document.getElementById("cropType").value,
         tons: document.getElementById("tons").value,
         hectares: document.getElementById("hectares").value,
+        person_name: document.getElementById("personName").value,
+        person_phone: document.getElementById("personPhone").value,
         company_name: document.getElementById("companyName").value,
         company_email: document.getElementById("companyEmail").value,
         company_country: document.getElementById("companyCountry").selectedOptions[0]?.text || "",

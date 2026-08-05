@@ -4,7 +4,7 @@
     </h2>
 
     <!-- Cuadro principal FOMO -->
-    <div class="card border-0 shadow mb-4" style="background: #575757">
+    <div class="card border-0 shadow mb-4" style="background: var(--primary)">
 
         <div class="card-body text-center py-5">
 
@@ -31,7 +31,7 @@
 
                     <div style="font-size: 2.5rem" class="mb-2">🌱</div>
 
-                    <div class="text-muted small text-uppercase mb-1" data-i18n="results_hectares_label">Hectáreas que podrías revitalizar</div>
+                    <div class="text-muted small text-uppercase mb-1" data-i18n="results_hectares_label"></div>
 
                     <h3 class="fw-bold" style="color: var(--primary-dark)" id="hectaresResult">0 Ha</h3>
 
@@ -61,65 +61,6 @@
 
     </div>
 
-    <!-- Constantes del modelo -->
-    <div class="row g-4 mb-4">
-
-        <div class="col-md-4">
-
-            <div class="card border-0 shadow-sm h-100">
-
-                <div class="card-body text-center py-4">
-
-                    <div style="font-size: 2.5rem" class="mb-2">💧</div>
-
-                    <div class="text-muted small text-uppercase mb-1" data-i18n="results_humidity_label">Ratio de humedad</div>
-
-                    <h3 class="fw-bold" style="color: var(--primary-dark)">50%</h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card border-0 shadow-sm h-100">
-
-                <div class="card-body text-center py-4">
-
-                    <div style="font-size: 2.5rem" class="mb-2">🔥</div>
-
-                    <div class="text-muted small text-uppercase mb-1" data-i18n="results_pyrolysis_label">Rendimiento de pirólisis</div>
-
-                    <h3 class="fw-bold" style="color: var(--primary-dark)">30%</h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card border-0 shadow-sm h-100">
-
-                <div class="card-body text-center py-4">
-
-                    <div style="font-size: 2.5rem" class="mb-2">🌍</div>
-
-                    <div class="text-muted small text-uppercase mb-1" data-i18n="results_removal_label">Factor de remoción CO₂</div>
-
-                    <h3 class="fw-bold" style="color: var(--primary-dark)">2.5x tCO₂e/t</h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
     <!-- Gráfico -->
     <div class="card mb-4 border-0 shadow-sm">
 
@@ -130,6 +71,9 @@
             <small class="text-muted mt-1 d-block" data-i18n="results_chart_note">
                 * No incluye inversión en hardware de pirólisis.
             </small>
+            <small class="text-muted d-block" data-i18n="results_legend_humidity">* Ratio de humedad: 50%</small>
+            <small class="text-muted d-block" data-i18n="results_legend_pyrolysis">* Rendimiento de pirólisis: 30%</small>
+            <small class="text-muted d-block" data-i18n="results_legend_removal">* Factor de remoción CO₂: 2.5x toneladas CO₂</small>
 
         </div>
 

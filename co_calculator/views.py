@@ -70,6 +70,8 @@ def _build_pdf(data):
     calc = result["calculations"]
 
     context = {
+        "person_name": data.get("person_name", ""),
+        "person_phone": data.get("person_phone", ""),
         "company_name": data.get("company_name", ""),
         "company_email": data.get("company_email", ""),
         "company_country": data.get("company_country", ""),
@@ -116,6 +118,8 @@ def preview_report(request):
     calc = result["calculations"]
 
     context = {
+        "person_name": data.get("person_name", ""),
+        "person_phone": data.get("person_phone", ""),
         "company_name": data.get("company_name", ""),
         "company_email": data.get("company_email", ""),
         "company_country": data.get("company_country", ""),
