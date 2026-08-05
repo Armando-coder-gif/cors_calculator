@@ -10,6 +10,10 @@
 
   "info_title": "Tell us about your company",
   "info_subtitle": "To personalize your financial report.",
+  "info_person_name": "Contact name",
+  "info_person_name_placeholder": "e.g. John Doe",
+  "info_phone": "Phone number",
+  "info_phone_placeholder": "e.g. +1 555 123 4567",
   "info_company_name": "Company name",
   "info_company_name_placeholder": "e.g. Green Acres Farm",
   "info_email": "Email",

@@ -10,10 +10,39 @@
 
     <div class="row g-4">
 
+        <div class="col-12 col-md-6">
+
+            <label class="form-label fw-semibold" data-i18n="info_person_name">
+                Nombre de la persona
+            </label>
+
+            <input
+                id="personName"
+                type="text"
+                class="form-control"
+                placeholder="Ej. Juan Pérez"
+                data-i18n-placeholder="info_person_name_placeholder">
+
+        </div>
+
+        <div class="col-12 col-md-6">
+
+            <label class="form-label fw-semibold" data-i18n="info_phone">
+                Número de teléfono
+            </label>
+
+            <input
+                id="personPhone"
+                type="tel"
+                class="form-control"
+                placeholder="Ej. +57 300 123 4567"
+                data-i18n-placeholder="info_phone_placeholder">
+
+        </div>
+
         <div class="col-12">
 
             <label class="form-label fw-semibold" data-i18n="info_company_name">
-                Nombre de la empresa
             </label>
 
             <input
@@ -28,7 +57,6 @@
         <div class="col-12 col-md-6">
 
             <label class="form-label fw-semibold" data-i18n="info_email">
-                Correo electrónico
             </label>
 
             <input
@@ -43,7 +71,6 @@
         <div class="col-12 col-md-6">
 
             <label class="form-label fw-semibold" data-i18n="info_country">
-                País
             </label>
 
             <select id="companyCountry" class="form-select">
@@ -59,7 +86,6 @@
     <div class="d-grid d-md-flex justify-content-md-end mt-5">
 
         <button class="btn btn-agro py-2 px-4 next" id="nextToCalcBtn" data-i18n="info_next">
-            SIGUIENTE
         </button>
 
     </div>

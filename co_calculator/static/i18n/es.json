@@ -10,6 +10,10 @@
 
   "info_title": "Cuéntanos sobre tu empresa",
   "info_subtitle": "Para personalizar tu diagnóstico financiero.",
+  "info_person_name": "Nombre de la persona",
+  "info_person_name_placeholder": "Ej. Juan Pérez",
+  "info_phone": "Número de teléfono",
+  "info_phone_placeholder": "Ej. +57 300 123 4567",
   "info_company_name": "Nombre de la empresa",
   "info_company_name_placeholder": "Ej. Finca El Roble",
   "info_email": "Correo electrónico",
