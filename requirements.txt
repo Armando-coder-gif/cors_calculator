@@ -1,0 +1,8 @@
+Django==6.0.7
+pycountry
+reportlab
+xhtml2pdf
+pypdf
+pyHanko
+pyhanko-certvalidator
+svglib
