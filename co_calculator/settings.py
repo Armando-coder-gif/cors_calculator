@@ -29,7 +29,10 @@ SECRET_KEY = 'django-insecure-csl=9#^m3$wqw8k(2(@+j3-9m$j*idi#-h4^=)(@ymwjjpc%4l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '').split(',') if h.strip()]
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '').split(',') if h.strip()]
+
+FORCE_SCRIPT_NAME = os.environ.get('FORCE_SCRIPT_NAME', None)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') if FORCE_SCRIPT_NAME else None
 
 
 # Application definition
@@ -118,11 +121,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = f'{FORCE_SCRIPT_NAME}/static/' if FORCE_SCRIPT_NAME else 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "co_calculator" / "static",
 ]
+
+STATIC_ROOT = BASE_DIR / "static"
 
 # Recuerda cambiar el email
 # Email
