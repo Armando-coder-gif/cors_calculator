@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-csl=9#^m3$wqw8k(2(@+j3-9m$j*idi#-h4^=)(@ymwjjpc%4l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['qa.agrocognitive.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -133,5 +133,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER', '')
-
-FORCE_SCRIPT_NAME = '/cors-calculator'
