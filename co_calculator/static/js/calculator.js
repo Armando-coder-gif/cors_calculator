@@ -66,7 +66,7 @@ async function calculate() {
         formData.append("tons", tons);
         formData.append("hectares", hectares);
 
-        const response = await fetch("/calculate/", {
+        const response = await fetch(window.APP_URLS.calculate, {
 
             method: "POST",
 
@@ -208,7 +208,7 @@ function _getReportData() {
 
 async function loadReportPreview() {
     try {
-        const response = await fetch("/preview-report/", {
+        const response = await fetch(window.APP_URLS.previewReport, {
             method: "POST",
             headers: {
                 "X-CSRFToken": getCookie("csrftoken"),
@@ -232,7 +232,7 @@ async function loadReportPreview() {
 
 async function downloadPdf() {
     try {
-        const response = await fetch("/download-pdf/", {
+        const response = await fetch(window.APP_URLS.downloadPdf, {
             method: "POST",
             headers: {
                 "X-CSRFToken": getCookie("csrftoken"),
@@ -269,7 +269,7 @@ async function sendPdfEmail() {
     btn.textContent = i18n.t("alert_email_sending");
 
     try {
-        const response = await fetch("/send-pdf-email/", {
+        const response = await fetch(window.APP_URLS.sendPdfEmail, {
             method: "POST",
             headers: {
                 "X-CSRFToken": getCookie("csrftoken"),
