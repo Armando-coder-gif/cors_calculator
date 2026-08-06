@@ -48,6 +48,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script>
+        window.APP_URLS = {
+            staticUrl: "{% static '' %}",
+            countriesApi: "{% url 'countries' %}",
+            calculate: "{% url 'calculate' %}",
+            previewReport: "{% url 'preview_report' %}",
+            downloadPdf: "{% url 'download_pdf' %}",
+            sendPdfEmail: "{% url 'send_pdf_email' %}"
+        };
+    </script>
+
     <script src="{% static 'js/i18n.js' %}"></script>
     <script src="{% static 'js/stepper.js' %}"></script>
     <script src="{% static 'js/crop.js' %}"></script>

@@ -9,7 +9,7 @@ const i18n = {
     },
 
     async load(lang) {
-        const res = await fetch(`/static/i18n/${lang}.json`);
+        const res = await fetch(`${window.APP_URLS.staticUrl}i18n/${lang}.json`);
         this._translations = await res.json();
         this._lang = lang;
         localStorage.setItem("lang", lang);

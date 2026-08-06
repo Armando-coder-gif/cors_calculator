@@ -1,6 +1,6 @@
 function loadCountries() {
     const select = document.getElementById("companyCountry");
-    fetch("/api/countries/")
+    fetch(window.APP_URLS.countriesApi)
         .then(r => r.json())
         .then(countries => {
             countries.forEach(c => {
