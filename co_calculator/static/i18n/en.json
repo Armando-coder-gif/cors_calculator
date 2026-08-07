@@ -36,7 +36,7 @@
   "results_subtitle": "Review your report before downloading or sending it.",
   "results_money_label": "Money you're leaving in the field",
   "results_money_default": "$0 USD/Year",
-  "results_hectares_label": "Biochar Fertilizer Produced",
+  "results_hectares_label": "Net biochar produced per year",
   "results_co2_label": "NET REMOVAL FACTOR REMOVED",
   "results_humidity_label": "Waste moisture",
   "results_pyrolysis_label": "Pyrolysis yield",
