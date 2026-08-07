@@ -15,7 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.views.static import serve
+from django.conf import settings
 from . import views
 
 urlpatterns = [
@@ -26,4 +28,9 @@ urlpatterns = [
     path("preview-report/", views.preview_report, name="preview_report"),
     path("download-pdf/", views.download_pdf, name="download_pdf"),
     path("send-pdf-email/", views.send_pdf_email, name="send_pdf_email"),
+
+    # =================================================================
+    # Ruta manual para servir estáticos (Django ya recortó el prefijo)
+    # =================================================================
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR / 'co_calculator' / 'static'}),
 ]
