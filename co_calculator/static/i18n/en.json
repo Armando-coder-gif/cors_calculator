@@ -20,6 +20,7 @@
   "info_email_placeholder": "e.g. contact@company.com",
   "info_country": "Country",
   "info_country_placeholder": "Select a country...",
+  "info_disclaimer": "Biomass valuation calculations are based on standard industry assumptions, factors, and efficiencies. They should not be taken as a definitive verdict without a detailed evaluation of your project. By accepting these terms, AgroCognitive (legally incorporated as Smartbase Group Int. Corp) is excluded from any claims regarding inaccuracies in the figures provided by our removed CO2 calculator.",
   "info_next": "NEXT",
 
   "crop_title": "Tell us about your waste",
