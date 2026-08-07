@@ -129,6 +129,8 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "static"
 
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if origin.strip()]
+
 # Recuerda cambiar el email
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
