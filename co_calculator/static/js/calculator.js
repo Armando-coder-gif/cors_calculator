@@ -173,6 +173,11 @@ function renderFomoChart(calculations) {
                     display: true,
                     text: i18n.t("chart_title"),
                     font: { size: 16 }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `$${ctx.raw.toLocaleString()}`
+                    }
                 }
             },
             scales: {
