@@ -6,4 +6,6 @@ BAG_WEIGHT = 20  # kg
 
 FBB_PRICE = 20
 
-AGROCOGNITIVE_SUBSCRIPTION = 15  # por hectárea
+AGROCOGNITIVE_SUBSCRIPTION = 15  # por hectárea/año
+
+DMRV_MONTHLY_PRICE = 2.5  # por hectárea/mes

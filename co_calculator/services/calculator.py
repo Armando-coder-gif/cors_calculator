@@ -27,8 +27,8 @@ class CalculatorService:
         bags = fertilizer_mix / 0.02
         fbb_value = bags * FBB_PRICE
 
-        # Inversión AgroCognitive
-        agrocognitive_cost = hectares * AGROCOGNITIVE_SUBSCRIPTION
+        # Inversión AgroCognitive (suscripción + dMRV anual)
+        agrocognitive_cost = hectares * (AGROCOGNITIVE_SUBSCRIPTION + DMRV_MONTHLY_PRICE * 12)
 
         # Ganancia neta
         net_gain = corcs_value - agrocognitive_cost

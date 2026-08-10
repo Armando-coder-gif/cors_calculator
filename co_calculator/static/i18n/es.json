@@ -36,7 +36,7 @@
   "results_subtitle": "Revisa tu reporte antes de descargarlo o enviarlo.",
   "results_money_label": "Dinero que dejas en el campo",
   "results_money_default": "$0 USD/Año",
-  "results_hectares_label": "Biochar neto que se produce al año",
+  "results_fbb_label": "Toneladas de FBB producidas al año",
   "results_co2_label": "FACTOR DE REMOCIÓN NETO REMOVIDO",
   "results_humidity_label": "Humedad del residuo",
   "results_pyrolysis_label": "Rendimiento de pirólisis",
@@ -67,6 +67,8 @@
 
   "money_suffix": "USD/Año",
 
+  "unit_tons": "toneladas",
+
   "hook_title": "¿Listos para capturar este valor?",
   "hook_subtitle": "Descubre cuánto cuesta implementar la solución.",
   "hook_toggle_label": "Mostrar costo de implementación AgroCognitive",
@@ -89,7 +91,7 @@
   "pdf_tons": "Toneladas de residuos",
   "pdf_hectares": "Hectáreas",
   "pdf_money_label": "Dinero que dejas en el campo",
-  "pdf_hectares_metric": "Hectáreas que podrías revitalizar",
+  "pdf_fbb_metric": "Fertilizante base biochar producido",
   "pdf_co2_metric": "CO2 neto removido",
   "pdf_chart_title": "Potencial de ingresos vs Ganancia obtenida",
   "pdf_detail_title": "Detalle de cálculos",
