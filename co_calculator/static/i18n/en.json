@@ -20,6 +20,7 @@
   "info_email_placeholder": "e.g. contact@company.com",
   "info_country": "Country",
   "info_country_placeholder": "Select a country...",
+  "info_disclaimer": "Biomass valuation calculations are based on standard industry assumptions, factors, and efficiencies. They should not be taken as a definitive verdict without a detailed evaluation of your project. By accepting these terms, AgroCognitive (legally incorporated as Smartbase Group Int. Corp) is excluded from any claims regarding inaccuracies in the figures provided by our removed CO2 calculator.",
   "info_next": "NEXT",
 
   "crop_title": "Tell us about your waste",
@@ -35,7 +36,7 @@
   "results_subtitle": "Review your report before downloading or sending it.",
   "results_money_label": "Money you're leaving in the field",
   "results_money_default": "$0 USD/Year",
-  "results_hectares_label": "Biochar Fertilizer Produced",
+  "results_fbb_label": "Tons of FBB produced per year",
   "results_co2_label": "NET REMOVAL FACTOR REMOVED",
   "results_humidity_label": "Waste moisture",
   "results_pyrolysis_label": "Pyrolysis yield",
@@ -66,6 +67,8 @@
 
   "money_suffix": "USD/Year",
 
+  "unit_tons": "tons",
+
   "hook_title": "Ready to capture this value?",
   "hook_subtitle": "Discover how much implementation costs.",
   "hook_toggle_label": "Show AgroCognitive Implementation Cost",
@@ -88,7 +91,7 @@
   "pdf_tons": "Tons of waste",
   "pdf_hectares": "Hectares",
   "pdf_money_label": "Money you're leaving in the field",
-  "pdf_hectares_metric": "Hectares you could revitalize",
+  "pdf_fbb_metric": "Biochar-based fertilizer produced",
   "pdf_co2_metric": "Net CO2 removed",
   "pdf_chart_title": "Revenue Potential vs. Profit Earned",
   "pdf_detail_title": "Calculation details",

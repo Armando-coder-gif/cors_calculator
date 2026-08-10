@@ -108,7 +108,13 @@ body{
     align-items:center;
     justify-content:center;
     padding:0!important;
+    transition:background .3s ease;
 
+}
+
+.step.active .bs-stepper-circle{
+    background:var(--primary-btn-bg-color)!important;
+    box-shadow:0 0 0 4px rgba(255,152,0,.25);
 }
 
 .bs-stepper-label{

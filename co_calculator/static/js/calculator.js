@@ -105,16 +105,16 @@ async function calculate() {
 function renderResults(result) {
 
     const calc = result.calculations;
-    const hectares = result.inputs.hectares;
+    window._lastCalc = calc;
 
     document.getElementById("moneyLeft").textContent =
         `$${calc.corcs_value.toLocaleString()} ${i18n.t("money_suffix")}`;
 
-    document.getElementById("hectaresResult").textContent =
-        `${hectares} Ha`;
+document.getElementById("fbbResult").textContent =
+    `${calc.biochar.toLocaleString()} ${i18n.t("unit_tons")}`;
 
-    document.getElementById("co2Removed").textContent =
-        `${calc.co2_removed} Toneladas CO₂ₑ`;
+document.getElementById("co2Removed").textContent =
+    `${calc.co2_removed.toLocaleString()} ${i18n.t("unit_tons")} CO₂ₑ`;
 
     document.getElementById("hookCost").textContent =
         `$${calc.agrocognitive_cost.toLocaleString()} USD/${i18n.t("hook_year")}`;
@@ -173,6 +173,11 @@ function renderFomoChart(calculations) {
                     display: true,
                     text: i18n.t("chart_title"),
                     font: { size: 16 }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `$${ctx.raw.toLocaleString()}`
+                    }
                 }
             },
             scales: {
@@ -180,7 +185,11 @@ function renderFomoChart(calculations) {
                     beginAtZero: true,
                     ticks: {
                         callback: value => `$${value.toLocaleString()}`
-                    }
+                    },
+                    grid: { display: false }
+                },
+                y: {
+                    grid: { display: false }
                 }
             }
         }

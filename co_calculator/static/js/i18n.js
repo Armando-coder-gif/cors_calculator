@@ -40,6 +40,17 @@ const i18n = {
         document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
             el.placeholder = this.t(el.dataset.i18nPlaceholder);
         });
+        if (window._lastCalc) {
+            const calc = window._lastCalc;
+            document.getElementById("moneyLeft").textContent =
+                `$${calc.corcs_value.toLocaleString()} ${this.t("money_suffix")}`;
+            document.getElementById("fbbResult").textContent =
+                `${calc.biochar.toLocaleString()} ${this.t("unit_tons")}`;
+            document.getElementById("co2Removed").textContent =
+                `${calc.co2_removed.toLocaleString()} ${this.t("unit_tons")} CO₂ₑ`;
+            document.getElementById("hookCost").textContent =
+                `$${calc.agrocognitive_cost.toLocaleString()} USD/${this.t("hook_year")}`;
+        }
     },
 
     _updateToggle() {
