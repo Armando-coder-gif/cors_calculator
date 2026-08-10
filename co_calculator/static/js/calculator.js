@@ -185,7 +185,11 @@ function renderFomoChart(calculations) {
                     beginAtZero: true,
                     ticks: {
                         callback: value => `$${value.toLocaleString()}`
-                    }
+                    },
+                    grid: { display: false }
+                },
+                y: {
+                    grid: { display: false }
                 }
             }
         }
