@@ -59,6 +59,13 @@ def calculate(request):
     return JsonResponse(result)
 
 
+def _fmt(value):
+    """Format number with dots as thousands separator and comma as decimal."""
+    formatted = f"{value:,.2f}"
+    # Swap: comma->X, dot->comma, X->dot
+    return formatted.replace(",", "X").replace(".", ",").replace("X", ".")
+
+
 def _build_pdf(data):
     crop = data["crop"]
     tons = float(data["tons"])
@@ -76,14 +83,14 @@ def _build_pdf(data):
         "company_email": data.get("company_email", ""),
         "company_country": data.get("company_country", ""),
         "crop": crop,
-        "tons": tons,
-        "hectares": hectares,
-        "co2_removed": calc["co2_removed"],
-        "dry_biomass": calc["dry_biomass"],
-        "biochar": calc["biochar"],
-        "corcs_value": f"{calc['corcs_value']:,.2f}",
-        "agrocognitive_cost": f"{calc['agrocognitive_cost']:,.2f}",
-        "net_gain": f"{calc['net_gain']:,.2f}",
+        "tons": _fmt(tons),
+        "hectares": _fmt(hectares),
+        "co2_removed": _fmt(calc["co2_removed"]),
+        "dry_biomass": _fmt(calc["dry_biomass"]),
+        "biochar": _fmt(calc["biochar"]),
+        "corcs_value": _fmt(calc["corcs_value"]),
+        "agrocognitive_cost": _fmt(calc["agrocognitive_cost"]),
+        "net_gain": _fmt(calc["net_gain"]),
         "chart_image": data.get("chart_image", ""),
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,
@@ -124,14 +131,14 @@ def preview_report(request):
         "company_email": data.get("company_email", ""),
         "company_country": data.get("company_country", ""),
         "crop": crop,
-        "tons": tons,
-        "hectares": hectares,
-        "co2_removed": calc["co2_removed"],
-        "dry_biomass": calc["dry_biomass"],
-        "biochar": calc["biochar"],
-        "corcs_value": f"{calc['corcs_value']:,.2f}",
-        "agrocognitive_cost": f"{calc['agrocognitive_cost']:,.2f}",
-        "net_gain": f"{calc['net_gain']:,.2f}",
+        "tons": _fmt(tons),
+        "hectares": _fmt(hectares),
+        "co2_removed": _fmt(calc["co2_removed"]),
+        "dry_biomass": _fmt(calc["dry_biomass"]),
+        "biochar": _fmt(calc["biochar"]),
+        "corcs_value": _fmt(calc["corcs_value"]),
+        "agrocognitive_cost": _fmt(calc["agrocognitive_cost"]),
+        "net_gain": _fmt(calc["net_gain"]),
         "chart_image": data.get("chart_image", ""),
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,
