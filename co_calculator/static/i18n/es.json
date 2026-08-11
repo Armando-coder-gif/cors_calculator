@@ -21,6 +21,7 @@
   "info_country": "País",
   "info_country_placeholder": "Selecciona un país...",
   "info_disclaimer": "Los cálculos de valorización de biomasa se hacen tomando en cuenta premisas, factores y eficiencias estándares de la industria. No deben tomarse como un veredicto definitivo sin una evaluación detallada de su proyecto. Al aceptar estos términos, AgroCognitive (legalmente constituida como Smartbase Group Int. Corp) queda excluida de cualquier reclamación por imprecisión en las cifras de nuestra calculadora de CO2 removido.",
+  "info_accept_terms": "Acepto los términos y condiciones",
   "info_next": "SIGUIENTE",
 
   "crop_title": "Cuéntanos de tus residuos",
