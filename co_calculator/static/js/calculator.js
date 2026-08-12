@@ -1,3 +1,7 @@
+function fmtNum(value) {
+    return new Intl.NumberFormat('es-ES', { useGrouping: true, minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(value);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     await i18n.init();
@@ -108,21 +112,21 @@ function renderResults(result) {
     window._lastCalc = calc;
 
     document.getElementById("moneyLeft").innerHTML =
-        `$${calc.corcs_value.toLocaleString("es-ES")} ${i18n.t("money_suffix")}<span data-bs-toggle="tooltip" data-bs-placement="top" title="${i18n.t("asterisk_tooltip")}" style="cursor:help">*</span>`;
+        `$${fmtNum(calc.corcs_value)} ${i18n.t("money_suffix")}<span data-bs-toggle="tooltip" data-bs-placement="top" title="${i18n.t("asterisk_tooltip")}" style="cursor:help">*</span>`;
 
     new bootstrap.Tooltip(document.querySelector('#moneyLeft [data-bs-toggle="tooltip"]'));
 
 document.getElementById("fbbResult").textContent =
-    `${calc.biochar.toLocaleString("es-ES")} ${i18n.t("unit_tons")}`;
+    `${fmtNum(calc.biochar)} ${i18n.t("unit_tons")}`;
 
 document.getElementById("co2Removed").textContent =
-    `${calc.co2_removed.toLocaleString("es-ES")} ${i18n.t("unit_tons")} CO₂ₑ`;
+    `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")} CO₂ₑ`;
 
     document.getElementById("hookCost").textContent =
-        `$${calc.agrocognitive_cost.toLocaleString("es-ES")} USD/${i18n.t("hook_year")}`;
+        `$${fmtNum(calc.agrocognitive_cost)} USD/${i18n.t("hook_year")}`;
 
     document.getElementById("hookNet").textContent =
-        `$${calc.net_gain.toLocaleString("es-ES")} USD`;
+        `$${fmtNum(calc.net_gain)} USD`;
 
     document.getElementById("hookToggle").checked = false;
     document.getElementById("hookCard").style.display = "none";
@@ -176,7 +180,7 @@ function renderFomoChart(calculations) {
                 },
                 tooltip: {
                     callbacks: {
-                        label: ctx => `$${ctx.raw.toLocaleString("es-ES")}`
+                        label: ctx => `$${fmtNum(ctx.raw)}`
                     }
                 }
             },
@@ -184,7 +188,7 @@ function renderFomoChart(calculations) {
                 x: {
                     beginAtZero: true,
                     ticks: {
-                        callback: value => `$${value.toLocaleString("es-ES")}`
+                        callback: value => `$${fmtNum(value)}`
                     },
                     grid: { display: false }
                 },

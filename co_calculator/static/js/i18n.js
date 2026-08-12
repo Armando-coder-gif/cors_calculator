@@ -49,14 +49,14 @@ const i18n = {
         if (window._lastCalc) {
             const calc = window._lastCalc;
             document.getElementById("moneyLeft").innerHTML =
-                `$${calc.corcs_value.toLocaleString("es-ES")} ${this.t("money_suffix")}<span data-bs-toggle="tooltip" data-bs-placement="top" title="${this.t("asterisk_tooltip")}" style="cursor:help">*</span>`;
+                `$${fmtNum(calc.corcs_value)} ${this.t("money_suffix")}<span data-bs-toggle="tooltip" data-bs-placement="top" title="${this.t("asterisk_tooltip")}" style="cursor:help">*</span>`;
             new bootstrap.Tooltip(document.querySelector('#moneyLeft [data-bs-toggle="tooltip"]'));
             document.getElementById("fbbResult").textContent =
-                `${calc.biochar.toLocaleString("es-ES")} ${this.t("unit_tons")}`;
+                `${fmtNum(calc.biochar)} ${this.t("unit_tons")}`;
             document.getElementById("co2Removed").textContent =
-                `${calc.co2_removed.toLocaleString("es-ES")} ${this.t("unit_tons")} CO₂ₑ`;
+                `${fmtNum(calc.co2_removed)} ${this.t("unit_tons")} CO₂ₑ`;
             document.getElementById("hookCost").textContent =
-                `$${calc.agrocognitive_cost.toLocaleString("es-ES")} USD/${this.t("hook_year")}`;
+                `$${fmtNum(calc.agrocognitive_cost)} USD/${this.t("hook_year")}`;
         }
     },
 
