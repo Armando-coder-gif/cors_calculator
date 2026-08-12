@@ -44,9 +44,9 @@ class CalculatorService:
 
         # --- Abatement Cost (BCR Path) ---
         service_cost = AGROCOGNITIVE_SUBSCRIPTION * hectares
-        hardware_cost = HARDWARE_COST_PER_TON * tons
-        logistics_cost = LOGISTICS_COST_PER_TON * tons
-        inoculation_cost = FBB_INOCULATION_COST_PER_TON * tons
+        hardware_cost = HARDWARE_COST_PER_TON * biochar
+        logistics_cost = LOGISTICS_COST_PER_TON * biochar
+        inoculation_cost = FBB_INOCULATION_COST_PER_TON * biochar
         total_investment = service_cost + hardware_cost + logistics_cost + inoculation_cost
 
         abatement_cost_bcr = total_investment / co2_removed if co2_removed > 0 else 0
