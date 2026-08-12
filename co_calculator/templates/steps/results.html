@@ -66,8 +66,13 @@
 
         <div class="card-body py-3">
 
+            <h6 class="fw-bold text-center mb-2" id="chartTitle">
+                <span data-i18n="chart_title"></span><span data-bs-toggle="tooltip" data-bs-placement="top" data-i18n-title="asterisk_tooltip" style="cursor:help">*</span>
+            </h6>
+
             <canvas id="fomoChart" height="150"></canvas>
 
+            {% comment %} <small class="text-muted mt-3 d-block fw-semibold" data-i18n="asterisk_tooltip" style="font-style:italic"></small> {% endcomment %}
             <small class="text-muted mt-1 d-block" data-i18n="results_chart_note">
                 * No incluye inversión en hardware de pirólisis.
             </small>

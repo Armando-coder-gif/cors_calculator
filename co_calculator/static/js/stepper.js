@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const acceptTerms = document.getElementById("acceptTerms");
+    const nextToCalcBtn = document.getElementById("nextToCalcBtn");
+    if (acceptTerms && nextToCalcBtn) {
+        acceptTerms.addEventListener("change", () => {
+            nextToCalcBtn.disabled = !acceptTerms.checked;
+        });
+    }
+
     document.querySelectorAll(".previous").forEach(btn => {
         btn.addEventListener("click", () => {
             window.stepper.previous();

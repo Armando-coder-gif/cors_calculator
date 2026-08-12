@@ -1,3 +1,7 @@
+function fmtNum(value) {
+    return new Intl.NumberFormat('es-ES', { useGrouping: true, minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(value);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     await i18n.init();
@@ -107,20 +111,22 @@ function renderResults(result) {
     const calc = result.calculations;
     window._lastCalc = calc;
 
-    document.getElementById("moneyLeft").textContent =
-        `$${calc.corcs_value.toLocaleString()} ${i18n.t("money_suffix")}`;
+    document.getElementById("moneyLeft").innerHTML =
+        `$${fmtNum(calc.corcs_value)} ${i18n.t("money_suffix")}<span data-bs-toggle="tooltip" data-bs-placement="top" title="${i18n.t("asterisk_tooltip")}" style="cursor:help">*</span>`;
+
+    new bootstrap.Tooltip(document.querySelector('#moneyLeft [data-bs-toggle="tooltip"]'));
 
 document.getElementById("fbbResult").textContent =
-    `${calc.biochar.toLocaleString()} ${i18n.t("unit_tons")}`;
+    `${fmtNum(calc.biochar)} ${i18n.t("unit_tons")}`;
 
 document.getElementById("co2Removed").textContent =
-    `${calc.co2_removed.toLocaleString()} ${i18n.t("unit_tons")} CO₂ₑ`;
+    `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")} CO₂ₑ`;
 
     document.getElementById("hookCost").textContent =
-        `$${calc.agrocognitive_cost.toLocaleString()} USD/${i18n.t("hook_year")}`;
+        `$${fmtNum(calc.agrocognitive_cost)} USD/${i18n.t("hook_year")}`;
 
     document.getElementById("hookNet").textContent =
-        `$${calc.net_gain.toLocaleString()} USD`;
+        `$${fmtNum(calc.net_gain)} USD`;
 
     document.getElementById("hookToggle").checked = false;
     document.getElementById("hookCard").style.display = "none";
@@ -170,13 +176,11 @@ function renderFomoChart(calculations) {
             plugins: {
                 legend: { display: false },
                 title: {
-                    display: true,
-                    text: i18n.t("chart_title"),
-                    font: { size: 16 }
+                    display: false
                 },
                 tooltip: {
                     callbacks: {
-                        label: ctx => `$${ctx.raw.toLocaleString()}`
+                        label: ctx => `$${fmtNum(ctx.raw)}`
                     }
                 }
             },
@@ -184,7 +188,7 @@ function renderFomoChart(calculations) {
                 x: {
                     beginAtZero: true,
                     ticks: {
-                        callback: value => `$${value.toLocaleString()}`
+                        callback: value => `$${fmtNum(value)}`
                     },
                     grid: { display: false }
                 },
