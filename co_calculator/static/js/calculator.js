@@ -16,6 +16,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
+    document.getElementById("investmentToggleBtn").addEventListener("click", function () {
+        const el = document.getElementById("investmentBreakdown");
+        el.style.display = el.style.display === "none" ? "block" : "none";
+    });
+
     document.getElementById("hookToggle").addEventListener("change", function () {
         const card = document.getElementById("hookCard");
         card.style.display = this.checked ? "block" : "none";
@@ -132,6 +137,7 @@ document.getElementById("co2Removed").textContent =
     document.getElementById("hookCard").style.display = "none";
 
     renderFomoChart(calc);
+    renderAbatement(result.abatement);
 
 }
 
@@ -301,4 +307,95 @@ async function sendPdfEmail() {
         btn.disabled = false;
         btn.textContent = i18n.t("results_send_email");
     }
+}
+
+let abatementChartInstance = null;
+
+function renderAbatement(abatement) {
+    if (!abatement) return;
+
+    const bcr = abatement.abatement_cost_bcr;
+    const solar = abatement.solar_pv_cost;
+    const forestry = abatement.forestry_cost;
+
+    // Financial summary
+    const savingsSolar = Math.round((1 - bcr / solar) * 100);
+    const savingsForestry = Math.round((1 - bcr / forestry) * 100);
+
+    document.getElementById("savingsVsSolar").textContent = `${savingsSolar}%`;
+    document.getElementById("savingsVsForestry").textContent = `${savingsForestry}%`;
+    document.getElementById("abatementCostDisplay").textContent = `$${fmtNum(bcr)}/${i18n.t("unit_tons")} CO₂ₑ`;
+
+    // Arbitrage
+    const arbitrageEl = document.getElementById("arbitrageMsg");
+    if (abatement.arbitrage) {
+        arbitrageEl.classList.remove("d-none");
+    } else {
+        arbitrageEl.classList.add("d-none");
+    }
+
+    // Support text
+    const supportText = i18n.t("abatement_support_text")
+        .replace("{solar_pct}", savingsSolar)
+        .replace("{forestry_pct}", savingsForestry);
+    document.getElementById("abatementSupportText").textContent = supportText;
+
+    // Investment breakdown
+    document.getElementById("breakdownService").textContent = `$${fmtNum(abatement.service_cost)}`;
+    document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost + abatement.logistics_cost)}`;
+    document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
+    document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;
+    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
+    document.getElementById("investmentBreakdown").style.display = "none";
+
+    // Chart
+    const ctx = document.getElementById("abatementChart").getContext("2d");
+    if (abatementChartInstance) abatementChartInstance.destroy();
+
+    abatementChartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: [
+                i18n.t("abatement_label_solar"),
+                i18n.t("abatement_label_forestry"),
+                i18n.t("abatement_label_bcr")
+            ],
+            datasets: [{
+                label: "$",
+                data: [solar, forestry, bcr],
+                backgroundColor: [
+                    "rgba(255, 152, 0, 0.6)",
+                    "rgba(255, 152, 0, 0.4)",
+                    "rgba(123, 174, 34, 0.7)"
+                ],
+                borderColor: [
+                    "rgba(255, 152, 0, 1)",
+                    "rgba(255, 152, 0, 1)",
+                    "rgba(123, 174, 34, 1)"
+                ],
+                borderWidth: 2,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `$${fmtNum(ctx.raw)} USD/${i18n.t("unit_tons")} CO₂ₑ`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: { callback: v => `$${v}` },
+                    grid: { display: false }
+                },
+                y: { grid: { display: false } }
+            }
+        }
+    });
 }

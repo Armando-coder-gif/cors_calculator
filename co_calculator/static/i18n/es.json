@@ -106,5 +106,24 @@
   "pdf_service": "Servicio AgroCognitive",
   "pdf_net_gain": "Inversión en proyecto",
   "pdf_footer_note": "No incluye inversión en hardware de pirólisis.",
-  "pdf_footer_generated": "Generado por AgroCognitive"
+  "pdf_footer_generated": "Generado por AgroCognitive",
+
+  "step_abatement": "Comparación",
+  "abatement_title": "Por qué gana la Circularidad",
+  "abatement_subtitle": "Costo de Abatimiento por Tonelada de CO₂ₑ",
+  "abatement_footnote": "* Promedios de referencia de la industria para LatAm.",
+  "abatement_savings_vs_solar": "Ahorro vs Solar",
+  "abatement_savings_vs_forestry": "Ahorro vs Forestación",
+  "abatement_your_cost": "Tu Costo",
+  "abatement_arbitrage": "Oportunidad de Arbitraje: Tu remoción se paga sola y genera ganancia.",
+  "abatement_show_breakdown": "Mostrar Desglose de Inversión",
+  "abatement_service_fee": "Servicio AgroCognitive",
+  "abatement_hardware_logistics": "Hardware y Logística (Est.)",
+  "abatement_fbb_production": "Producción e Inoculación FBB",
+  "abatement_total_investment": "Inversión Total Estimada",
+  "abatement_potential_revenue": "Ingreso Potencial (CORCs + FBB)",
+  "abatement_label_solar": "Energía Solar ($100/tCO₂ₑ)",
+  "abatement_label_forestry": "Forestación ($55/tCO₂ₑ)",
+  "abatement_label_bcr": "AgroCognitive BCR",
+  "abatement_support_text": "Nuestro modelo circular es {solar_pct}% más barato que Solar y {forestry_pct}% más eficiente que Forestación, con más de 1000 años de permanencia de carbono."
 }

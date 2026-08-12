@@ -137,6 +137,10 @@ body{
     flex:0 1 30px;
 }
 
+#investmentBreakdown{
+    animation:slideDown .4s ease;
+}
+
 .bs-stepper-content{
 
     overflow-y:visible;
