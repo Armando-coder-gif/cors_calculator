@@ -110,10 +110,10 @@
 
   "step_abatement": "Comparison",
   "abatement_title": "Why Circularity Wins",
-  "abatement_subtitle": "Cost of Abatement per Tonne of CO₂ₑ",
+  "abatement_subtitle": "Comparison of the cost of reducing, removing, sequestering, or avoiding CO₂ₑ equivalents",
   "abatement_footnote": "* Average industry benchmarks for LatAm.",
-  "abatement_savings_vs_solar": "Savings vs Solar",
-  "abatement_savings_vs_forestry": "Savings vs Forestry",
+  "abatement_savings_vs_solar": "BCR Savings vs Solar",
+  "abatement_savings_vs_forestry": "BCR Savings vs Reforestation",
   "abatement_your_cost": "Your Cost",
   "abatement_arbitrage": "Arbitrage Opportunity: Your removal pays for itself and generates profit.",
   "abatement_show_breakdown": "Show Investment Breakdown",
@@ -122,8 +122,8 @@
   "abatement_fbb_production": "FBB Production & Inoculation",
   "abatement_total_investment": "Total Estimated Investment",
   "abatement_potential_revenue": "Potential Revenue (CORCs + FBB)",
-  "abatement_label_solar": "Solar Energy ($100/tCO₂ₑ)",
-  "abatement_label_forestry": "Forestry ($55/tCO₂ₑ)",
-  "abatement_label_bcr": "AgroCognitive BCR",
+  "abatement_label_solar": "Solar Energy",
+  "abatement_label_forestry": "Reforestation",
+  "abatement_label_bcr": "Biochar Carbon Removal",
   "abatement_support_text": "Our circular model is {solar_pct}% cheaper than Solar and {forestry_pct}% more efficient than Forestry, with 1000+ years of carbon permanence."
 }

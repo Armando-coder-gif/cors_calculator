@@ -334,12 +334,6 @@ function renderAbatement(abatement) {
         arbitrageEl.classList.add("d-none");
     }
 
-    // Support text
-    const supportText = i18n.t("abatement_support_text")
-        .replace("{solar_pct}", savingsSolar)
-        .replace("{forestry_pct}", savingsForestry);
-    document.getElementById("abatementSupportText").textContent = supportText;
-
     // Investment breakdown
     document.getElementById("breakdownService").textContent = `$${fmtNum(abatement.service_cost)}`;
     document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost + abatement.logistics_cost)}`;
