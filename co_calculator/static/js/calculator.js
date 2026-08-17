@@ -125,7 +125,7 @@ document.getElementById("fbbResult").textContent =
     `${fmtNum(calc.biochar)} ${i18n.t("unit_tons")}`;
 
 document.getElementById("co2Removed").textContent =
-    `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")} CO₂ₑ`;
+    `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
 
     document.getElementById("hookCost").textContent =
         `$${fmtNum(calc.agrocognitive_cost)} USD/${i18n.t("hook_year")}`;
