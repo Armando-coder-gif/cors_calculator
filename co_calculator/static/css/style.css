@@ -196,19 +196,13 @@ body{
     letter-spacing:.5px;
 }
 
-.toggle-agro{
-    width:3rem!important;
-    height:1.5rem;
-    cursor:pointer;
+#investmentBreakdown{
+    animation:slideDown .4s ease;
 }
 
-.toggle-agro:checked{
-    background-color:var(--primary-btn-bg-color)!important;
-    border-color:var(--primary-btn-bg-color)!important;
-}
-
-.toggle-agro:focus{
-    box-shadow:0 0 0 .2rem rgba(255,152,0,.25)!important;
+@keyframes slideDown{
+    from{opacity:0;transform:translateY(-10px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
 /* Mobile responsive */
@@ -324,26 +318,5 @@ body{
 
     .btn{
         font-size:13px;
-    }
-
-    /* Hook step mobile */
-    #hook .d-flex.align-items-center.justify-content-center{
-        flex-direction:column;
-        gap:10px;
-        text-align:center;
-    }
-
-    #hook .d-flex.align-items-center.justify-content-center .me-3{
-        margin-right:0!important;
-    }
-
-    #hookCard .d-flex.justify-content-between{
-        flex-direction:column;
-        gap:4px;
-        text-align:center;
-    }
-
-    #hookCard h4{
-        font-size:1.1rem;
     }
 }

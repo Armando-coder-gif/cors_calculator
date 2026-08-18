@@ -16,6 +16,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
+    document.getElementById("investmentToggleBtn").addEventListener("click", function () {
+        const el = document.getElementById("investmentBreakdown");
+        el.style.display = el.style.display === "none" ? "block" : "none";
+    });
+
 });
 
 function getCookie(name) {
@@ -314,6 +319,17 @@ function renderAbatement(abatement) {
     } else {
         arbitrageEl.classList.add("d-none");
     }
+
+    // Investment breakdown
+    document.getElementById("breakdownService").textContent = `$${fmtNum(abatement.service_cost)}`;
+    document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost)}`;
+    document.getElementById("breakdownLogistics").textContent = `$${fmtNum(abatement.logistics_cost)}`;
+    document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
+    document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;
+    document.getElementById("breakdownCorcs").textContent = `$${fmtNum(window._lastCalc.corcs_value)}`;
+    document.getElementById("breakdownFbbRevenue").textContent = `$${fmtNum(window._lastCalc.fbb_value)}`;
+    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
+    document.getElementById("investmentBreakdown").style.display = "none";
 
     // Chart
     const ctx = document.getElementById("abatementChart").getContext("2d");
