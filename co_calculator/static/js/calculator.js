@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
-    document.getElementById("hookToggle").addEventListener("change", function () {
-        const card = document.getElementById("hookCard");
-        card.style.display = this.checked ? "block" : "none";
+    document.getElementById("investmentToggleBtn").addEventListener("click", function () {
+        const el = document.getElementById("investmentBreakdown");
+        el.style.display = el.style.display === "none" ? "block" : "none";
     });
 
 });
@@ -120,18 +120,10 @@ document.getElementById("fbbResult").textContent =
     `${fmtNum(calc.biochar)} ${i18n.t("unit_tons")}`;
 
 document.getElementById("co2Removed").textContent =
-    `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")} CO₂ₑ`;
-
-    document.getElementById("hookCost").textContent =
-        `$${fmtNum(calc.agrocognitive_cost)} USD/${i18n.t("hook_year")}`;
-
-    document.getElementById("hookNet").textContent =
-        `$${fmtNum(calc.net_gain)} USD`;
-
-    document.getElementById("hookToggle").checked = false;
-    document.getElementById("hookCard").style.display = "none";
+    `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
 
     renderFomoChart(calc);
+    renderAbatement(result.abatement);
 
 }
 
@@ -301,4 +293,93 @@ async function sendPdfEmail() {
         btn.disabled = false;
         btn.textContent = i18n.t("results_send_email");
     }
+}
+
+let abatementChartInstance = null;
+
+function renderAbatement(abatement) {
+    if (!abatement) return;
+    window._lastAbatement = abatement;
+
+    const bcr = abatement.abatement_cost_bcr;
+    const solar = abatement.solar_pv_cost;
+    const forestry = abatement.forestry_cost;
+
+    // Financial summary
+    const savingsSolar = Math.round((1 - bcr / solar) * 100);
+    const savingsForestry = Math.round((1 - bcr / forestry) * 100);
+
+    document.getElementById("savingsVsSolar").textContent = `${savingsSolar}%`;
+    document.getElementById("savingsVsForestry").textContent = `${savingsForestry}%`;
+    document.getElementById("abatementCostDisplay").textContent = `$${fmtNum(bcr)}/${i18n.t("unit_tons")} CO₂ₑ`;
+
+    // Arbitrage
+    const arbitrageEl = document.getElementById("arbitrageMsg");
+    if (abatement.arbitrage) {
+        arbitrageEl.classList.remove("d-none");
+    } else {
+        arbitrageEl.classList.add("d-none");
+    }
+
+    // Investment breakdown
+    document.getElementById("breakdownService").textContent = `$${fmtNum(abatement.service_cost)}`;
+    document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost)}`;
+    document.getElementById("breakdownLogistics").textContent = `$${fmtNum(abatement.logistics_cost)}`;
+    document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
+    document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;
+    document.getElementById("breakdownCorcs").textContent = `$${fmtNum(window._lastCalc.corcs_value)}`;
+    document.getElementById("breakdownFbbRevenue").textContent = `$${fmtNum(window._lastCalc.fbb_value)}`;
+    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
+    document.getElementById("investmentBreakdown").style.display = "none";
+
+    // Chart
+    const ctx = document.getElementById("abatementChart").getContext("2d");
+    if (abatementChartInstance) abatementChartInstance.destroy();
+
+    abatementChartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: [
+                i18n.t("abatement_label_solar"),
+                i18n.t("abatement_label_forestry"),
+                i18n.t("abatement_label_bcr")
+            ],
+            datasets: [{
+                label: "$",
+                data: [solar, forestry, bcr],
+                backgroundColor: [
+                    "rgba(255, 152, 0, 0.6)",
+                    "rgba(255, 152, 0, 0.4)",
+                    "rgba(123, 174, 34, 0.7)"
+                ],
+                borderColor: [
+                    "rgba(255, 152, 0, 1)",
+                    "rgba(255, 152, 0, 1)",
+                    "rgba(123, 174, 34, 1)"
+                ],
+                borderWidth: 2,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `$${fmtNum(ctx.raw)} USD/${i18n.t("unit_tons")} CO₂ₑ`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: { callback: v => `$${v}` },
+                    grid: { display: false }
+                },
+                y: { grid: { display: false } }
+            }
+        }
+    });
 }
