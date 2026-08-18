@@ -55,8 +55,11 @@ const i18n = {
                 `${fmtNum(calc.biochar)} ${this.t("unit_tons")}`;
             document.getElementById("co2Removed").textContent =
                 `${fmtNum(calc.co2_removed)} ${this.t("unit_tons")} CO₂ₑ`;
-            document.getElementById("hookCost").textContent =
-                `$${fmtNum(calc.agrocognitive_cost)} USD/${this.t("hook_year")}`;
+        }
+        if (window._lastAbatement) {
+            const bcr = window._lastAbatement.abatement_cost_bcr;
+            document.getElementById("abatementCostDisplay").textContent =
+                `$${fmtNum(bcr)} / ${this.t("unit_tons")} CO₂ₑ`;
         }
     },
 

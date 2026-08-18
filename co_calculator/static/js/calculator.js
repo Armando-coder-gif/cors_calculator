@@ -299,6 +299,7 @@ let abatementChartInstance = null;
 
 function renderAbatement(abatement) {
     if (!abatement) return;
+    window._lastAbatement = abatement;
 
     const bcr = abatement.abatement_cost_bcr;
     const solar = abatement.solar_pv_cost;
