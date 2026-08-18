@@ -20,7 +20,7 @@ class CalculatorService:
         if hectares <= 0 or hectares > MAX_HECTARES:
             raise ValueError(f"Hectáreas fuera de rango: {hectares}")
 
-        moisture = crop_data.get("moisture", 0.50)
+        moisture = HUMIDITY_RATIO
         dry_biomass = tons * (1 - moisture)
         biochar = dry_biomass * PYROLYSIS_YIELD
         co2_removed = biochar * REMOVAL_FACTOR
