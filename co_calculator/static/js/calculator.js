@@ -16,16 +16,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
-    document.getElementById("investmentToggleBtn").addEventListener("click", function () {
-        const el = document.getElementById("investmentBreakdown");
-        el.style.display = el.style.display === "none" ? "block" : "none";
-    });
-
-    document.getElementById("hookToggle").addEventListener("change", function () {
-        const card = document.getElementById("hookCard");
-        card.style.display = this.checked ? "block" : "none";
-    });
-
 });
 
 function getCookie(name) {
@@ -126,15 +116,6 @@ document.getElementById("fbbResult").textContent =
 
 document.getElementById("co2Removed").textContent =
     `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
-
-    document.getElementById("hookCost").textContent =
-        `$${fmtNum(calc.agrocognitive_cost)} USD/${i18n.t("hook_year")}`;
-
-    document.getElementById("hookNet").textContent =
-        `$${fmtNum(calc.net_gain)} USD`;
-
-    document.getElementById("hookToggle").checked = false;
-    document.getElementById("hookCard").style.display = "none";
 
     renderFomoChart(calc);
     renderAbatement(result.abatement);
@@ -333,14 +314,6 @@ function renderAbatement(abatement) {
     } else {
         arbitrageEl.classList.add("d-none");
     }
-
-    // Investment breakdown
-    document.getElementById("breakdownService").textContent = `$${fmtNum(abatement.service_cost)}`;
-    document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost + abatement.logistics_cost)}`;
-    document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
-    document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;
-    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
-    document.getElementById("investmentBreakdown").style.display = "none";
 
     // Chart
     const ctx = document.getElementById("abatementChart").getContext("2d");

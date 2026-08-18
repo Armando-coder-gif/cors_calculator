@@ -137,10 +137,6 @@ body{
     flex:0 1 30px;
 }
 
-#investmentBreakdown{
-    animation:slideDown .4s ease;
-}
-
 .bs-stepper-content{
 
     overflow-y:visible;
@@ -213,15 +209,6 @@ body{
 
 .toggle-agro:focus{
     box-shadow:0 0 0 .2rem rgba(255,152,0,.25)!important;
-}
-
-#hookCard{
-    animation:slideDown .4s ease;
-}
-
-@keyframes slideDown{
-    from{opacity:0;transform:translateY(-10px)}
-    to{opacity:1;transform:translateY(0)}
 }
 
 /* Mobile responsive */
