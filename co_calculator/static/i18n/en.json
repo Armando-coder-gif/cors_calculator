@@ -37,7 +37,7 @@
   "results_subtitle": "Review your report before downloading or sending it.",
   "results_money_label": "Money you're leaving in the field",
   "results_money_default": "$0 USD/Year",
-  "results_fbb_label": "FBB produced per year",
+  "results_fbb_label": "Annual production of biochar-based biofertilizer",
   "results_co2_label": "Net CO₂ removed per year",
   "results_humidity_label": "Waste moisture",
   "results_pyrolysis_label": "Pyrolysis yield",
