@@ -20,7 +20,7 @@ class CalculatorService:
         if hectares <= 0 or hectares > MAX_HECTARES:
             raise ValueError(f"Hectáreas fuera de rango: {hectares}")
 
-        moisture = HUMIDITY_RATIO
+        moisture = crop_data["moisture"]
         dry_biomass = tons * (1 - moisture)
         biochar = dry_biomass * PYROLYSIS_YIELD
         co2_removed = biochar * REMOVAL_FACTOR
@@ -44,6 +44,7 @@ class CalculatorService:
 
         # --- Abatement Cost (BCR Path) ---
         service_cost = AGROCOGNITIVE_SUBSCRIPTION * hectares
+
         hardware_cost = HARDWARE_COST_PER_TON * biochar
         logistics_cost = LOGISTICS_COST_PER_TON * biochar
         inoculation_cost = FBB_INOCULATION_COST_PER_TON * biochar
