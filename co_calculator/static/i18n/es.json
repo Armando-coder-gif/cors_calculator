@@ -51,9 +51,9 @@
 
   "btn_back": "Atrás",
 
-  "chart_income": "Ingresos Aproximados Por Créditos De Carbono",
+  "chart_income": "ingresos aproximados por créditos de carbono",
   "chart_service": "Servicio AgroCognitive",
-  "chart_net": "Inversión en proyecto",
+  "chart_net": "inversión en proyecto",
   "chart_title": "Potencial de ingresos vs Ganancia obtenida",
 
   "alert_required": "Todos los campos son obligatorios.",

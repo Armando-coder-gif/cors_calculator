@@ -51,9 +51,9 @@
 
   "btn_back": "Back",
 
-  "chart_income": "Estimated Carbon Credit Revenue",
+  "chart_income": "estimated carbon credit revenue",
   "chart_service": "AgroCognitive Service",
-  "chart_net": "Project Investment",
+  "chart_net": "project investment",
   "chart_title": "Revenue Potential vs. Profit Earned",
 
   "alert_required": "All fields are required.",
