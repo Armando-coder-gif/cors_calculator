@@ -43,9 +43,9 @@
   "results_pyrolysis_label": "Pyrolysis Yield Assumption",
   "results_removal_label": "CO₂ₑ Removal Factor Assumption",
   "results_chart_note": "* Does not include pyrolysis hardware investment.",
-  "results_legend_humidity": "* Waste moisture: {moisture_pct}%",
-  "results_legend_pyrolysis": "* Pyrolysis yield: 30%",
-  "results_legend_removal": "* CO₂ₑ removal factor: 2.5x tons CO₂ₑ",
+  "results_legend_humidity": "* Residue Moisture Assumption: {moisture_pct}%",
+  "results_legend_pyrolysis": "* Pyrolysis Yield Assumption: 30%",
+  "results_legend_removal": "* CO₂ₑ Removal Factor Assumption: 2.5×",
   "results_download_pdf": "📄 Download PDF",
   "results_send_email": "✉️ Send by email",
 
