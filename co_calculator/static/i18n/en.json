@@ -38,14 +38,14 @@
   "results_money_label": "Money you're leaving in the field",
   "results_money_default": "$0 USD/Year",
   "results_fbb_label": "Annual production of biochar-based biofertilizer",
-  "results_co2_label": "Net CO₂ removed per year",
-  "results_humidity_label": "Waste moisture",
-  "results_pyrolysis_label": "Pyrolysis yield",
-  "results_removal_label": "CO₂ removal factor",
+  "results_co2_label": "Net CO₂ₑ removed per year",
+  "results_humidity_label": "Residue Moisture Assumption",
+  "results_pyrolysis_label": "Pyrolysis Yield Assumption",
+  "results_removal_label": "CO₂ₑ Removal Factor Assumption",
   "results_chart_note": "* Does not include pyrolysis hardware investment.",
   "results_legend_humidity": "* Waste moisture: {moisture_pct}%",
   "results_legend_pyrolysis": "* Pyrolysis yield: 30%",
-  "results_legend_removal": "* CO₂ removal factor: 2.5x tons CO₂ₑ",
+  "results_legend_removal": "* CO₂ₑ removal factor: 2.5x tons CO₂ₑ",
   "results_download_pdf": "📄 Download PDF",
   "results_send_email": "✉️ Send by email",
 
@@ -67,7 +67,7 @@
   "alert_email_success": "Email sent successfully!",
 
   "money_suffix": "USD/Year",
-  "asterisk_tooltip": "Waste Moisture Assumption, Pyrolysis Yield Assumption, CO₂ₑ Removal Factor Assumption",
+  "asterisk_tooltip": "See clarifications below",
 
   "unit_tons": "tons",
 
