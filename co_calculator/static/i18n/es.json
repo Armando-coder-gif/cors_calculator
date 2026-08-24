@@ -129,9 +129,9 @@
   "abatement_revenue_corcs": "Ingresos estimados por venta de Créditos de Carbono en mercados voluntarios",
   "abatement_revenue_fbb": "Ingresos estimados por venta de biofertilizantes base biochar en el mercado",
   "abatement_potential_revenue": "Ingreso Potencial Total",
-  "abatement_label_solar": "Energía Solar",
-  "abatement_label_forestry": "Reforestación",
-  "abatement_label_bcr": "Biochar Carbon Removal",
+  "abatement_label_solar": "energía solar",
+  "abatement_label_forestry": "reforestación",
+  "abatement_label_bcr": "biochar carbon removal",
   "abatement_support_text": "Nuestro modelo circular es {solar_pct}% más barato que solar y {forestry_pct}% más eficiente que reforestación, con más de 1000 años de permanencia de carbono.",
   "abatement_warning_text": "Las premisas de producción e inversión en hardware son atípicas, por lo que arrojan un costo de abatimiento BCR muy alto. Le sugerimos ponerse en contacto con nosotros para hacerle una valorización personalizada."
 }
