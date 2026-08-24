@@ -21,6 +21,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         el.style.display = this.checked ? "block" : "none";
     });
 
+    document.getElementById("revenueToggleBtn").addEventListener("change", function () {
+        const el = document.getElementById("revenueBreakdown");
+        el.style.display = this.checked ? "block" : "none";
+    });
+
 });
 
 function getCookie(name) {
@@ -339,6 +344,13 @@ function renderAbatement(abatement) {
     document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
     document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;
     document.getElementById("investmentBreakdown").style.display = "none";
+
+    // Revenue breakdown
+    const calc = window._lastCalc;
+    document.getElementById("breakdownCorcs").textContent = `$${fmtNum(calc.corcs_value)}`;
+    document.getElementById("breakdownFbbRevenue").textContent = `$${fmtNum(calc.fbb_value)}`;
+    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
+    document.getElementById("revenueBreakdown").style.display = "none";
 
     // Chart
     const ctx = document.getElementById("abatementChart").getContext("2d");

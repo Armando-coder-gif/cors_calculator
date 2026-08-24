@@ -43,7 +43,7 @@ class CalculatorService:
         money_left = corcs_value + fbb_value
 
         # --- Abatement Cost (BCR Path) ---
-        service_cost = AGROCOGNITIVE_SUBSCRIPTION * hectares
+        service_cost = agrocognitive_cost
 
         hardware_cost = HARDWARE_COST_PER_TON * biochar
         logistics_cost = LOGISTICS_COST_PER_TON * biochar
