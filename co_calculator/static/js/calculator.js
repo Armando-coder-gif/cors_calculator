@@ -343,6 +343,7 @@ function renderAbatement(abatement) {
     }
 
     // Investment breakdown
+    document.getElementById("breakdownServiceTotal").textContent = `$${fmtNum(abatement.subscription_cost + abatement.dmrv_cost)}`;
     document.getElementById("breakdownSubscription").textContent = `$${fmtNum(abatement.subscription_cost)}`;
     document.getElementById("breakdownDmrv").textContent = `$${fmtNum(abatement.dmrv_cost)}`;
     document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost)}`;
