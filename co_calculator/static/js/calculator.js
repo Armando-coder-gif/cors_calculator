@@ -316,14 +316,23 @@ function renderAbatement(abatement) {
     const forestry = abatement.forestry_cost;
 
     // Support text
-    const savingsSolar = Math.round((1 - bcr / solar) * 100);
-    const savingsForestry = Math.round((1 - bcr / forestry) * 100);
-    const supportText = i18n
-        .t("abatement_support_text")
-        .replace("{solar_pct}", savingsSolar)
-        .replace("{forestry_pct}", savingsForestry);
-    const supportEl = document.getElementById("abatementSupportText");
-    if (supportEl) supportEl.textContent = supportText;
+    const supportCard = document.getElementById("abatementSupportCard");
+    const warningMsg = document.getElementById("abatementWarningMsg");
+    if (bcr >= solar || bcr >= forestry) {
+        supportCard.classList.add("d-none");
+        warningMsg.textContent = i18n.t("abatement_warning_text");
+        warningMsg.classList.remove("d-none");
+    } else {
+        const savingsSolar = Math.round((1 - bcr / solar) * 100);
+        const savingsForestry = Math.round((1 - bcr / forestry) * 100);
+        const supportEl = document.getElementById("abatementSupportText");
+        supportEl.textContent = i18n
+            .t("abatement_support_text")
+            .replace("{solar_pct}", savingsSolar)
+            .replace("{forestry_pct}", savingsForestry);
+        supportCard.classList.remove("d-none");
+        warningMsg.classList.add("d-none");
+    }
 
     // Arbitrage
     const arbitrageEl = document.getElementById("arbitrageMsg");
