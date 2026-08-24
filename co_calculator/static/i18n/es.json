@@ -104,6 +104,8 @@
   "pdf_corcs": "Ingresos Aproximados Por Créditos De Carbono",
   "pdf_service": "Servicio AgroCognitive",
   "pdf_net_gain": "Inversión Total del Proyecto",
+  "pdf_investment_title": "Desglose de Inversión",
+  "pdf_revenue_title": "Desglose de Ingresos Potenciales",
   "pdf_footer_note": "No incluye inversión en hardware de pirólisis.",
   "pdf_footer_generated": "Generado por AgroCognitive",
 
