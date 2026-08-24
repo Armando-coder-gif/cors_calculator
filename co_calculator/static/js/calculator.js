@@ -333,9 +333,6 @@ function renderAbatement(abatement) {
     document.getElementById("breakdownLogistics").textContent = `$${fmtNum(abatement.logistics_cost)}`;
     document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
     document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;
-    document.getElementById("breakdownCorcs").textContent = `$${fmtNum(window._lastCalc.corcs_value)}`;
-    document.getElementById("breakdownFbbRevenue").textContent = `$${fmtNum(window._lastCalc.fbb_value)}`;
-    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
     document.getElementById("investmentBreakdown").style.display = "none";
 
     // Chart
