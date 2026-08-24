@@ -57,10 +57,11 @@
     </div>
 
     <!-- Investment Breakdown Toggle -->
-    <div class="text-center mb-3">
-        <button class="btn btn-outline-secondary btn-sm" id="investmentToggleBtn" data-i18n="abatement_show_breakdown">
-            Show Investment Breakdown
-        </button>
+    <div class="form-check form-switch d-flex align-items-center justify-content-center gap-2 mb-3">
+        <input class="form-check-input" type="checkbox" role="switch" id="investmentToggleBtn">
+        <label class="form-check-label" for="investmentToggleBtn" data-i18n="abatement_show_breakdown">
+            I would like to see the investment detail
+        </label>
     </div>
 
     <div id="investmentBreakdown" class="card border-0 shadow-sm mb-4" style="display:none">

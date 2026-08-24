@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
-    document.getElementById("investmentToggleBtn").addEventListener("click", function () {
+    document.getElementById("investmentToggleBtn").addEventListener("change", function () {
         const el = document.getElementById("investmentBreakdown");
-        el.style.display = el.style.display === "none" ? "block" : "none";
+        el.style.display = this.checked ? "block" : "none";
     });
 
 });
