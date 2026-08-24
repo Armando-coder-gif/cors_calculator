@@ -55,6 +55,10 @@ const i18n = {
                 `${fmtNum(calc.biochar)} ${this.t("unit_tons")}`;
             document.getElementById("co2Removed").textContent =
                 `${fmtNum(calc.co2_removed)} ${this.t("unit_tons")} CO₂ₑ`;
+            const humidityEl = document.querySelector('[data-i18n="results_legend_humidity"]');
+            if (humidityEl) {
+                humidityEl.textContent = this.t("results_legend_humidity").replace("{moisture_pct}", calc.moisture);
+            }
         }
         if (window._lastAbatement) {
             const bcr = window._lastAbatement.abatement_cost_bcr;

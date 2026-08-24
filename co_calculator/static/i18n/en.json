@@ -43,7 +43,7 @@
   "results_pyrolysis_label": "Pyrolysis yield",
   "results_removal_label": "CO₂ removal factor",
   "results_chart_note": "* Does not include pyrolysis hardware investment.",
-  "results_legend_humidity": "* Waste moisture: 50%",
+  "results_legend_humidity": "* Waste moisture: {moisture_pct}%",
   "results_legend_pyrolysis": "* Pyrolysis yield: 30%",
   "results_legend_removal": "* CO₂ removal factor: 2.5x tons CO₂ₑ",
   "results_download_pdf": "📄 Download PDF",

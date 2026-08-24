@@ -122,6 +122,11 @@ document.getElementById("fbbResult").textContent =
 document.getElementById("co2Removed").textContent =
     `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
 
+    const humidityEl = document.querySelector('[data-i18n="results_legend_humidity"]');
+    if (humidityEl) {
+        humidityEl.textContent = i18n.t("results_legend_humidity").replace("{moisture_pct}", calc.moisture);
+    }
+
     renderFomoChart(calc);
     renderAbatement(result.abatement);
 

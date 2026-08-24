@@ -43,7 +43,7 @@
   "results_pyrolysis_label": "Rendimiento de pirólisis",
   "results_removal_label": "Factor de remoción CO₂",
   "results_chart_note": "* No incluye inversión en hardware de pirólisis.",
-  "results_legend_humidity": "* Humedad del residuo: 50%",
+  "results_legend_humidity": "* Humedad del residuo: {moisture_pct}%",
   "results_legend_pyrolysis": "* Rendimiento de pirólisis: 30%",
   "results_legend_removal": "* Factor de remoción CO₂: 2.5x toneladas CO₂ₑ",
   "results_download_pdf": "📄 Descargar PDF",
