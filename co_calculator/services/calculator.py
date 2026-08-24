@@ -20,7 +20,7 @@ class CalculatorService:
         if hectares <= 0 or hectares > MAX_HECTARES:
             raise ValueError(f"Hectáreas fuera de rango: {hectares}")
 
-        moisture = HUMIDITY_RATIO
+        moisture = crop_data["moisture"]
         dry_biomass = tons * (1 - moisture)
         biochar = dry_biomass * PYROLYSIS_YIELD
         co2_removed = biochar * REMOVAL_FACTOR
@@ -43,7 +43,10 @@ class CalculatorService:
         money_left = corcs_value + fbb_value
 
         # --- Abatement Cost (BCR Path) ---
-        service_cost = AGROCOGNITIVE_SUBSCRIPTION * hectares
+        subscription_cost = hectares * AGROCOGNITIVE_SUBSCRIPTION
+        dmrv_cost = hectares * DMRV_MONTHLY_PRICE * 12
+        service_cost = subscription_cost + dmrv_cost
+
         hardware_cost = HARDWARE_COST_PER_TON * biochar
         logistics_cost = LOGISTICS_COST_PER_TON * biochar
         inoculation_cost = FBB_INOCULATION_COST_PER_TON * biochar
@@ -62,6 +65,7 @@ class CalculatorService:
                 "hectares": hectares
             },
             "calculations": {
+                "moisture": round(moisture * 100),
                 "dry_biomass": round(dry_biomass, 2),
                 "biochar": round(biochar, 2),
                 "co2_removed": round(co2_removed, 2),
@@ -73,7 +77,8 @@ class CalculatorService:
                 "net_gain": round(net_gain, 2)
             },
             "abatement": {
-                "service_cost": round(service_cost, 2),
+                "subscription_cost": round(subscription_cost, 2),
+                "dmrv_cost": round(dmrv_cost, 2),
                 "hardware_cost": round(hardware_cost, 2),
                 "logistics_cost": round(logistics_cost, 2),
                 "inoculation_cost": round(inoculation_cost, 2),

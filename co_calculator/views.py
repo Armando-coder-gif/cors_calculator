@@ -66,15 +66,26 @@ def _fmt(value):
     return formatted.replace(",", "X").replace(".", ",").replace("X", ".")
 
 
+def _pdf_safe_translations(t):
+    """Replace Unicode subscripts with HTML <sub> for xhtml2pdf compatibility."""
+    result = {}
+    for k, v in t.items():
+        if isinstance(v, str):
+            v = v.replace("CO₂ₑ", "CO<sub>2</sub>e").replace("CO₂", "CO<sub>2</sub>")
+        result[k] = v
+    return result
+
+
 def _build_pdf(data):
     crop = data["crop"]
     tons = float(data["tons"])
     hectares = float(data["hectares"])
-    t = _load_translations(data.get("lang", "es"))
+    t = _pdf_safe_translations(_load_translations(data.get("lang", "es")))
 
     service = CalculatorService()
     result = service.calculate(crop, tons, hectares)
     calc = result["calculations"]
+    abat = result["abatement"]
 
     context = {
         "person_name": data.get("person_name", ""),
@@ -90,7 +101,14 @@ def _build_pdf(data):
         "biochar": _fmt(calc["biochar"]),
         "corcs_value": _fmt(calc["corcs_value"]),
         "agrocognitive_cost": _fmt(calc["agrocognitive_cost"]),
-        "net_gain": _fmt(calc["net_gain"]),
+        "total_investment": _fmt(abat["total_investment"]),
+        "subscription_cost": _fmt(abat["subscription_cost"]),
+        "dmrv_cost": _fmt(abat["dmrv_cost"]),
+        "hardware_cost": _fmt(abat["hardware_cost"]),
+        "logistics_cost": _fmt(abat["logistics_cost"]),
+        "inoculation_cost": _fmt(abat["inoculation_cost"]),
+        "potential_revenue": _fmt(abat["potential_revenue"]),
+        "fbb_value": _fmt(calc["fbb_value"]),
         "chart_image": data.get("chart_image", ""),
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,
@@ -118,11 +136,12 @@ def preview_report(request):
     crop = data["crop"]
     tons = float(data["tons"])
     hectares = float(data["hectares"])
-    t = _load_translations(data.get("lang", "es"))
+    t = _pdf_safe_translations(_load_translations(data.get("lang", "es")))
 
     service = CalculatorService()
     result = service.calculate(crop, tons, hectares)
     calc = result["calculations"]
+    abat = result["abatement"]
 
     context = {
         "person_name": data.get("person_name", ""),
@@ -138,7 +157,14 @@ def preview_report(request):
         "biochar": _fmt(calc["biochar"]),
         "corcs_value": _fmt(calc["corcs_value"]),
         "agrocognitive_cost": _fmt(calc["agrocognitive_cost"]),
-        "net_gain": _fmt(calc["net_gain"]),
+        "total_investment": _fmt(abat["total_investment"]),
+        "subscription_cost": _fmt(abat["subscription_cost"]),
+        "dmrv_cost": _fmt(abat["dmrv_cost"]),
+        "hardware_cost": _fmt(abat["hardware_cost"]),
+        "logistics_cost": _fmt(abat["logistics_cost"]),
+        "inoculation_cost": _fmt(abat["inoculation_cost"]),
+        "potential_revenue": _fmt(abat["potential_revenue"]),
+        "fbb_value": _fmt(calc["fbb_value"]),
         "chart_image": data.get("chart_image", ""),
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,

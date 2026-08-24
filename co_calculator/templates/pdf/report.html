@@ -222,8 +222,8 @@
                 <div class="metric-value">{{ biochar }} {{ t.unit_tons }}</div>
             </td>
             <td>
-                <div class="metric-label">{{ t.pdf_co2_metric }}</div>
-                <div class="metric-value">{{ co2_removed }} {{ t.unit_tons }} CO2e</div>
+                <div class="metric-label">{{ t.pdf_co2_metric|safe }}</div>
+                <div class="metric-value">{{ co2_removed }} {{ t.unit_tons }} CO<sub>2</sub>e</div>
             </td>
         </tr>
     </table>
@@ -233,10 +233,10 @@
         <h2>{{ t.pdf_chart_title }}</h2>
         <img src="{{ chart_image }}" style="width: 100%;" />
         <p style="font-size: 10px; color: #999; margin-top: 8px;">
-            {{ t.results_chart_note }}<br>
-            {{ t.results_legend_humidity }}<br>
-            {{ t.results_legend_pyrolysis }}<br>
-            {{ t.results_legend_removal }}
+            {{ t.results_chart_note|safe }}<br>
+            {{ t.results_legend_humidity|safe }}<br>
+            {{ t.results_legend_pyrolysis|safe }}<br>
+            {{ t.results_legend_removal|safe }}
         </p>
     </div>
     {% endif %}
@@ -257,20 +257,68 @@
                 <td class="val">{{ biochar }} t</td>
             </tr>
             <tr>
-                <td>{{ t.pdf_co2_removed }}</td>
-                <td class="val">{{ co2_removed }} {{ t.unit_tons }} CO₂ₑ</td>
+                <td>{{ t.pdf_co2_removed|safe }}</td>
+                <td class="val">{{ co2_removed }} {{ t.unit_tons }} CO<sub>2</sub>e</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section" style="page-break-before: always;">
+        <h2>{{ t.pdf_investment_title }}</h2>
+        <table class="detail-table">
+            <tr>
+                <th>{{ t.pdf_col_concept }}</th>
+                <th style="text-align:right">{{ t.pdf_col_value }}</th>
             </tr>
             <tr>
-                <td>{{ t.pdf_corcs }}</td>
+                <td><strong>{{ t.abatement_agrocognitive_group }}</strong></td>
+                <td class="val">${{ agrocognitive_cost }} USD</td>
+            </tr>
+            <tr>
+                <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ t.abatement_subscription }}</td>
+                <td class="val" style="font-size: 10px; color: #666;">${{ subscription_cost }} USD</td>
+            </tr>
+            <tr>
+                <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ t.abatement_dmrv }}</td>
+                <td class="val" style="font-size: 10px; color: #666;">${{ dmrv_cost }} USD</td>
+            </tr>
+            <tr>
+                <td>{{ t.abatement_hardware }}</td>
+                <td class="val">${{ hardware_cost }} USD</td>
+            </tr>
+            <tr>
+                <td>{{ t.abatement_logistics }}</td>
+                <td class="val">${{ logistics_cost }} USD</td>
+            </tr>
+            <tr>
+                <td>{{ t.abatement_fbb_production }}</td>
+                <td class="val">${{ inoculation_cost }} USD</td>
+            </tr>
+            <tr class="net-row">
+                <td><strong>{{ t.abatement_total_investment }}</strong></td>
+                <td class="val">${{ total_investment }} USD</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>{{ t.pdf_revenue_title }}</h2>
+        <table class="detail-table">
+            <tr>
+                <th>{{ t.pdf_col_concept }}</th>
+                <th style="text-align:right">{{ t.pdf_col_value }}</th>
+            </tr>
+            <tr>
+                <td>{{ t.abatement_revenue_corcs }}</td>
                 <td class="val">${{ corcs_value }} USD</td>
             </tr>
             <tr>
-                <td>{{ t.pdf_service }}</td>
-                <td class="val">${{ agrocognitive_cost }} USD</td>
+                <td>{{ t.abatement_revenue_fbb }}</td>
+                <td class="val">${{ fbb_value }} USD</td>
             </tr>
             <tr class="net-row">
-                <td><strong>{{ t.pdf_net_gain }}</strong></td>
-                <td class="val">${{ net_gain }} USD</td>
+                <td><strong>{{ t.abatement_potential_revenue }}</strong></td>
+                <td class="val">${{ potential_revenue }} USD</td>
             </tr>
         </table>
     </div>

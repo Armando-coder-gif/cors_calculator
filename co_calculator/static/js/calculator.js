@@ -16,9 +16,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
-    document.getElementById("investmentToggleBtn").addEventListener("click", function () {
+    document.getElementById("investmentToggleBtn").addEventListener("change", function () {
         const el = document.getElementById("investmentBreakdown");
-        el.style.display = el.style.display === "none" ? "block" : "none";
+        el.style.display = this.checked ? "block" : "none";
+    });
+
+    document.getElementById("revenueToggleBtn").addEventListener("change", function () {
+        const el = document.getElementById("revenueBreakdown");
+        el.style.display = this.checked ? "block" : "none";
     });
 
 });
@@ -121,6 +126,11 @@ document.getElementById("fbbResult").textContent =
 
 document.getElementById("co2Removed").textContent =
     `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
+
+    const humidityEl = document.querySelector('[data-i18n="results_legend_humidity"]');
+    if (humidityEl) {
+        humidityEl.textContent = i18n.t("results_legend_humidity").replace("{moisture_pct}", calc.moisture);
+    }
 
     renderFomoChart(calc);
     renderAbatement(result.abatement);
@@ -305,32 +315,50 @@ function renderAbatement(abatement) {
     const solar = abatement.solar_pv_cost;
     const forestry = abatement.forestry_cost;
 
-    // Financial summary
-    const savingsSolar = Math.round((1 - bcr / solar) * 100);
-    const savingsForestry = Math.round((1 - bcr / forestry) * 100);
+    // Support text
+    const supportCard = document.getElementById("abatementSupportCard");
+    const warningMsg = document.getElementById("abatementWarningMsg");
+    if (bcr >= solar || bcr >= forestry) {
+        supportCard.classList.add("d-none");
+        warningMsg.textContent = i18n.t("abatement_warning_text");
+        warningMsg.classList.remove("d-none");
+    } else {
+        const savingsSolar = Math.round((1 - bcr / solar) * 100);
+        const savingsForestry = Math.round((1 - bcr / forestry) * 100);
+        const supportEl = document.getElementById("abatementSupportText");
+        supportEl.textContent = i18n
+            .t("abatement_support_text")
+            .replace("{solar_pct}", savingsSolar)
+            .replace("{forestry_pct}", savingsForestry);
+        supportCard.classList.remove("d-none");
+        warningMsg.classList.add("d-none");
+    }
 
-    document.getElementById("savingsVsSolar").textContent = `${savingsSolar}%`;
-    document.getElementById("savingsVsForestry").textContent = `${savingsForestry}%`;
-    document.getElementById("abatementCostDisplay").textContent = `$${fmtNum(bcr)}/${i18n.t("unit_tons")} CO₂ₑ`;
-
-    // Arbitrage
+    // Arbitrage (hide if warning is showing)
     const arbitrageEl = document.getElementById("arbitrageMsg");
-    if (abatement.arbitrage) {
+    const showWarning = bcr >= solar || bcr >= forestry;
+    if (abatement.arbitrage && !showWarning) {
         arbitrageEl.classList.remove("d-none");
     } else {
         arbitrageEl.classList.add("d-none");
     }
 
     // Investment breakdown
-    document.getElementById("breakdownService").textContent = `$${fmtNum(abatement.service_cost)}`;
+    document.getElementById("breakdownServiceTotal").textContent = `$${fmtNum(abatement.subscription_cost + abatement.dmrv_cost)}`;
+    document.getElementById("breakdownSubscription").textContent = `$${fmtNum(abatement.subscription_cost)}`;
+    document.getElementById("breakdownDmrv").textContent = `$${fmtNum(abatement.dmrv_cost)}`;
     document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost)}`;
     document.getElementById("breakdownLogistics").textContent = `$${fmtNum(abatement.logistics_cost)}`;
     document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
     document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;
-    document.getElementById("breakdownCorcs").textContent = `$${fmtNum(window._lastCalc.corcs_value)}`;
-    document.getElementById("breakdownFbbRevenue").textContent = `$${fmtNum(window._lastCalc.fbb_value)}`;
-    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
     document.getElementById("investmentBreakdown").style.display = "none";
+
+    // Revenue breakdown
+    const calc = window._lastCalc;
+    document.getElementById("breakdownCorcs").textContent = `$${fmtNum(calc.corcs_value)}`;
+    document.getElementById("breakdownFbbRevenue").textContent = `$${fmtNum(calc.fbb_value)}`;
+    document.getElementById("breakdownRevenue").textContent = `$${fmtNum(abatement.potential_revenue)}`;
+    document.getElementById("revenueBreakdown").style.display = "none";
 
     // Chart
     const ctx = document.getElementById("abatementChart").getContext("2d");
