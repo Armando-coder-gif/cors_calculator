@@ -58,8 +58,19 @@ const i18n = {
         }
         if (window._lastAbatement) {
             const bcr = window._lastAbatement.abatement_cost_bcr;
+            const solar = window._lastAbatement.solar_pv_cost;
+            const forestry = window._lastAbatement.forestry_cost;
+            const savingsSolar = Math.round((1 - bcr / solar) * 100);
+            const savingsForestry = Math.round((1 - bcr / forestry) * 100);
             document.getElementById("abatementCostDisplay").textContent =
                 `$${fmtNum(bcr)} / ${this.t("unit_tons")} CO₂ₑ`;
+            const txtAbatement = document.getElementById("abatementSupportText");
+            if (txtAbatement) {
+                txtAbatement.textContent = this
+                    .t("abatement_support_text")
+                    .replace("{solar_pct}", savingsSolar)
+                    .replace("{forestry_pct}", savingsForestry);
+            }
         }
     },
 

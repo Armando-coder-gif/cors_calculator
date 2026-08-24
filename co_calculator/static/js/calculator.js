@@ -311,6 +311,12 @@ function renderAbatement(abatement) {
 
     document.getElementById("savingsVsSolar").textContent = `${savingsSolar}%`;
     document.getElementById("savingsVsForestry").textContent = `${savingsForestry}%`;
+    const supportText = i18n
+        .t("abatement_support_text")
+        .replace("{solar_pct}", savingsSolar)
+        .replace("{forestry_pct}", savingsForestry);
+    const supportEl = document.getElementById("abatementSupportText");
+    if (supportEl) supportEl.textContent = supportText;
     document.getElementById("abatementCostDisplay").textContent = `$${fmtNum(bcr)}/${i18n.t("unit_tons")} CO₂ₑ`;
 
     // Arbitrage
