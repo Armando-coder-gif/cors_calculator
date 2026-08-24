@@ -315,19 +315,15 @@ function renderAbatement(abatement) {
     const solar = abatement.solar_pv_cost;
     const forestry = abatement.forestry_cost;
 
-    // Financial summary
+    // Support text
     const savingsSolar = Math.round((1 - bcr / solar) * 100);
     const savingsForestry = Math.round((1 - bcr / forestry) * 100);
-
-    document.getElementById("savingsVsSolar").textContent = `${savingsSolar}%`;
-    document.getElementById("savingsVsForestry").textContent = `${savingsForestry}%`;
     const supportText = i18n
         .t("abatement_support_text")
         .replace("{solar_pct}", savingsSolar)
         .replace("{forestry_pct}", savingsForestry);
     const supportEl = document.getElementById("abatementSupportText");
     if (supportEl) supportEl.textContent = supportText;
-    document.getElementById("abatementCostDisplay").textContent = `$${fmtNum(bcr)}/${i18n.t("unit_tons")} CO₂ₑ`;
 
     // Arbitrage
     const arbitrageEl = document.getElementById("arbitrageMsg");
