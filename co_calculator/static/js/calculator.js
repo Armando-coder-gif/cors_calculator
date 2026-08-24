@@ -338,7 +338,8 @@ function renderAbatement(abatement) {
     }
 
     // Investment breakdown
-    document.getElementById("breakdownService").textContent = `$${fmtNum(abatement.service_cost)}`;
+    document.getElementById("breakdownSubscription").textContent = `$${fmtNum(abatement.subscription_cost)}`;
+    document.getElementById("breakdownDmrv").textContent = `$${fmtNum(abatement.dmrv_cost)}`;
     document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost)}`;
     document.getElementById("breakdownLogistics").textContent = `$${fmtNum(abatement.logistics_cost)}`;
     document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;

@@ -104,7 +104,7 @@
   "pdf_co2_removed": "CO2 removido",
   "pdf_corcs": "Ingresos Aproximados Por Créditos De Carbono",
   "pdf_service": "Servicio AgroCognitive",
-  "pdf_net_gain": "Inversión en proyecto",
+  "pdf_net_gain": "Inversión Total del Proyecto",
   "pdf_footer_note": "No incluye inversión en hardware de pirólisis.",
   "pdf_footer_generated": "Generado por AgroCognitive",
 
@@ -118,7 +118,8 @@
   "abatement_arbitrage": "Oportunidad de Arbitraje: Tu remoción se paga sola y genera ganancia.",
   "abatement_show_breakdown": "Me gustaría ver el detalle de la inversión necesaria",
   "abatement_show_revenue": "Me gustaría ver el detalle de los ingresos por esta inversión",
-  "abatement_service_fee": "Servicio AgroCognitive",
+  "abatement_subscription": "Suscripción AgroCognitive ($15/ha)",
+  "abatement_dmrv": "dMRV Monitoreo Anual ($2,5/ha/mes)",
   "abatement_hardware": "Hardware",
   "abatement_logistics": "Logística",
   "abatement_fbb_production": "Inoculación FBB",
