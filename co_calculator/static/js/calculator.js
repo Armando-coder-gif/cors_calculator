@@ -334,9 +334,10 @@ function renderAbatement(abatement) {
         warningMsg.classList.add("d-none");
     }
 
-    // Arbitrage
+    // Arbitrage (hide if warning is showing)
     const arbitrageEl = document.getElementById("arbitrageMsg");
-    if (abatement.arbitrage) {
+    const showWarning = bcr >= solar || bcr >= forestry;
+    if (abatement.arbitrage && !showWarning) {
         arbitrageEl.classList.remove("d-none");
     } else {
         arbitrageEl.classList.add("d-none");
