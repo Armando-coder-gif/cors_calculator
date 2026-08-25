@@ -11,7 +11,7 @@ from ..constants.data_constants import *
 
 class CalculatorService:
 
-     def calculate(self, crop, tons, hectares):
+     def calculate(self, crop, tons, hectares, kiln_id=None):
         crop_data = next((c for c in CROPS if c["id"] == crop), None)
         if not crop_data:
             raise ValueError(f"Cultivo no válido: {crop}")
@@ -52,10 +52,15 @@ class CalculatorService:
         # Dinero total dejado en el campo
         money_left = corcs_value + fbb_value
 
-        # Kiln recommendation
+        # Kiln selection
+        from ..constants.economic import KILNS
         recommended = self._recommend_kiln(tons)
-        kiln_capex = recommended["capex"]
-        amortization_years = recommended["amortization_years"]
+        if kiln_id:
+            selected = next((k for k in KILNS if k["id"] == kiln_id), recommended)
+        else:
+            selected = recommended
+        kiln_capex = selected["capex"]
+        amortization_years = selected["amortization_years"]
 
         # ROI projection (año 0 = inversión inicial)
         roi_projection = [{"year": 0, "accumulated_profit": 0, "roi_pct": 0}]
@@ -83,7 +88,7 @@ class CalculatorService:
         potential_revenue = corcs_value + fbb_value
 
         arbitrage = abatement_cost_bcr < CORC_PRICE
-
+        print(round(corcs_value, 2),)
         return {
             "inputs": {
                 "crop": crop_data["id"],
@@ -116,7 +121,7 @@ class CalculatorService:
                 "breakeven_months": round(breakeven_months, 1) if breakeven_months else None,
                 "projection": roi_projection,
                 "fast_payback": breakeven_months is not None and breakeven_months < 18,
-                "kiln_name": recommended["name"],
+                "kiln_name": selected["name"],
                 "kiln_capex": kiln_capex,
                 "amortization_years": amortization_years,
             },
@@ -125,7 +130,9 @@ class CalculatorService:
                 "fee_management": round(fee_management, 2),
                 "fee_dmrv": round(fee_dmrv, 2),
                 "service_cost": round(service_cost, 2),
-                "kiln_name": recommended["name"],
+                "kiln_name": selected["name"],
+                "recommended_id": recommended["id"],
+                "selected_id": selected["id"],
                 "kiln_annual_cost": round(kiln_annual_cost, 2),
                 "amortization_years": amortization_years,
                 "labor_cost": round(labor_cost, 2),

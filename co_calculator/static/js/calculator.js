@@ -74,6 +74,7 @@ async function calculate() {
         formData.append("crop", crop);
         formData.append("tons", tons);
         formData.append("hectares", hectares);
+        formData.append("kiln_id", getSelectedKilnId() || "");
 
         const response = await fetch(window.APP_URLS.calculate, {
 
