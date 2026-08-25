@@ -44,7 +44,7 @@
   "results_chart_note": "* No incluye inversión en hardware de pirólisis.",
   "results_legend_humidity": "* Premisa de humedad del residuo: {moisture_pct}%",
   "results_legend_pyrolysis": "* Premisa de rendimiento de pirólisis: 30%",
-  "results_legend_removal": "* Premisa de Factor de remoción CO₂ₑ: 2.5x toneladas CO₂ₑ",
+  "results_legend_removal": "* Premisa de Factor de remoción CO₂ₑ: 2.5x toneladas",
   "results_download_pdf": "📄 Descargar PDF",
   "results_send_email": "✉️ Enviar por correo",
 
