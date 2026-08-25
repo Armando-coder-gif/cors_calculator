@@ -132,7 +132,7 @@ document.getElementById("co2Removed").textContent =
         humidityEl.textContent = i18n.t("results_legend_humidity").replace("{moisture_pct}", calc.moisture);
     }
 
-    renderFomoChart(calc);
+    renderFomoChart(calc, result.roi);
     renderRoi(result.roi);
     renderAbatement(result.abatement);
 
@@ -140,7 +140,7 @@ document.getElementById("co2Removed").textContent =
 
 let fomoChartInstance = null;
 
-function renderFomoChart(calculations) {
+function renderFomoChart(calculations, roi) {
 
     const ctx = document.getElementById("fomoChart").getContext("2d");
 
@@ -148,9 +148,9 @@ function renderFomoChart(calculations) {
         fomoChartInstance.destroy();
     }
 
-    const corcsValue = calculations.corcs_value;
-    const agroCost = calculations.agrocognitive_cost;
-    const netGain = corcsValue - agroCost;
+    const income = calculations.money_left;
+    const costs = roi.fee_saas + roi.fee_management + roi.fee_dmrv + roi.opex_est;
+    const netProfit = roi.annual_net_profit;
 
     fomoChartInstance = new Chart(ctx, {
         type: "bar",
@@ -158,7 +158,7 @@ function renderFomoChart(calculations) {
             labels: [i18n.t("chart_income"), i18n.t("chart_service"), i18n.t("chart_net")],
             datasets: [{
                 label: "$",
-                data: [corcsValue, agroCost, netGain],
+                data: [income, costs, netProfit],
                 backgroundColor: [
                     "rgba(164, 198, 53, 0.6)",
                     "rgba(255, 152, 0, 0.6)",
@@ -458,7 +458,10 @@ function renderAbatement(abatement) {
     document.getElementById("breakdownSubscription").textContent = `$${fmtNum(abatement.fee_saas)}`;
     document.getElementById("breakdownManagement").textContent = `$${fmtNum(abatement.fee_management)}`;
     document.getElementById("breakdownDmrv").textContent = `$${fmtNum(abatement.fee_dmrv)}`;
-    document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.hardware_cost)}`;
+    document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.kiln_annual_cost)}`;
+    document.getElementById("breakdownKilnName").textContent = abatement.kiln_name;
+    document.getElementById("breakdownKilnAmortization").textContent = `$${fmtNum(abatement.kiln_annual_cost)}/año (${abatement.amortization_years} años)`;
+    document.getElementById("breakdownLabor").textContent = `$${fmtNum(abatement.labor_cost)}`;
     document.getElementById("breakdownLogistics").textContent = `$${fmtNum(abatement.logistics_cost)}`;
     document.getElementById("breakdownFbb").textContent = `$${fmtNum(abatement.inoculation_cost)}`;
     document.getElementById("breakdownTotal").textContent = `$${fmtNum(abatement.total_investment)}`;

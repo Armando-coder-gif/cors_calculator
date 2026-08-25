@@ -72,10 +72,11 @@ class CalculatorService:
 
         # --- Abatement Cost (BCR Path) ---
         service_cost = agrocognitive_cost
-        hardware_cost = HARDWARE_COST_PER_TON * biochar
+        kiln_annual_cost = kiln_capex / amortization_years
         logistics_cost = LOGISTICS_COST_PER_TON * biochar
         inoculation_cost = FBB_INOCULATION_COST_PER_TON * biochar
-        total_investment = service_cost + hardware_cost + logistics_cost + inoculation_cost
+        labor_cost = HARDWARE_COST_PER_TON * biochar
+        total_investment = service_cost + kiln_annual_cost + logistics_cost + inoculation_cost + labor_cost
 
         abatement_cost_bcr = total_investment / co2_removed if co2_removed > 0 else 0
 
@@ -124,7 +125,10 @@ class CalculatorService:
                 "fee_management": round(fee_management, 2),
                 "fee_dmrv": round(fee_dmrv, 2),
                 "service_cost": round(service_cost, 2),
-                "hardware_cost": round(hardware_cost, 2),
+                "kiln_name": recommended["name"],
+                "kiln_annual_cost": round(kiln_annual_cost, 2),
+                "amortization_years": amortization_years,
+                "labor_cost": round(labor_cost, 2),
                 "logistics_cost": round(logistics_cost, 2),
                 "inoculation_cost": round(inoculation_cost, 2),
                 "total_investment": round(total_investment, 2),
