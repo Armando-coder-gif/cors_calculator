@@ -134,5 +134,10 @@
   "abatement_label_forestry": "reforestation",
   "abatement_label_bcr": "biochar carbon removal",
   "abatement_support_text": "Our circular model is {solar_pct}% cheaper than solar and {forestry_pct}% more efficient than reforestation, with 1000+ years of carbon permanence.",
-  "abatement_warning_text": "The production and hardware investment assumptions are atypical, resulting in a very high BCR abatement cost. We recommend contacting us for a personalized assessment."
+  "abatement_warning_text": "The production and hardware investment assumptions are atypical, resulting in a very high BCR abatement cost. We recommend contacting us for a personalized assessment.",
+
+  "kiln_select_label": "Select your kiln type",
+  "kiln_recommended": "Recommended",
+  "kiln_capacity": "Capacity",
+  "kiln_warning": "⚠️ This kiln does not cover your current capacity. Consider a higher capacity option."
 }

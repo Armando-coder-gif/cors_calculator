@@ -133,5 +133,10 @@
   "abatement_label_forestry": "reforestación",
   "abatement_label_bcr": "biochar carbon removal",
   "abatement_support_text": "Nuestro modelo circular es {solar_pct}% más barato que solar y {forestry_pct}% más eficiente que reforestación, con más de 1000 años de permanencia de carbono.",
-  "abatement_warning_text": "Las premisas de producción e inversión en hardware son atípicas, por lo que arrojan un costo de abatimiento BCR muy alto. Le sugerimos ponerse en contacto con nosotros para hacerle una valorización personalizada."
+  "abatement_warning_text": "Las premisas de producción e inversión en hardware son atípicas, por lo que arrojan un costo de abatimiento BCR muy alto. Le sugerimos ponerse en contacto con nosotros para hacerle una valorización personalizada.",
+
+  "kiln_select_label": "Selecciona tu tipo de horno",
+  "kiln_recommended": "Recomendado",
+  "kiln_capacity": "Capacidad",
+  "kiln_warning": "⚠️ Este horno no cubre tu capacidad actual. Considera uno de mayor capacidad."
 }

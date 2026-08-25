@@ -13,6 +13,7 @@ from xhtml2pdf import pisa
 
 from .services.calculator import CalculatorService
 from .constants.crops import CROPS
+from .constants.economic import KILNS
 
 _I18N_DIR = Path(settings.BASE_DIR) / "co_calculator" / "static" / "i18n"
 
@@ -26,7 +27,8 @@ def _load_translations(lang):
 
 def index(request):
    return render(request, "../templates/index.html", {
-        "crops": CROPS
+        "crops": CROPS,
+        "kilns": KILNS
     })
 
 

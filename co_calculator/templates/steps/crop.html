@@ -88,6 +88,49 @@
 
     </div>
 
+    {% load static %}
+    <!-- Kiln Selector -->
+    <div id="kilnSelector" class="mt-4">
+
+        <label class="form-label fw-semibold" data-i18n="kiln_select_label">
+            Selecciona tu tipo de horno
+        </label>
+
+        <div class="row g-3">
+            {% for kiln in kilns %}
+            <div class="col-12 col-md-4">
+                <div class="card kiln-card border-2 h-100"
+                     data-kiln-id="{{ kiln.id }}"
+                     data-max-tons="{{ kiln.max_tons_month }}"
+                     role="button"
+                     style="cursor:pointer; transition: all 0.2s;">
+
+                    <img src="{% static 'pics/' %}{{ kiln.image }}"
+                         class="card-img-top"
+                         alt="{{ kiln.name }}"
+                         style="height:160px; object-fit:cover;">
+
+                    <div class="card-body text-center p-3">
+                        <span class="badge bg-success kiln-badge mb-2" style="display:none;" data-i18n="kiln_recommended">Recomendado</span>
+                        <h6 class="fw-bold mb-1">{{ kiln.name }}</h6>
+                        <p class="text-muted small mb-1">
+                            <span data-i18n="kiln_capacity">Capacidad</span>: {{ kiln.max_tons_month }} ton/mes
+                        </p>
+                        <p class="fw-bold mb-0" style="color: var(--primary-dark);">
+                            ${{ kiln.capex|floatformat:0 }} USD
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="kilnWarning" class="alert alert-warning mt-2" style="display:none;" data-i18n="kiln_warning">
+            ⚠️ Este horno no cubre tu capacidad actual.
+        </div>
+
+    </div>
+
     <div class="d-flex justify-content-between mt-5">
 
         <button class="btn btn-secondary previous py-2 px-4" data-i18n="btn_back">
