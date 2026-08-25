@@ -71,10 +71,7 @@ class CalculatorService:
         breakeven_months = (kiln_capex / (annual_net_profit / 12)) if annual_net_profit > 0 else None
 
         # --- Abatement Cost (BCR Path) ---
-        subscription_cost = hectares * AGROCOGNITIVE_SUBSCRIPTION
-        dmrv_cost = hectares * FEE_DMRV_PER_TCO2 * 12
-        service_cost = subscription_cost + dmrv_cost
-
+        service_cost = agrocognitive_cost
         hardware_cost = HARDWARE_COST_PER_TON * biochar
         logistics_cost = LOGISTICS_COST_PER_TON * biochar
         inoculation_cost = FBB_INOCULATION_COST_PER_TON * biochar
@@ -123,8 +120,10 @@ class CalculatorService:
                 "amortization_years": amortization_years,
             },
             "abatement": {
-                "subscription_cost": round(subscription_cost, 2),
-                "dmrv_cost": round(dmrv_cost, 2),
+                "fee_saas": round(fee_saas, 2),
+                "fee_management": round(fee_management, 2),
+                "fee_dmrv": round(fee_dmrv, 2),
+                "service_cost": round(service_cost, 2),
                 "hardware_cost": round(hardware_cost, 2),
                 "logistics_cost": round(logistics_cost, 2),
                 "inoculation_cost": round(inoculation_cost, 2),
