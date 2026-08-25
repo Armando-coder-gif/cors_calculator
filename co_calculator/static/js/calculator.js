@@ -133,6 +133,7 @@ document.getElementById("co2Removed").textContent =
     }
 
     renderFomoChart(calc);
+    renderRoi(result.roi);
     renderAbatement(result.abatement);
 
 }
@@ -201,6 +202,115 @@ function renderFomoChart(calculations) {
         }
     });
 
+}
+
+let roiChartInstance = null;
+
+function renderRoi(roi) {
+    if (!roi) return;
+
+    document.getElementById("roiKilnName").textContent = roi.kiln_name;
+    document.getElementById("roiKilnCapex").textContent = `$${fmtNum(roi.kiln_capex)}`;
+
+    const badge = document.getElementById("fastPaybackBadge");
+    badge.style.display = roi.fast_payback ? "inline-block" : "none";
+
+    const breakevenMsg = document.getElementById("roiBreakevenMsg");
+    if (roi.breakeven_months) {
+        const years = Math.floor(roi.breakeven_months / 12);
+        const months = Math.round(roi.breakeven_months % 12);
+        breakevenMsg.textContent = (i18n.t("roi_breakeven_msg") || "Punto de equilibrio en el mes {months}")
+            .replace("{months}", Math.round(roi.breakeven_months))
+            .replace("{years}", years)
+            .replace("{m}", months);
+        breakevenMsg.style.display = "block";
+    } else {
+        breakevenMsg.style.display = "none";
+    }
+
+    document.getElementById("roiFeeSaas").textContent = `$${fmtNum(roi.fee_saas)}`;
+    document.getElementById("roiFeeManagement").textContent = `$${fmtNum(roi.fee_management)}`;
+    document.getElementById("roiFeeDmrv").textContent = `$${fmtNum(roi.fee_dmrv)}`;
+
+    const projection = roi.projection;
+    const headerRow = document.getElementById("roiTableHeader");
+    const profitRow = document.getElementById("roiTableProfit");
+    const roiRow = document.getElementById("roiTableRoi");
+
+    headerRow.innerHTML = `<th>${i18n.t("roi_table_year") || "Año"}</th>`;
+    profitRow.innerHTML = `<td class="fw-semibold">${i18n.t("roi_table_profit") || "Utilidad Neta"}</td>`;
+    roiRow.innerHTML = `<td class="fw-semibold">ROI %</td>`;
+
+    projection.forEach(p => {
+        headerRow.innerHTML += `<th>${p.year}</th>`;
+        profitRow.innerHTML += `<td>$${fmtNum(p.accumulated_profit)}</td>`;
+        roiRow.innerHTML += `<td>${fmtNum(p.roi_pct)}%</td>`;
+    });
+
+    const ctx = document.getElementById("roiChart").getContext("2d");
+    if (roiChartInstance) roiChartInstance.destroy();
+
+    const labels = projection.map(p => `${i18n.t("roi_year_label") || "Año"} ${p.year}`);
+    const profitData = projection.map(p => p.accumulated_profit);
+    const capexLine = projection.map(() => roi.kiln_capex);
+
+    roiChartInstance = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: i18n.t("roi_chart_profit") || "Utilidad Acumulada",
+                    data: profitData,
+                    borderColor: "rgba(123, 174, 34, 1)",
+                    backgroundColor: "rgba(123, 174, 34, 0.1)",
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 3,
+                    pointRadius: 5,
+                },
+                {
+                    label: i18n.t("roi_chart_investment") || "Inversión (CAPEX)",
+                    data: capexLine,
+                    borderColor: "rgba(255, 87, 34, 0.8)",
+                    borderDash: [8, 4],
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: false,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: "bottom" },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.dataset.label}: $${fmtNum(ctx.raw)}`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: v => `$${fmtNum(v)}` },
+                    grid: { color: "rgba(0,0,0,0.05)" }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    const summaryMsg = document.getElementById("roiSummaryMsg");
+    const lastYear = projection[projection.length - 1];
+    if (lastYear && lastYear.roi_pct > 0) {
+        summaryMsg.textContent = (i18n.t("roi_summary") || "Tu proyecto no solo es carbono neutral, es una unidad de negocio con un ROI del {roi_pct}% a {years} años.")
+            .replace("{roi_pct}", fmtNum(lastYear.roi_pct))
+            .replace("{years}", lastYear.year);
+        summaryMsg.style.display = "block";
+    } else {
+        summaryMsg.style.display = "none";
+    }
 }
 
 function _getReportData() {

@@ -57,8 +57,8 @@ class CalculatorService:
         kiln_capex = recommended["capex"]
         amortization_years = recommended["amortization_years"]
 
-        # ROI projection
-        roi_projection = []
+        # ROI projection (año 0 = inversión inicial)
+        roi_projection = [{"year": 0, "accumulated_profit": 0, "roi_pct": 0}]
         for year in range(1, amortization_years + 1):
             accumulated = annual_net_profit * year
             roi_pct = (accumulated / kiln_capex) * 100 if kiln_capex > 0 else 0
