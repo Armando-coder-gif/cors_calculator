@@ -1,16 +1,17 @@
 from ..constants.crops import CROPS, MAX_TONS, MAX_HECTARES
 from ..constants.economic import (
     CORC_PRICE, BIOCHAR_MIX_RATIO, BAG_WEIGHT, FBB_PRICE,
-    AGROCOGNITIVE_SUBSCRIPTION, DMRV_MONTHLY_PRICE,
+    AGROCOGNITIVE_SUBSCRIPTION,
     HARDWARE_COST_PER_TON, LOGISTICS_COST_PER_TON,
     FBB_INOCULATION_COST_PER_TON,
     SOLAR_PV_ABATEMENT_COST, FORESTRY_ABATEMENT_COST,
+    FEE_MANAGEMENT_PER_TON, FEE_DMRV_PER_TCO2
 )
 from ..constants.data_constants import *
 
 class CalculatorService:
 
-     def calculate(self, crop, tons, hectares):
+     def calculate(self, crop, tons, hectares, kiln_id=None):
         crop_data = next((c for c in CROPS if c["id"] == crop), None)
         if not crop_data:
             raise ValueError(f"Cultivo no válido: {crop}")
@@ -33,8 +34,17 @@ class CalculatorService:
         bags = fertilizer_mix / 0.02
         fbb_value = bags * FBB_PRICE
 
-        # Inversión AgroCognitive (suscripción + dMRV anual)
-        agrocognitive_cost = hectares * (AGROCOGNITIVE_SUBSCRIPTION + DMRV_MONTHLY_PRICE * 12)
+        # AC Fees
+        fee_saas = hectares * AGROCOGNITIVE_SUBSCRIPTION
+        fee_management = biochar * FEE_MANAGEMENT_PER_TON
+        fee_dmrv = co2_removed * FEE_DMRV_PER_TCO2
+        agrocognitive_cost = fee_saas + fee_management + fee_dmrv
+
+        # OpEx (mano de obra + logística + insumos orgánicos)
+        opex_est = biochar * (HARDWARE_COST_PER_TON + LOGISTICS_COST_PER_TON + FBB_INOCULATION_COST_PER_TON)
+
+        # Cash Flow anual (ROI)
+        annual_net_profit = (corcs_value + fbb_value) - (fee_saas + fee_management + fee_dmrv + opex_est)
 
         # Ganancia neta
         net_gain = corcs_value - agrocognitive_cost
@@ -42,17 +52,40 @@ class CalculatorService:
         # Dinero total dejado en el campo
         money_left = corcs_value + fbb_value
 
-        # --- Abatement Cost (BCR Path) ---
-        subscription_cost = hectares * AGROCOGNITIVE_SUBSCRIPTION
-        dmrv_cost = hectares * DMRV_MONTHLY_PRICE * 12
-        service_cost = subscription_cost + dmrv_cost
+        # Kiln selection
+        from ..constants.economic import KILNS
+        recommended = self._recommend_kiln(tons)
+        if kiln_id:
+            selected = next((k for k in KILNS if k["id"] == kiln_id), recommended)
+        else:
+            selected = recommended
+        kiln_capex = selected["capex"]
+        amortization_years = selected["amortization_years"]
 
-        hardware_cost = HARDWARE_COST_PER_TON * biochar
+        # ROI projection (año 0 = inversión inicial)
+        roi_projection = [{"year": 0, "accumulated_profit": 0, "roi_pct": 0}]
+        for year in range(1, amortization_years + 1):
+            accumulated = annual_net_profit * year
+            roi_pct = (accumulated / kiln_capex) * 100 if kiln_capex > 0 else 0
+            roi_projection.append({
+                "year": year,
+                "accumulated_profit": round(accumulated, 2),
+                "roi_pct": round(roi_pct, 1),
+            })
+
+        breakeven_months = (kiln_capex / (annual_net_profit / 12)) if annual_net_profit > 0 else None
+
+        # --- Abatement Cost (BCR Path) ---
+        service_cost = agrocognitive_cost
+        kiln_annual_cost = kiln_capex / amortization_years
         logistics_cost = LOGISTICS_COST_PER_TON * biochar
         inoculation_cost = FBB_INOCULATION_COST_PER_TON * biochar
-        total_investment = service_cost + hardware_cost + logistics_cost + inoculation_cost
+        labor_cost = HARDWARE_COST_PER_TON * biochar
+        total_investment = service_cost + kiln_annual_cost + logistics_cost + inoculation_cost + labor_cost
 
-        abatement_cost_bcr = total_investment / co2_removed if co2_removed > 0 else 0
+        # Abatement cost sin CAPEX del horno (solo OpEx + fees)
+        opex_for_abatement = service_cost + logistics_cost + inoculation_cost + labor_cost
+        abatement_cost_bcr = opex_for_abatement / co2_removed if co2_removed > 0 else 0
 
         potential_revenue = corcs_value + fbb_value
 
@@ -74,12 +107,37 @@ class CalculatorService:
                 "fbb_value": round(fbb_value, 2),
                 "money_left": round(money_left, 2),
                 "agrocognitive_cost": round(agrocognitive_cost, 2),
-                "net_gain": round(net_gain, 2)
+                "net_gain": round(net_gain, 2),
+                "fee_saas": round(fee_saas, 2),
+                "fee_management": round(fee_management, 2),
+                "fee_dmrv": round(fee_dmrv, 2),
+            },
+            "roi": {
+                "income_corcs": round(corcs_value, 2),
+                "income_fbb": round(fbb_value, 2),
+                "fee_saas": round(fee_saas, 2),
+                "fee_management": round(fee_management, 2),
+                "fee_dmrv": round(fee_dmrv, 2),
+                "opex_est": round(opex_est, 2),
+                "annual_net_profit": round(annual_net_profit, 2),
+                "breakeven_months": round(breakeven_months, 1) if breakeven_months else None,
+                "projection": roi_projection,
+                "fast_payback": breakeven_months is not None and breakeven_months < 18,
+                "kiln_name": selected["name"],
+                "kiln_capex": kiln_capex,
+                "amortization_years": amortization_years,
             },
             "abatement": {
-                "subscription_cost": round(subscription_cost, 2),
-                "dmrv_cost": round(dmrv_cost, 2),
-                "hardware_cost": round(hardware_cost, 2),
+                "fee_saas": round(fee_saas, 2),
+                "fee_management": round(fee_management, 2),
+                "fee_dmrv": round(fee_dmrv, 2),
+                "service_cost": round(service_cost, 2),
+                "kiln_name": selected["name"],
+                "recommended_id": recommended["id"],
+                "selected_id": selected["id"],
+                "kiln_annual_cost": round(kiln_annual_cost, 2),
+                "amortization_years": amortization_years,
+                "labor_cost": round(labor_cost, 2),
                 "logistics_cost": round(logistics_cost, 2),
                 "inoculation_cost": round(inoculation_cost, 2),
                 "total_investment": round(total_investment, 2),
@@ -90,3 +148,11 @@ class CalculatorService:
                 "arbitrage": arbitrage
             }
         }
+
+     def _recommend_kiln(self, tons_per_year):
+        from ..constants.economic import KILNS
+        tons_per_month = tons_per_year / 12
+        for kiln in KILNS:
+            if tons_per_month <= kiln["max_tons_month"]:
+                return kiln
+        return KILNS[-1]

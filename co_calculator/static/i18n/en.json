@@ -122,8 +122,10 @@
   "abatement_show_revenue": "I would like to see the revenue detail for this annualized investment",
   "abatement_agrocognitive_group": "AgroCognitive",
   "abatement_subscription": "Agricultural Traceability Subscription",
+  "abatement_management": "Biochar Project Management",
   "abatement_dmrv": "BCR Traceability Subscription (dMRV)",
-  "abatement_hardware": "Hardware",
+  "abatement_hardware": "Kiln (annual amortization)",
+  "abatement_labor": "Labor",
   "abatement_logistics": "Logistics",
   "abatement_fbb_production": "FBB Inoculation",
   "abatement_total_investment": "Total Estimated Investment",
@@ -134,5 +136,23 @@
   "abatement_label_forestry": "reforestation",
   "abatement_label_bcr": "biochar carbon removal",
   "abatement_support_text": "Our circular model is {solar_pct}% cheaper than solar and {forestry_pct}% more efficient than reforestation, with 1000+ years of carbon permanence.",
-  "abatement_warning_text": "The production and hardware investment assumptions are atypical, resulting in a very high BCR abatement cost. We recommend contacting us for a personalized assessment."
+  "abatement_warning_text": "The production and hardware investment assumptions are atypical, resulting in a very high BCR abatement cost. We recommend contacting us for a personalized assessment.",
+
+  "kiln_select_label": "Select your kiln type",
+  "kiln_recommended": "Recommended",
+  "kiln_capacity": "Capacity",
+  "kiln_warning": "⚠️ This kiln does not cover your current capacity. Consider a higher capacity option.",
+
+  "roi_title": "Return on Investment (ROI)",
+  "roi_fast_payback": "🚀 Fast Payback Opportunity",
+  "roi_investment_selected": "Selected Investment:",
+  "roi_breakeven_msg": "Breakeven reached at month {months} (approx. {years} year(s) and {m} month(s)).",
+  "roi_table_title": "Projected Accumulated Net Profit",
+  "roi_table_year": "Year",
+  "roi_table_profit": "Net Profit",
+  "roi_year_label": "Year",
+  "roi_chart_profit": "Accumulated Profit",
+  "roi_chart_investment": "Investment (CAPEX)",
+  "roi_fee_breakdown": "AgroCognitive Cost Breakdown",
+  "roi_summary": "Your project is not only carbon neutral, it's a business unit with a {roi_pct}% ROI over {years} years."
 }

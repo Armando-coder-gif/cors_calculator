@@ -84,6 +84,54 @@
 
     </div>
 
+    <!-- ROI Dashboard -->
+    <div class="card mb-4 border-0 shadow-sm">
+
+        <div class="card-body py-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0" data-i18n="roi_title">Retorno sobre la Inversión (ROI)</h5>
+                <span id="fastPaybackBadge" class="badge bg-success fs-6" style="display:none;" data-i18n="roi_fast_payback">🚀 Fast Payback Opportunity</span>
+            </div>
+
+            <div class="alert alert-light border mb-3">
+                <strong data-i18n="roi_investment_selected">Inversión Seleccionada:</strong>
+                <span id="roiKilnName">—</span> (<span id="roiKilnCapex">$0</span> USD)
+            </div>
+
+            <canvas id="roiChart" height="200"></canvas>
+
+            <p class="mt-3 fw-semibold" id="roiBreakevenMsg" style="display:none;"></p>
+
+            <h6 class="fw-bold mt-4 mb-2" data-i18n="roi_table_title">Proyección de Utilidad Neta Acumulada</h6>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm text-center">
+                    <thead class="table-light">
+                        <tr id="roiTableHeader"></tr>
+                    </thead>
+                    <tbody>
+                        <tr id="roiTableProfit"></tr>
+                        <tr id="roiTableRoi"></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <details class="mt-3">
+                <summary class="fw-semibold" data-i18n="roi_fee_breakdown">Desglose de Costos AgroCognitive</summary>
+                <ul class="list-unstyled mt-2 ms-3">
+                    <li>SaaS: <span id="roiFeeSaas">$0</span>/año</li>
+                    <li>Management: <span id="roiFeeManagement">$0</span>/ton biochar</li>
+                    <li>dMRV: <span id="roiFeeDmrv">$0</span>/tons CO₂ₑ</li>
+                </ul>
+            </details>
+
+            <div id="roiSummaryMsg" class="alert alert-success mt-3 fw-semibold" style="display:none;"></div>
+
+        </div>
+
+    </div>
+
     <div class="d-flex justify-content-between mt-4">
 
         <button class="btn btn-secondary previous py-2 px-4" data-i18n="btn_back">

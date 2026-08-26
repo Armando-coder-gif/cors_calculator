@@ -44,7 +44,7 @@
   "results_chart_note": "* No incluye inversión en hardware de pirólisis.",
   "results_legend_humidity": "* Premisa de humedad del residuo: {moisture_pct}%",
   "results_legend_pyrolysis": "* Premisa de rendimiento de pirólisis: 30%",
-  "results_legend_removal": "* Premisa de Factor de remoción CO₂ₑ: 2.5x toneladas CO₂ₑ",
+  "results_legend_removal": "* Premisa de Factor de remoción CO₂ₑ: 2.5x toneladas",
   "results_download_pdf": "📄 Descargar PDF",
   "results_send_email": "✉️ Enviar por correo",
 
@@ -121,8 +121,10 @@
   "abatement_show_revenue": "Me gustaría ver el detalle de los ingresos por esta inversión anualizada",
   "abatement_agrocognitive_group": "AgroCognitive",
   "abatement_subscription": "Suscripción trazabilidad agrícola",
+  "abatement_management": "Gestión de proyecto biochar",
   "abatement_dmrv": "Suscripción trazabilidad de BCR (dMRV)",
-  "abatement_hardware": "Hardware",
+  "abatement_hardware": "Horno (amortización anual)",
+  "abatement_labor": "Mano de obra",
   "abatement_logistics": "Logística",
   "abatement_fbb_production": "Inoculación FBB",
   "abatement_total_investment": "Inversión Total Estimada",
@@ -133,5 +135,23 @@
   "abatement_label_forestry": "reforestación",
   "abatement_label_bcr": "biochar carbon removal",
   "abatement_support_text": "Nuestro modelo circular es {solar_pct}% más barato que solar y {forestry_pct}% más eficiente que reforestación, con más de 1000 años de permanencia de carbono.",
-  "abatement_warning_text": "Las premisas de producción e inversión en hardware son atípicas, por lo que arrojan un costo de abatimiento BCR muy alto. Le sugerimos ponerse en contacto con nosotros para hacerle una valorización personalizada."
+  "abatement_warning_text": "Las premisas de producción e inversión en hardware son atípicas, por lo que arrojan un costo de abatimiento BCR muy alto. Le sugerimos ponerse en contacto con nosotros para hacerle una valorización personalizada.",
+
+  "kiln_select_label": "Selecciona tu tipo de horno",
+  "kiln_recommended": "Recomendado",
+  "kiln_capacity": "Capacidad",
+  "kiln_warning": "⚠️ Este horno no cubre tu capacidad actual. Considera uno de mayor capacidad.",
+
+  "roi_title": "Retorno sobre la Inversión (ROI)",
+  "roi_fast_payback": "🚀 Fast Payback Opportunity",
+  "roi_investment_selected": "Inversión Seleccionada:",
+  "roi_breakeven_msg": "Punto de equilibrio alcanzado en el mes {months} (aprox. {years} año(s) y {m} mes(es)).",
+  "roi_table_title": "Proyección de Utilidad Neta Acumulada",
+  "roi_table_year": "Año",
+  "roi_table_profit": "Utilidad Neta",
+  "roi_year_label": "Año",
+  "roi_chart_profit": "Utilidad Acumulada",
+  "roi_chart_investment": "Inversión (CAPEX)",
+  "roi_fee_breakdown": "Desglose de Costos AgroCognitive",
+  "roi_summary": "Tu proyecto no solo es carbono neutral, es una unidad de negocio con un ROI del {roi_pct}% a {years} años."
 }

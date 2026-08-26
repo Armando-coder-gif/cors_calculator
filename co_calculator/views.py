@@ -13,6 +13,7 @@ from xhtml2pdf import pisa
 
 from .services.calculator import CalculatorService
 from .constants.crops import CROPS
+from .constants.economic import KILNS
 
 _I18N_DIR = Path(settings.BASE_DIR) / "co_calculator" / "static" / "i18n"
 
@@ -26,7 +27,8 @@ def _load_translations(lang):
 
 def index(request):
    return render(request, "../templates/index.html", {
-        "crops": CROPS
+        "crops": CROPS,
+        "kilns": KILNS
     })
 
 
@@ -42,6 +44,7 @@ def countries(request):
 def calculate(request):
 
     crop = request.POST.get("crop", "")
+    kiln_id = request.POST.get("kiln_id", "")
 
     try:
         tons = float(request.POST.get("tons", 0))
@@ -52,7 +55,7 @@ def calculate(request):
     service = CalculatorService()
 
     try:
-        result = service.calculate(crop, tons, hectares)
+        result = service.calculate(crop, tons, hectares, kiln_id=kiln_id or None)
     except ValueError as e:
         return JsonResponse({"error": str(e)}, status=400)
 
@@ -86,6 +89,7 @@ def _build_pdf(data):
     result = service.calculate(crop, tons, hectares)
     calc = result["calculations"]
     abat = result["abatement"]
+    roi = result["roi"]
 
     context = {
         "person_name": data.get("person_name", ""),
@@ -102,13 +106,18 @@ def _build_pdf(data):
         "corcs_value": _fmt(calc["corcs_value"]),
         "agrocognitive_cost": _fmt(calc["agrocognitive_cost"]),
         "total_investment": _fmt(abat["total_investment"]),
-        "subscription_cost": _fmt(abat["subscription_cost"]),
-        "dmrv_cost": _fmt(abat["dmrv_cost"]),
-        "hardware_cost": _fmt(abat["hardware_cost"]),
+        "subscription_cost": _fmt(abat["fee_saas"]),
+        "management_cost": _fmt(abat["fee_management"]),
+        "dmrv_cost": _fmt(abat["fee_dmrv"]),
+        "kiln_name": abat["kiln_name"],
+        "kiln_annual_cost": _fmt(abat["kiln_annual_cost"]),
+        "amortization_years": abat["amortization_years"],
+        "labor_cost": _fmt(abat["labor_cost"]),
         "logistics_cost": _fmt(abat["logistics_cost"]),
         "inoculation_cost": _fmt(abat["inoculation_cost"]),
         "potential_revenue": _fmt(abat["potential_revenue"]),
         "fbb_value": _fmt(calc["fbb_value"]),
+        "annual_net_profit": _fmt(roi["annual_net_profit"]),
         "chart_image": data.get("chart_image", ""),
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,
@@ -142,6 +151,7 @@ def preview_report(request):
     result = service.calculate(crop, tons, hectares)
     calc = result["calculations"]
     abat = result["abatement"]
+    roi = result["roi"]
 
     context = {
         "person_name": data.get("person_name", ""),
@@ -158,13 +168,18 @@ def preview_report(request):
         "corcs_value": _fmt(calc["corcs_value"]),
         "agrocognitive_cost": _fmt(calc["agrocognitive_cost"]),
         "total_investment": _fmt(abat["total_investment"]),
-        "subscription_cost": _fmt(abat["subscription_cost"]),
-        "dmrv_cost": _fmt(abat["dmrv_cost"]),
-        "hardware_cost": _fmt(abat["hardware_cost"]),
+        "subscription_cost": _fmt(abat["fee_saas"]),
+        "management_cost": _fmt(abat["fee_management"]),
+        "dmrv_cost": _fmt(abat["fee_dmrv"]),
+        "kiln_name": abat["kiln_name"],
+        "kiln_annual_cost": _fmt(abat["kiln_annual_cost"]),
+        "amortization_years": abat["amortization_years"],
+        "labor_cost": _fmt(abat["labor_cost"]),
         "logistics_cost": _fmt(abat["logistics_cost"]),
         "inoculation_cost": _fmt(abat["inoculation_cost"]),
         "potential_revenue": _fmt(abat["potential_revenue"]),
         "fbb_value": _fmt(calc["fbb_value"]),
+        "annual_net_profit": _fmt(roi["annual_net_profit"]),
         "chart_image": data.get("chart_image", ""),
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,

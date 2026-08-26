@@ -13,4 +13,70 @@ function loadCountries() {
         .catch(err => console.error("Error loading countries:", err));
 }
 
-document.addEventListener("DOMContentLoaded", loadCountries);
+let selectedKilnId = null;
+
+function initKilnSelector() {
+    const tonsInput = document.getElementById("tons");
+    const kilnCards = document.querySelectorAll(".kiln-card");
+
+    tonsInput.addEventListener("input", () => {
+        const tons = parseFloat(tonsInput.value);
+        if (!tons || tons <= 0) return;
+        updateKilnRecommendation(tons);
+    });
+
+    kilnCards.forEach(card => {
+        card.addEventListener("click", () => selectKiln(card));
+    });
+}
+
+function updateKilnRecommendation(tonsPerYear) {
+    const tonsPerMonth = tonsPerYear / 12;
+    const cards = document.querySelectorAll(".kiln-card");
+    let recommendedCard = null;
+
+    cards.forEach(card => {
+        card.querySelector(".kiln-badge").style.display = "none";
+        const maxTons = parseFloat(card.dataset.maxTons);
+        if (!recommendedCard && tonsPerMonth <= maxTons) {
+            recommendedCard = card;
+        }
+    });
+
+    if (!recommendedCard) recommendedCard = cards[cards.length - 1];
+
+    recommendedCard.querySelector(".kiln-badge").style.display = "inline-block";
+    window._recommendedKilnMaxTons = parseFloat(recommendedCard.dataset.maxTons);
+
+    if (selectedKilnId) checkKilnWarning();
+}
+
+function selectKiln(card) {
+    document.querySelectorAll(".kiln-card").forEach(c => {
+        c.classList.remove("border-success", "shadow");
+        c.style.borderColor = "";
+    });
+    card.classList.add("border-success", "shadow");
+    card.style.borderColor = "var(--primary)";
+    selectedKilnId = card.dataset.kilnId;
+    checkKilnWarning();
+}
+
+function checkKilnWarning() {
+    const warning = document.getElementById("kilnWarning");
+    const selectedCard = document.querySelector(`.kiln-card[data-kiln-id="${selectedKilnId}"]`);
+    if (!selectedCard) return;
+
+    const selectedMax = parseFloat(selectedCard.dataset.maxTons);
+    const recommendedMax = window._recommendedKilnMaxTons || 0;
+    warning.style.display = selectedMax < recommendedMax ? "block" : "none";
+}
+
+function getSelectedKilnId() {
+    return selectedKilnId;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadCountries();
+    initKilnSelector();
+});

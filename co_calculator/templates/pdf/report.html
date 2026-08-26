@@ -279,12 +279,24 @@
                 <td class="val" style="font-size: 10px; color: #666;">${{ subscription_cost }} USD</td>
             </tr>
             <tr>
+                <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ t.abatement_management }}</td>
+                <td class="val" style="font-size: 10px; color: #666;">${{ management_cost }} USD</td>
+            </tr>
+            <tr>
                 <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ t.abatement_dmrv }}</td>
                 <td class="val" style="font-size: 10px; color: #666;">${{ dmrv_cost }} USD</td>
             </tr>
             <tr>
-                <td>{{ t.abatement_hardware }}</td>
-                <td class="val">${{ hardware_cost }} USD</td>
+                <td><strong>{{ t.abatement_hardware }}</strong></td>
+                <td class="val">${{ kiln_annual_cost }} USD</td>
+            </tr>
+            <tr>
+                <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ kiln_name }} ({{ amortization_years }} años)</td>
+                <td class="val" style="font-size: 10px; color: #666;">${{ kiln_annual_cost }}/año</td>
+            </tr>
+            <tr>
+                <td>{{ t.abatement_labor }}</td>
+                <td class="val">${{ labor_cost }} USD</td>
             </tr>
             <tr>
                 <td>{{ t.abatement_logistics }}</td>
