@@ -149,9 +149,9 @@ function renderFomoChart(calculations, roi) {
         fomoChartInstance.destroy();
     }
 
-    const income = calculations.money_left;
-    const costs = roi.fee_saas + roi.fee_management + roi.fee_dmrv + roi.opex_est;
-    const netProfit = roi.annual_net_profit;
+    const income = calculations.corcs_value;
+    const costs = roi.fee_saas + roi.fee_management + roi.fee_dmrv;
+    const netProfit = income - costs;
 
     fomoChartInstance = new Chart(ctx, {
         type: "bar",

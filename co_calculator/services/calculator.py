@@ -83,12 +83,14 @@ class CalculatorService:
         labor_cost = HARDWARE_COST_PER_TON * biochar
         total_investment = service_cost + kiln_annual_cost + logistics_cost + inoculation_cost + labor_cost
 
-        abatement_cost_bcr = total_investment / co2_removed if co2_removed > 0 else 0
+        # Abatement cost sin CAPEX del horno (solo OpEx + fees)
+        opex_for_abatement = service_cost + logistics_cost + inoculation_cost + labor_cost
+        abatement_cost_bcr = opex_for_abatement / co2_removed if co2_removed > 0 else 0
 
         potential_revenue = corcs_value + fbb_value
 
         arbitrage = abatement_cost_bcr < CORC_PRICE
-        print(round(corcs_value, 2),)
+
         return {
             "inputs": {
                 "crop": crop_data["id"],
