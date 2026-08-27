@@ -15,6 +15,26 @@ function loadCountries() {
 
 let selectedKilnId = null;
 
+function _fmtKilnNumber(value) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return value;
+    return new Intl.NumberFormat("es-ES", {
+        useGrouping: true,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(num);
+}
+
+function formatKilnNumbers() {
+    document.querySelectorAll(".kiln-capacity-value").forEach(el => {
+        el.textContent = _fmtKilnNumber(el.dataset.value);
+    });
+
+    document.querySelectorAll(".kiln-capex-value").forEach(el => {
+        el.textContent = _fmtKilnNumber(el.dataset.value);
+    });
+}
+
 function initKilnSelector() {
     const tonsInput = document.getElementById("tons");
     const kilnCards = document.querySelectorAll(".kiln-card");
@@ -78,5 +98,6 @@ function getSelectedKilnId() {
 
 document.addEventListener("DOMContentLoaded", () => {
     loadCountries();
+    formatKilnNumbers();
     initKilnSelector();
 });

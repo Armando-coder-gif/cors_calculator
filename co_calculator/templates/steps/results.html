@@ -20,6 +20,11 @@
 
     </div>
 
+    <!-- Explicación de métricas -->
+    <div class="alert alert-light border-0 shadow-sm mb-3 py-2 px-3" style="font-size: 0.82rem; color: #555;">
+        💡 <span data-i18n="metrics_explanation"></span>
+    </div>
+
     <!-- Métricas de impacto -->
     <div class="row g-4 mb-4">
 
@@ -29,7 +34,7 @@
 
                 <div class="card-body text-center py-4">
 
-                    <div style="font-size: 2.5rem" class="mb-2">🪵</div>
+                    <div style="font-size: 2.5rem" class="mb-2">🌱🧪</div>
 
                     <div class="text-muted small text-uppercase mb-1" data-i18n="results_fbb_label"></div>
 
@@ -62,7 +67,11 @@
     </div>
 
     <!-- Gráfico -->
-    <div class="card mb-4 border-0 shadow-sm">
+    <div class="card mb-4 border-0 shadow-sm" style="position: relative;">
+
+        <span class="text-muted" style="position: absolute; top: 50%; left: -2rem; transform: translateY(-50%); font-size: 1.5rem; cursor: help; z-index: 2;"
+              data-bs-toggle="tooltip" data-bs-placement="left"
+              data-i18n-title="co2_tooltip">💡</span>
 
         <div class="card-body py-3">
 
@@ -73,60 +82,9 @@
             <canvas id="fomoChart" height="150"></canvas>
 
             {% comment %} <small class="text-muted mt-3 d-block fw-semibold" data-i18n="asterisk_tooltip" style="font-style:italic"></small> {% endcomment %}
-            <small class="text-muted mt-1 d-block" data-i18n="results_chart_note">
-                * No incluye inversión en hardware de pirólisis.
-            </small>
             <small class="text-muted d-block" data-i18n="results_legend_humidity">* Ratio de humedad: 50%</small>
             <small class="text-muted d-block" data-i18n="results_legend_pyrolysis">* Rendimiento de pirólisis: 30%</small>
             <small class="text-muted d-block" data-i18n="results_legend_removal">* Factor de remoción CO₂: 2.5x toneladas CO₂</small>
-
-        </div>
-
-    </div>
-
-    <!-- ROI Dashboard -->
-    <div class="card mb-4 border-0 shadow-sm">
-
-        <div class="card-body py-4">
-
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold mb-0" data-i18n="roi_title">Retorno sobre la Inversión (ROI)</h5>
-                <span id="fastPaybackBadge" class="badge bg-success fs-6" style="display:none;" data-i18n="roi_fast_payback">🚀 Fast Payback Opportunity</span>
-            </div>
-
-            <div class="alert alert-light border mb-3">
-                <strong data-i18n="roi_investment_selected">Inversión Seleccionada:</strong>
-                <span id="roiKilnName">—</span> (<span id="roiKilnCapex">$0</span> USD)
-            </div>
-
-            <canvas id="roiChart" height="200"></canvas>
-
-            <p class="mt-3 fw-semibold" id="roiBreakevenMsg" style="display:none;"></p>
-
-            <h6 class="fw-bold mt-4 mb-2" data-i18n="roi_table_title">Proyección de Utilidad Neta Acumulada</h6>
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-sm text-center">
-                    <thead class="table-light">
-                        <tr id="roiTableHeader"></tr>
-                    </thead>
-                    <tbody>
-                        <tr id="roiTableProfit"></tr>
-                        <tr id="roiTableRoi"></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <details class="mt-3">
-                <summary class="fw-semibold" data-i18n="roi_fee_breakdown">Desglose de Costos AgroCognitive</summary>
-                <ul class="list-unstyled mt-2 ms-3">
-                    <li>SaaS: <span id="roiFeeSaas">$0</span>/año</li>
-                    <li>Management: <span id="roiFeeManagement">$0</span>/ton biochar</li>
-                    <li>dMRV: <span id="roiFeeDmrv">$0</span>/tons CO₂ₑ</li>
-                </ul>
-            </details>
-
-            <div id="roiSummaryMsg" class="alert alert-success mt-3 fw-semibold" style="display:none;"></div>
 
         </div>
 

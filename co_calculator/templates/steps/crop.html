@@ -114,10 +114,12 @@
                         <span class="badge bg-success kiln-badge mb-2" style="display:none;" data-i18n="kiln_recommended">Recomendado</span>
                         <h6 class="fw-bold mb-1">{{ kiln.name }}</h6>
                         <p class="text-muted small mb-1">
-                            <span data-i18n="kiln_capacity">Capacidad</span>: {{ kiln.max_tons_month }} ton/mes
+                            <span data-i18n="kiln_capacity">Capacidad</span>:
+                            <span class="kiln-capacity-value" data-value="{{ kiln.max_tons_month }}">{{ kiln.max_tons_month }}</span>
+                            ton/mes
                         </p>
                         <p class="fw-bold mb-0" style="color: var(--primary-dark);">
-                            ${{ kiln.capex|floatformat:0 }} USD
+                            $<span class="kiln-capex-value" data-value="{{ kiln.capex }}">{{ kiln.capex|floatformat:0 }}</span> USD
                         </p>
                     </div>
                 </div>

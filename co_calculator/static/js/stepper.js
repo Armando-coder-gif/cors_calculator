@@ -12,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     stepperElement.addEventListener("shown.bs-stepper", () => {
         if (content) content.scrollTop = 0;
+
+        document.querySelectorAll(".form-check-input[role='switch']").forEach(sw => {
+            sw.checked = false;
+            sw.dispatchEvent(new Event("change"));
+        });
     });
 
     document.querySelectorAll(".next").forEach(btn => {

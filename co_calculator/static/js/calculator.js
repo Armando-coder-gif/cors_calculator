@@ -1,5 +1,5 @@
 function fmtNum(value) {
-    return new Intl.NumberFormat('es-ES', { useGrouping: true, minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(value);
+    return new Intl.NumberFormat('es-ES', { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     calculateBtn.addEventListener("click", calculate);
 
-    document.getElementById("goToReportFromHook").addEventListener("click", loadReportPreview);
+    document.getElementById("goToReportFromRoi").addEventListener("click", loadReportPreview);
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 
@@ -123,10 +123,20 @@ function renderResults(result) {
     new bootstrap.Tooltip(document.querySelector('#moneyLeft [data-bs-toggle="tooltip"]'));
 
 document.getElementById("fbbResult").textContent =
-    `${fmtNum(calc.biochar)} ${i18n.t("unit_tons")}`;
+    `${fmtNum(calc.fertilizer_mix)} ${i18n.t("unit_tons")}`;
 
 document.getElementById("co2Removed").textContent =
     `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
+
+    // Update dynamic legends based on kiln-specific specs
+    const pyrolysisEl = document.querySelector('[data-i18n="results_legend_pyrolysis"]');
+    if (pyrolysisEl) {
+        pyrolysisEl.textContent = i18n.t("results_legend_pyrolysis").replace("{yield_pct}", calc.pyrolysis_yield);
+    }
+    const removalEl = document.querySelector('[data-i18n="results_legend_removal"]');
+    if (removalEl) {
+        removalEl.textContent = i18n.t("results_legend_removal").replace("{co2_factor}", calc.co2_factor);
+    }
 
     const humidityEl = document.querySelector('[data-i18n="results_legend_humidity"]');
     if (humidityEl) {
@@ -150,25 +160,22 @@ function renderFomoChart(calculations, roi) {
     }
 
     const income = calculations.corcs_value;
-    const costs = roi.fee_saas + roi.fee_management + roi.fee_dmrv;
-    const netProfit = income - costs;
+    const fbb = calculations.fbb_value;
 
     fomoChartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: [i18n.t("chart_income"), i18n.t("chart_service"), i18n.t("chart_net")],
+            labels: [i18n.t("chart_income"), i18n.t("chart_fbb")],
             datasets: [{
                 label: "$",
-                data: [income, costs, netProfit],
+                data: [income, fbb],
                 backgroundColor: [
                     "rgba(164, 198, 53, 0.6)",
-                    "rgba(255, 152, 0, 0.6)",
-                    "rgba(123, 174, 34, 0.7)"
+                    "rgba(255, 152, 0, 0.6)"
                 ],
                 borderColor: [
                     "rgba(164, 198, 53, 1)",
-                    "rgba(255, 152, 0, 1)",
-                    "rgba(123, 174, 34, 1)"
+                    "rgba(255, 152, 0, 1)"
                 ],
                 borderWidth: 2,
                 borderRadius: 8

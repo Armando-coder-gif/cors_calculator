@@ -219,7 +219,7 @@
         <tr>
             <td>
                 <div class="metric-label">{{ t.pdf_fbb_metric }}</div>
-                <div class="metric-value">{{ biochar }} {{ t.unit_tons }}</div>
+                <div class="metric-value">{{ fertilizer_mix }} {{ t.unit_tons }}</div>
             </td>
             <td>
                 <div class="metric-label">{{ t.pdf_co2_metric|safe }}</div>
@@ -233,7 +233,6 @@
         <h2>{{ t.pdf_chart_title }}</h2>
         <img src="{{ chart_image }}" style="width: 100%;" />
         <p style="font-size: 10px; color: #999; margin-top: 8px;">
-            {{ t.results_chart_note|safe }}<br>
             {{ t.results_legend_humidity|safe }}<br>
             {{ t.results_legend_pyrolysis|safe }}<br>
             {{ t.results_legend_removal|safe }}
@@ -336,6 +335,9 @@
     </div>
 
     <div class="footer">
+        <p style="font-size: 11px; color: #444; font-style: italic; margin-bottom: 12px;">
+            {{ t.pdf_killer_argument }}
+        </p>
         <p>* {{ t.pdf_footer_note }}</p>
         <p>{{ t.pdf_footer_generated }} &mdash; {{ date }}</p>
     </div>

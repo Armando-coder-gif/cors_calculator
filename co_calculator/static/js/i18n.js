@@ -52,7 +52,7 @@ const i18n = {
                 `$${fmtNum(calc.corcs_value)} ${this.t("money_suffix")}<span data-bs-toggle="tooltip" data-bs-placement="top" title="${this.t("asterisk_tooltip")}" style="cursor:help">*</span>`;
             new bootstrap.Tooltip(document.querySelector('#moneyLeft [data-bs-toggle="tooltip"]'));
             document.getElementById("fbbResult").textContent =
-                `${fmtNum(calc.biochar)} ${this.t("unit_tons")}`;
+                `${fmtNum(calc.fertilizer_mix)} ${this.t("unit_tons")}`;
             document.getElementById("co2Removed").textContent =
                 `${fmtNum(calc.co2_removed)} ${this.t("unit_tons")} CO₂ₑ`;
             const humidityEl = document.querySelector('[data-i18n="results_legend_humidity"]');
