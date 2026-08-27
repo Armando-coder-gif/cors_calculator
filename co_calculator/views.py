@@ -79,7 +79,7 @@ def _pdf_safe_translations(t):
     return result
 
 
-def _build_pdf(data):
+def _report_context(data):
     crop = data["crop"]
     tons = float(data["tons"])
     hectares = float(data["hectares"])
@@ -91,7 +91,15 @@ def _build_pdf(data):
     abat = result["abatement"]
     roi = result["roi"]
 
-    context = {
+    # Replace dynamic legend placeholders
+    t["results_legend_pyrolysis"] = t["results_legend_pyrolysis"].replace(
+        "{yield_pct}", str(calc["pyrolysis_yield"]))
+    t["results_legend_removal"] = t["results_legend_removal"].replace(
+        "{co2_factor}", str(calc["co2_factor"]))
+    t["results_legend_humidity"] = t["results_legend_humidity"].replace(
+        "{moisture_pct}", str(calc["moisture"]))
+
+    return {
         "person_name": data.get("person_name", ""),
         "person_phone": data.get("person_phone", ""),
         "company_name": data.get("company_name", ""),
@@ -123,6 +131,10 @@ def _build_pdf(data):
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,
     }
+
+
+def _build_pdf(data):
+    context = _report_context(data)
 
     html_string = render_to_string("pdf/report.html", context)
     buffer = io.BytesIO()
@@ -143,49 +155,7 @@ def download_pdf(request):
 
 def preview_report(request):
     data = json.loads(request.body)
-    crop = data["crop"]
-    tons = float(data["tons"])
-    hectares = float(data["hectares"])
-    t = _pdf_safe_translations(_load_translations(data.get("lang", "es")))
-
-    service = CalculatorService()
-    result = service.calculate(crop, tons, hectares)
-    calc = result["calculations"]
-    abat = result["abatement"]
-    roi = result["roi"]
-
-    context = {
-        "person_name": data.get("person_name", ""),
-        "person_phone": data.get("person_phone", ""),
-        "company_name": data.get("company_name", ""),
-        "company_email": data.get("company_email", ""),
-        "company_country": data.get("company_country", ""),
-        "crop": crop,
-        "tons": _fmt(tons),
-        "hectares": _fmt(hectares),
-        "co2_removed": _fmt(calc["co2_removed"]),
-        "dry_biomass": _fmt(calc["dry_biomass"]),
-        "biochar": _fmt(calc["biochar"]),
-        "fertilizer_mix": _fmt(calc["fertilizer_mix"]),
-        "corcs_value": _fmt(calc["corcs_value"]),
-        "agrocognitive_cost": _fmt(calc["agrocognitive_cost"]),
-        "total_investment": _fmt(abat["total_investment"]),
-        "subscription_cost": _fmt(abat["fee_saas"]),
-        "management_cost": _fmt(abat["fee_management"]),
-        "dmrv_cost": _fmt(abat["fee_dmrv"]),
-        "kiln_name": abat["kiln_name"],
-        "kiln_annual_cost": _fmt(abat["kiln_annual_cost"]),
-        "amortization_years": abat["amortization_years"],
-        "labor_cost": _fmt(abat["labor_cost"]),
-        "logistics_cost": _fmt(abat["logistics_cost"]),
-        "inoculation_cost": _fmt(abat["inoculation_cost"]),
-        "potential_revenue": _fmt(abat["potential_revenue"]),
-        "fbb_value": _fmt(calc["fbb_value"]),
-        "annual_net_profit": _fmt(roi["annual_net_profit"]),
-        "chart_image": data.get("chart_image", ""),
-        "date": date.today().strftime("%d/%m/%Y"),
-        "t": t,
-    }
+    context = _report_context(data)
 
     html_string = render_to_string("pdf/report.html", context)
     return HttpResponse(html_string)

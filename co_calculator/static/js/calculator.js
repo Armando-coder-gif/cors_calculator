@@ -128,6 +128,16 @@ document.getElementById("fbbResult").textContent =
 document.getElementById("co2Removed").textContent =
     `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
 
+    // Update dynamic legends based on kiln-specific specs
+    const pyrolysisEl = document.querySelector('[data-i18n="results_legend_pyrolysis"]');
+    if (pyrolysisEl) {
+        pyrolysisEl.textContent = i18n.t("results_legend_pyrolysis").replace("{yield_pct}", calc.pyrolysis_yield);
+    }
+    const removalEl = document.querySelector('[data-i18n="results_legend_removal"]');
+    if (removalEl) {
+        removalEl.textContent = i18n.t("results_legend_removal").replace("{co2_factor}", calc.co2_factor);
+    }
+
     const humidityEl = document.querySelector('[data-i18n="results_legend_humidity"]');
     if (humidityEl) {
         humidityEl.textContent = i18n.t("results_legend_humidity").replace("{moisture_pct}", calc.moisture);

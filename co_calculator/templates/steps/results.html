@@ -62,7 +62,11 @@
     </div>
 
     <!-- Gráfico -->
-    <div class="card mb-4 border-0 shadow-sm">
+    <div class="card mb-4 border-0 shadow-sm" style="position: relative;">
+
+        <span class="text-muted" style="position: absolute; top: 50%; left: -2rem; transform: translateY(-50%); font-size: 1.5rem; cursor: help; z-index: 2;"
+              data-bs-toggle="tooltip" data-bs-placement="left"
+              data-i18n-title="co2_tooltip">💡</span>
 
         <div class="card-body py-3">
 
@@ -73,9 +77,6 @@
             <canvas id="fomoChart" height="150"></canvas>
 
             {% comment %} <small class="text-muted mt-3 d-block fw-semibold" data-i18n="asterisk_tooltip" style="font-style:italic"></small> {% endcomment %}
-            <small class="text-muted mt-1 d-block" data-i18n="results_chart_note">
-                * No incluye inversión en hardware de pirólisis.
-            </small>
             <small class="text-muted d-block" data-i18n="results_legend_humidity">* Ratio de humedad: 50%</small>
             <small class="text-muted d-block" data-i18n="results_legend_pyrolysis">* Rendimiento de pirólisis: 30%</small>
             <small class="text-muted d-block" data-i18n="results_legend_removal">* Factor de remoción CO₂: 2.5x toneladas CO₂</small>

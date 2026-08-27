@@ -21,10 +21,22 @@ class CalculatorService:
         if hectares <= 0 or hectares > MAX_HECTARES:
             raise ValueError(f"Hectáreas fuera de rango: {hectares}")
 
+        # Resolve kiln to get technology-specific specs
+        from ..constants.economic import KILNS
+        recommended = self._recommend_kiln(tons)
+        if kiln_id:
+            selected = next((k for k in KILNS if k["id"] == kiln_id), recommended)
+        else:
+            selected = recommended
+
+        specs = KILN_SPECS.get(selected["id"], KILN_SPECS["artisan"])
+        pyrolysis_yield = specs["yield"]
+        co2_factor = specs["co2_factor"]
+
         moisture = crop_data["moisture"]
         dry_biomass = tons * (1 - moisture)
-        biochar = dry_biomass * PYROLYSIS_YIELD
-        co2_removed = biochar * REMOVAL_FACTOR
+        biochar = dry_biomass * pyrolysis_yield
+        co2_removed = biochar * co2_factor
 
         # CORCs
         corcs_value = co2_removed * CORC_PRICE
@@ -52,13 +64,7 @@ class CalculatorService:
         # Dinero total dejado en el campo
         money_left = corcs_value + fbb_value
 
-        # Kiln selection
-        from ..constants.economic import KILNS
-        recommended = self._recommend_kiln(tons)
-        if kiln_id:
-            selected = next((k for k in KILNS if k["id"] == kiln_id), recommended)
-        else:
-            selected = recommended
+        # Kiln selection (already resolved above)
         kiln_capex = selected["capex"]
         amortization_years = selected["amortization_years"]
 
@@ -112,6 +118,9 @@ class CalculatorService:
                 "fee_saas": round(fee_saas, 2),
                 "fee_management": round(fee_management, 2),
                 "fee_dmrv": round(fee_dmrv, 2),
+                "pyrolysis_yield": round(pyrolysis_yield * 100),
+                "co2_factor": specs["co2_factor"],
+                "c_fix": round(specs["c_fix"] * 100),
             },
             "roi": {
                 "income_corcs": round(corcs_value, 2),
