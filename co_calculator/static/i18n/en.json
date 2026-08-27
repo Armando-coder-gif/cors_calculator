@@ -161,5 +161,8 @@
   "roi_fee_breakdown": "AgroCognitive Cost Breakdown",
   "roi_summary": "Your project is not only carbon neutral, it's a business unit with a {roi_pct}% ROI over {years} years.",
   "co2_tooltip": "Calculation based on the thermochemical efficiency of the selected equipment and the carbon stability factor (C-fix) per CSI standards.",
-  "co2_tooltip_short": "Based on C-fix efficiency"
+  "co2_tooltip_short": "Based on C-fix efficiency",
+  "fbb_explanation": "The fertilizer weight exceeds the biochar weight because organic matter is added during inoculation (compost, microorganisms, and nutrients are mixed in).",
+  "co2_explanation": "CO₂ₑ is a chemical calculation of atomic mass equivalence: each atom of fixed carbon in the biochar equals 3.667 kg of CO₂ₑ permanently kept from the atmosphere.",
+  "metrics_explanation": "The fertilizer weight increases because we add organic matter (inoculation), while the CO₂ₑ weight is a chemical calculation of atomic mass equivalence."
 }
