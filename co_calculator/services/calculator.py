@@ -31,7 +31,7 @@ class CalculatorService:
 
         # FBB
         fertilizer_mix = biochar / BIOCHAR_MIX_RATIO
-        bags = fertilizer_mix / 0.02
+        bags = fertilizer_mix / (BAG_WEIGHT / 1000)
         fbb_value = bags * FBB_PRICE
 
         # AC Fees

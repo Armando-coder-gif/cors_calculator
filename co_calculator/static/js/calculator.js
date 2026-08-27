@@ -151,8 +151,7 @@ function renderFomoChart(calculations, roi) {
 
     const income = calculations.corcs_value;
     const fbb = calculations.fbb_value;
-    const costs = roi.fee_saas + roi.fee_management + roi.fee_dmrv;
-    const netProfit = income - costs;
+    const costs = roi.fee_saas + roi.fee_management + roi.fee_dmrv + roi.opex_est + (roi.kiln_capex / roi.amortization_years);
 
     fomoChartInstance = new Chart(ctx, {
         type: "bar",
@@ -160,7 +159,7 @@ function renderFomoChart(calculations, roi) {
             labels: [i18n.t("chart_income"), i18n.t("chart_fbb"), i18n.t("chart_net")],
             datasets: [{
                 label: "$",
-                data: [income, fbb, netProfit],
+                data: [income, fbb, costs],
                 backgroundColor: [
                     "rgba(164, 198, 53, 0.6)",
                     "rgba(255, 152, 0, 0.6)",
