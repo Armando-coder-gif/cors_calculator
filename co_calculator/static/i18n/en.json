@@ -39,7 +39,7 @@
   "results_subtitle": "Review your report before downloading or sending it.",
   "results_money_label": "Money you're leaving in the field",
   "results_money_default": "$0 USD/Year",
-  "results_fbb_label": "Annual production of biochar-based biofertilizer",
+  "results_fbb_label": "Annual biofertilizer production capacity",
   "results_co2_label": "Net CO₂ₑ removed per year",
   "results_humidity_label": "Residue Moisture Assumption",
   "results_pyrolysis_label": "Pyrolysis Yield Assumption",

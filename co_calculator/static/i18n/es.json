@@ -39,7 +39,7 @@
   "results_subtitle": "Revisa tu reporte antes de descargarlo o enviarlo.",
   "results_money_label": "Dinero que dejas en el campo",
   "results_money_default": "$0 USD/Año",
-  "results_fbb_label": "Biofertilizante base biochar producido al año",
+  "results_fbb_label": "Biofertilizante que se podría producir al año",
   "results_co2_label": "CO₂ₑ neto que se podría remover al año",
   "results_pyrolysis_label": "Premisa de rendimiento de pirólisis",
   "results_removal_label": "Premisa de Factor de remoción CO₂ₑ",
