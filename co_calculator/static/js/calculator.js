@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     calculateBtn.addEventListener("click", calculate);
 
-    document.getElementById("goToReportFromHook").addEventListener("click", loadReportPreview);
+    document.getElementById("goToReportFromRoi").addEventListener("click", loadReportPreview);
     document.getElementById("downloadPdfBtn").addEventListener("click", downloadPdf);
     document.getElementById("sendEmailBtn").addEventListener("click", sendPdfEmail);
 

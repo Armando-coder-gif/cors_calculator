@@ -64,14 +64,30 @@
 
         <div class="line"></div>
 
-        <div class="step" data-target="#results">
+        <div class="step" data-target="#roi">
 
             <button class="step-trigger">
 
                 <span class="bs-stepper-circle">5</span>
 
-                <span class="bs-stepper-label" data-i18n="step_results">
-                    Resultados
+                <span class="bs-stepper-label" data-i18n="step_roi">
+                    ROI
+                </span>
+
+            </button>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step" data-target="#report">
+
+            <button class="step-trigger">
+
+                <span class="bs-stepper-circle">6</span>
+
+                <span class="bs-stepper-label" data-i18n="step_report">
+                    Reporte
                 </span>
 
             </button>
@@ -88,6 +104,8 @@
         {% include "steps/results.html" %}
 
         {% include "steps/hook.html" %}
+
+        {% include "steps/roi.html" %}
 
         {% include "steps/report.html" %}
 

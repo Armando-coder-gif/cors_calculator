@@ -7,6 +7,8 @@
   "step_volume": "Diagnóstico",
   "step_results": "Resultados",
   "step_hook": "Inversión",
+  "step_roi": "ROI",
+  "step_report": "Reporte",
 
   "info_title": "Cuéntanos sobre tu empresa",
   "info_subtitle": "Para personalizar tu diagnóstico financiero.",
@@ -144,6 +146,7 @@
   "kiln_warning": "⚠️ Este horno no cubre tu capacidad actual. Considera uno de mayor capacidad.",
 
   "roi_title": "Retorno sobre la Inversión (ROI)",
+  "roi_page_title": "Retorno sobre la Inversión (ROI)",
   "roi_fast_payback": "🚀 Fast Payback Opportunity",
   "roi_investment_selected": "Inversión Seleccionada:",
   "roi_breakeven_msg": "Punto de equilibrio alcanzado en el mes {months} (aprox. {years} año(s) y {m} mes(es)).",
