@@ -1,5 +1,5 @@
 function fmtNum(value) {
-    return new Intl.NumberFormat('es-ES', { useGrouping: true, minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(value);
+    return new Intl.NumberFormat('es-ES', { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -123,7 +123,7 @@ function renderResults(result) {
     new bootstrap.Tooltip(document.querySelector('#moneyLeft [data-bs-toggle="tooltip"]'));
 
 document.getElementById("fbbResult").textContent =
-    `${fmtNum(calc.biochar)} ${i18n.t("unit_tons")}`;
+    `${fmtNum(calc.fertilizer_mix)} ${i18n.t("unit_tons")}`;
 
 document.getElementById("co2Removed").textContent =
     `${fmtNum(calc.co2_removed)} ${i18n.t("unit_tons")}`;
@@ -150,16 +150,17 @@ function renderFomoChart(calculations, roi) {
     }
 
     const income = calculations.corcs_value;
+    const fbb = calculations.fbb_value;
     const costs = roi.fee_saas + roi.fee_management + roi.fee_dmrv;
     const netProfit = income - costs;
 
     fomoChartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: [i18n.t("chart_income"), i18n.t("chart_service"), i18n.t("chart_net")],
+            labels: [i18n.t("chart_income"), i18n.t("chart_fbb"), i18n.t("chart_net")],
             datasets: [{
                 label: "$",
-                data: [income, costs, netProfit],
+                data: [income, fbb, netProfit],
                 backgroundColor: [
                     "rgba(164, 198, 53, 0.6)",
                     "rgba(255, 152, 0, 0.6)",

@@ -101,6 +101,7 @@ class CalculatorService:
                 "moisture": round(moisture * 100),
                 "dry_biomass": round(dry_biomass, 2),
                 "biochar": round(biochar, 2),
+                "fertilizer_mix": round(fertilizer_mix, 2),
                 "co2_removed": round(co2_removed, 2),
                 "corcs_value": round(corcs_value, 2),
                 "bags": round(bags),

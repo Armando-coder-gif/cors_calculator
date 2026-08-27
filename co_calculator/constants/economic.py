@@ -23,7 +23,7 @@ FORESTRY_ABATEMENT_COST = 55  # USD/tCO2e (sequestration, high risk)
 
 # Hardware (variable por tipo de horno)
 KILNS = [
-    {"id": "artisan", "name": "Artisan C-Sink (Kon-Tiki)", "capex": 5000, "max_tons_month": 15, "amortization_years": 5, "image": "Artisan C-Sink (Kon-Tiki).png"},
-    {"id": "modular", "name": "Modular Reactor", "capex": 65000, "max_tons_month": 60, "amortization_years": 10, "image": "Modular.png"},
-    {"id": "industrial", "name": "Continuous Flow (Industrial)", "capex": 350000, "max_tons_month": 9999, "amortization_years": 10, "image": "Continuous Flow (Industrial).png"},
+    {"id": "artisan", "name": "Artisan C-Sink (Kon-Tiki)", "capex": 5000, "max_tons_month": 15, "amortization_years": 5, "image": "Artisan C-Sink (Kon-Tiki).jpeg"},
+    {"id": "modular", "name": "Modular Reactor", "capex": 65000, "max_tons_month": 60, "amortization_years": 10, "image": "Modular_Portable_Reactor.png"},
+    {"id": "industrial", "name": "Continuous Flow (Industrial)", "capex": 350000, "max_tons_month": 9999, "amortization_years": 10, "image": "ContinuousFlow.jpg"},
 ]
