@@ -166,5 +166,19 @@
   "co2_tooltip_short": "Basado en eficiencia C-fix",
   "fbb_explanation": "El peso del fertilizante es mayor que el del biochar porque se le añade materia orgánica durante la inoculación (compost, microorganismos y nutrientes).",
   "co2_explanation": "El CO₂ₑ es un cálculo químico de masa atómica equivalente: cada átomo de carbono fijo en el biochar equivale a 3.667 kg de CO₂ₑ que no regresa a la atmósfera.",
-  "metrics_explanation": "El peso del fertilizante aumenta porque le añadimos materia orgánica (inoculación), mientras que el peso del CO₂ₑ es un cálculo químico de masa atómica equivalente."
+  "metrics_explanation": "El peso del fertilizante aumenta porque le añadimos materia orgánica (inoculación), mientras que el peso del CO₂ₑ es un cálculo químico de masa atómica equivalente.",
+
+  "fbb_commercialize_question": "¿Va a comercializar el FBB producido?",
+  "fbb_sale_pct_label": "Porcentaje de producción destinado a la venta",
+  "fbb_mode_savings": "El FBB producido se usará internamente como ahorro en fertilizantes.",
+  "fbb_mode_income": "El FBB producido se comercializará como ingreso adicional.",
+  "fbb_revenue_savings_only": "Ahorro estimado por uso interno de biofertilizante base biochar",
+  "chart_fbb_savings": "ahorro estimado por uso interno de FBB",
+  "roi_total_income": "Ingreso total anual",
+  "roi_fbb_income": "FBB (ingreso)",
+  "roi_fbb_savings": "FBB (ahorro)",
+  "roi_fbb_not_in_roi": "no incluido en el ROI",
+  "fbb_slider_min": "0% venta",
+  "fbb_slider_max": "100% venta",
+  "fbb_slider_summary": "{sale}% se vende · {savings}% uso interno (ahorro)"
 }

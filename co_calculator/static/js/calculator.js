@@ -33,6 +33,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         el.style.display = this.checked ? "block" : "none";
     });
 
+    document.getElementById("fbbCommercializeToggle").addEventListener("change", function () {
+        const container = document.getElementById("fbbSalePctContainer");
+        const desc = document.getElementById("fbbModeDescription");
+        container.style.display = this.checked ? "block" : "none";
+        desc.textContent = this.checked
+            ? i18n.t("fbb_mode_income")
+            : i18n.t("fbb_mode_savings");
+        if (this.checked) updateFbbSliderSummary(parseInt(document.getElementById("fbbSalePct").value));
+        recalcFbbScenario();
+    });
+
+    document.getElementById("fbbSalePct").addEventListener("input", function () {
+        document.getElementById("fbbSalePctValue").textContent = this.value + "%";
+        updateFbbSliderSummary(parseInt(this.value));
+        recalcFbbScenario();
+    });
+
 });
 
 function getCookie(name) {
@@ -153,6 +170,17 @@ document.getElementById("co2Removed").textContent =
     renderFomoChart(calc, result.roi);
     renderRoi(result.roi);
     renderAbatement(result.abatement);
+
+    window._lastRoi = result.roi;
+
+    // Reset FBB commercialization toggle
+    const toggle = document.getElementById("fbbCommercializeToggle");
+    toggle.checked = false;
+    document.getElementById("fbbSalePctContainer").style.display = "none";
+    document.getElementById("fbbSalePct").value = 100;
+    document.getElementById("fbbSalePctValue").textContent = "100%";
+    document.getElementById("fbbModeDescription").textContent = i18n.t("fbb_mode_savings");
+    recalcFbbScenario();
 
 }
 
@@ -322,6 +350,164 @@ function renderRoi(roi) {
     } else {
         summaryMsg.style.display = "none";
     }
+}
+
+function getFbbSplit() {
+    const commercialize = document.getElementById("fbbCommercializeToggle").checked;
+    const salePct = commercialize ? parseInt(document.getElementById("fbbSalePct").value) : 0;
+    return { commercialize, salePct };
+}
+
+function updateFbbSliderSummary(pct) {
+    const el = document.getElementById("fbbSaleSummary");
+    if (!el) return;
+    const savingsPct = 100 - pct;
+    el.textContent = (i18n.t("fbb_slider_summary") || "{sale}% se vende · {savings}% uso interno (ahorro)")
+        .replace("{sale}", pct)
+        .replace("{savings}", savingsPct);
+}
+
+function recalcFbbScenario() {
+    const calc = window._lastCalc;
+    const roi = window._lastRoi;
+    const abatement = window._lastAbatement;
+    if (!calc || !roi) return;
+
+    const { commercialize, salePct } = getFbbSplit();
+    const fbbTotal = calc.fbb_value;
+    const fbbIncome = fbbTotal * (salePct / 100);
+    const fbbSavings = fbbTotal - fbbIncome;
+
+    // Recalculate ROI with adjusted FBB income
+    const totalCosts = roi.fee_saas + roi.fee_management + roi.fee_dmrv
+        + roi.fee_onboarding_lca + roi.fee_csink_cert + roi.opex_est;
+    const adjustedAnnualProfit = (roi.income_corcs + fbbIncome) - totalCosts;
+    const adjustedBreakeven = adjustedAnnualProfit > 0
+        ? roi.kiln_capex / (adjustedAnnualProfit / 12) : null;
+
+    const adjustedProjection = [{ year: 0, accumulated_profit: 0, roi_pct: 0 }];
+    for (let y = 1; y <= roi.amortization_years; y++) {
+        const acc = adjustedAnnualProfit * y;
+        adjustedProjection.push({
+            year: y,
+            accumulated_profit: Math.round(acc * 100) / 100,
+            roi_pct: roi.kiln_capex > 0 ? Math.round((acc / roi.kiln_capex) * 1000) / 10 : 0
+        });
+    }
+
+    const adjustedRoi = {
+        ...roi,
+        annual_net_profit: adjustedAnnualProfit,
+        breakeven_months: adjustedBreakeven ? Math.round(adjustedBreakeven * 10) / 10 : null,
+        fast_payback: adjustedBreakeven !== null && adjustedBreakeven < 18,
+        projection: adjustedProjection
+    };
+
+    renderRoi(adjustedRoi);
+
+    // Update income breakdown cards
+    const totalIncome = roi.income_corcs + fbbIncome;
+    const breakdownEl = document.getElementById("roiIncomeBreakdown");
+    breakdownEl.style.display = "flex";
+
+    document.getElementById("roiTotalIncome").textContent = `$${fmtNum(totalIncome)}`;
+    document.getElementById("roiCorcsIncome").textContent = `$${fmtNum(roi.income_corcs)}`;
+    document.getElementById("roiCorcsPct").textContent = totalIncome > 0
+        ? `${Math.round((roi.income_corcs / totalIncome) * 100)}%` : "0%";
+
+    const fbbLabelEl = document.getElementById("roiFbbLabel");
+    const fbbIncomeEl = document.getElementById("roiFbbIncome");
+    const fbbPctEl = document.getElementById("roiFbbPct");
+
+    if (!commercialize) {
+        fbbLabelEl.textContent = i18n.t("roi_fbb_savings");
+        fbbIncomeEl.textContent = `$${fmtNum(fbbSavings)}`;
+        fbbIncomeEl.style.color = "rgba(76, 175, 80, 1)";
+        fbbPctEl.textContent = i18n.t("roi_fbb_not_in_roi");
+    } else {
+        fbbLabelEl.textContent = i18n.t("roi_fbb_income");
+        fbbIncomeEl.textContent = `$${fmtNum(fbbIncome)}`;
+        fbbIncomeEl.style.color = "rgba(255, 152, 0, 1)";
+        fbbPctEl.textContent = totalIncome > 0
+            ? `${Math.round((fbbIncome / totalIncome) * 100)}%` : "0%";
+    }
+
+    // Re-render fomo chart with updated labels
+    renderFomoChartWithFbb(calc, roi, fbbIncome, fbbSavings, commercialize);
+
+    // Update revenue breakdown labels
+    const fbbRevenueEl = document.getElementById("breakdownFbbRevenue");
+    const fbbRevenueLabelEl = document.getElementById("breakdownFbbRevenueLabel");
+    if (fbbRevenueEl) {
+        if (!commercialize) {
+            fbbRevenueEl.textContent = `$${fmtNum(fbbSavings)}`;
+            if (fbbRevenueLabelEl) fbbRevenueLabelEl.textContent = i18n.t("fbb_revenue_savings_only");
+        } else {
+            fbbRevenueEl.textContent = `$${fmtNum(fbbIncome)}`;
+            if (fbbRevenueLabelEl) fbbRevenueLabelEl.textContent = i18n.t("abatement_revenue_fbb");
+        }
+    }
+}
+
+function renderFomoChartWithFbb(calculations, roi, fbbIncome, fbbSavings, commercialize) {
+    const ctx = document.getElementById("fomoChart").getContext("2d");
+    if (fomoChartInstance) fomoChartInstance.destroy();
+
+    const income = calculations.corcs_value;
+
+    let labels, data, bgColors, borderColors;
+
+    if (!commercialize) {
+        labels = [i18n.t("chart_income"), i18n.t("chart_fbb_savings")];
+        data = [income, fbbSavings];
+        bgColors = ["rgba(164, 198, 53, 0.6)", "rgba(255, 152, 0, 0.6)"];
+        borderColors = ["rgba(164, 198, 53, 1)", "rgba(255, 152, 0, 1)"];
+    } else if (fbbSavings > 0) {
+        labels = [i18n.t("chart_income"), i18n.t("chart_fbb"), i18n.t("chart_fbb_savings")];
+        data = [income, fbbIncome, fbbSavings];
+        bgColors = ["rgba(164, 198, 53, 0.6)", "rgba(255, 152, 0, 0.6)", "rgba(255, 152, 0, 0.4)"];
+        borderColors = ["rgba(164, 198, 53, 1)", "rgba(255, 152, 0, 1)", "rgba(255, 152, 0, 0.8)"];
+    } else {
+        labels = [i18n.t("chart_income"), i18n.t("chart_fbb")];
+        data = [income, fbbIncome];
+        bgColors = ["rgba(164, 198, 53, 0.6)", "rgba(255, 152, 0, 0.6)"];
+        borderColors = ["rgba(164, 198, 53, 1)", "rgba(255, 152, 0, 1)"];
+    }
+
+    fomoChartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                label: "$",
+                data,
+                backgroundColor: bgColors,
+                borderColor: borderColors,
+                borderWidth: 2,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `$${fmtNum(ctx.raw)}`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: { callback: value => `$${fmtNum(value)}` },
+                    grid: { display: false }
+                },
+                y: { grid: { display: false } }
+            }
+        }
+    });
 }
 
 function _getReportData() {

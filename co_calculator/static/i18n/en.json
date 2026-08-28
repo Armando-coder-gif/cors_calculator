@@ -167,5 +167,19 @@
   "co2_tooltip_short": "Based on C-fix efficiency",
   "fbb_explanation": "The fertilizer weight exceeds the biochar weight because organic matter is added during inoculation (compost, microorganisms, and nutrients are mixed in).",
   "co2_explanation": "CO₂ₑ is a chemical calculation of atomic mass equivalence: each atom of fixed carbon in the biochar equals 3.667 kg of CO₂ₑ permanently kept from the atmosphere.",
-  "metrics_explanation": "The fertilizer weight increases because we add organic matter (inoculation), while the CO₂ₑ weight is a chemical calculation of atomic mass equivalence."
+  "metrics_explanation": "The fertilizer weight increases because we add organic matter (inoculation), while the CO₂ₑ weight is a chemical calculation of atomic mass equivalence.",
+
+  "fbb_commercialize_question": "Will you commercialize the FBB produced?",
+  "fbb_sale_pct_label": "Percentage of production dedicated to sales",
+  "fbb_mode_savings": "The FBB produced will be used internally as fertilizer savings.",
+  "fbb_mode_income": "The FBB produced will be commercialized as additional income.",
+  "fbb_revenue_savings_only": "Estimated savings from internal use of biochar-based biofertilizer",
+  "chart_fbb_savings": "estimated savings from internal FBB use",
+  "roi_total_income": "Total annual income",
+  "roi_fbb_income": "FBB (income)",
+  "roi_fbb_savings": "FBB (savings)",
+  "roi_fbb_not_in_roi": "not included in ROI",
+  "fbb_slider_min": "0% sale",
+  "fbb_slider_max": "100% sale",
+  "fbb_slider_summary": "{sale}% sold · {savings}% internal use (savings)"
 }
