@@ -118,6 +118,8 @@ def _report_context(data):
         "subscription_cost": _fmt(abat["fee_saas"]),
         "management_cost": _fmt(abat["fee_management"]),
         "dmrv_cost": _fmt(abat["fee_dmrv"]),
+        "onboarding_lca_cost": _fmt(abat["fee_onboarding_lca"]),
+        "csink_cert_cost": _fmt(abat["fee_csink_cert"]),
         "kiln_name": abat["kiln_name"],
         "kiln_annual_cost": _fmt(abat["kiln_annual_cost"]),
         "amortization_years": abat["amortization_years"],

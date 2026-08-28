@@ -2,6 +2,13 @@ function fmtNum(value) {
     return new Intl.NumberFormat('es-ES', { useGrouping: true, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
 }
 
+function fmtK(value) {
+    const abs = Math.abs(value);
+    if (abs >= 1_000_000) return (value / 1_000_000).toFixed(1).replace('.0', '') + 'M';
+    if (abs >= 1_000) return (value / 1_000).toFixed(1).replace('.0', '') + 'k';
+    return Math.round(value).toString();
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     await i18n.init();
@@ -236,10 +243,6 @@ function renderRoi(roi) {
         breakevenMsg.style.display = "none";
     }
 
-    document.getElementById("roiFeeSaas").textContent = `$${fmtNum(roi.fee_saas)}`;
-    document.getElementById("roiFeeManagement").textContent = `$${fmtNum(roi.fee_management)}`;
-    document.getElementById("roiFeeDmrv").textContent = `$${fmtNum(roi.fee_dmrv)}`;
-
     const projection = roi.projection;
     const headerRow = document.getElementById("roiTableHeader");
     const profitRow = document.getElementById("roiTableProfit");
@@ -251,7 +254,7 @@ function renderRoi(roi) {
 
     projection.forEach(p => {
         headerRow.innerHTML += `<th>${p.year}</th>`;
-        profitRow.innerHTML += `<td>$${fmtNum(p.accumulated_profit)}</td>`;
+        profitRow.innerHTML += `<td>$${fmtK(p.accumulated_profit)}</td>`;
         roiRow.innerHTML += `<td>${fmtNum(p.roi_pct)}%</td>`;
     });
 
@@ -466,6 +469,8 @@ function renderAbatement(abatement) {
     document.getElementById("breakdownSubscription").textContent = `$${fmtNum(abatement.fee_saas)}`;
     document.getElementById("breakdownManagement").textContent = `$${fmtNum(abatement.fee_management)}`;
     document.getElementById("breakdownDmrv").textContent = `$${fmtNum(abatement.fee_dmrv)}`;
+    document.getElementById("breakdownOnboardingLca").textContent = `$${fmtNum(abatement.fee_onboarding_lca)}`;
+    document.getElementById("breakdownCsinkCert").textContent = `$${fmtNum(abatement.fee_csink_cert)}`;
     document.getElementById("breakdownHardware").textContent = `$${fmtNum(abatement.kiln_annual_cost)}`;
     document.getElementById("breakdownKilnName").textContent = abatement.kiln_name;
     document.getElementById("breakdownKilnAmortization").textContent = `$${fmtNum(abatement.kiln_annual_cost)}/año (${abatement.amortization_years} años)`;

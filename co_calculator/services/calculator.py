@@ -5,7 +5,8 @@ from ..constants.economic import (
     HARDWARE_COST_PER_TON, LOGISTICS_COST_PER_TON,
     FBB_INOCULATION_COST_PER_TON,
     SOLAR_PV_ABATEMENT_COST, FORESTRY_ABATEMENT_COST,
-    FEE_MANAGEMENT_PER_TON, FEE_DMRV_PER_TCO2
+    FEE_MANAGEMENT_PER_TON, FEE_DMRV_PER_TCO2,
+    ONBOARDING_LCA_ANNUAL, CSINK_CERTIFICATION_ANNUAL
 )
 from ..constants.data_constants import *
 
@@ -50,13 +51,15 @@ class CalculatorService:
         fee_saas = hectares * AGROCOGNITIVE_SUBSCRIPTION
         fee_management = biochar * FEE_MANAGEMENT_PER_TON
         fee_dmrv = co2_removed * FEE_DMRV_PER_TCO2
-        agrocognitive_cost = fee_saas + fee_management + fee_dmrv
+        fee_onboarding_lca = ONBOARDING_LCA_ANNUAL
+        fee_csink_cert = CSINK_CERTIFICATION_ANNUAL
+        agrocognitive_cost = fee_saas + fee_management + fee_dmrv + fee_onboarding_lca + fee_csink_cert
 
         # OpEx (mano de obra + logística + insumos orgánicos)
         opex_est = biochar * (HARDWARE_COST_PER_TON + LOGISTICS_COST_PER_TON + FBB_INOCULATION_COST_PER_TON)
 
         # Cash Flow anual (ROI)
-        annual_net_profit = (corcs_value + fbb_value) - (fee_saas + fee_management + fee_dmrv + opex_est)
+        annual_net_profit = (corcs_value + fbb_value) - (fee_saas + fee_management + fee_dmrv + fee_onboarding_lca + fee_csink_cert + opex_est)
 
         # Ganancia neta
         net_gain = corcs_value - agrocognitive_cost
@@ -118,6 +121,8 @@ class CalculatorService:
                 "fee_saas": round(fee_saas, 2),
                 "fee_management": round(fee_management, 2),
                 "fee_dmrv": round(fee_dmrv, 2),
+                "fee_onboarding_lca": round(fee_onboarding_lca, 2),
+                "fee_csink_cert": round(fee_csink_cert, 2),
                 "pyrolysis_yield": round(pyrolysis_yield * 100),
                 "co2_factor": specs["co2_factor"],
                 "c_fix": round(specs["c_fix"] * 100),
@@ -128,6 +133,8 @@ class CalculatorService:
                 "fee_saas": round(fee_saas, 2),
                 "fee_management": round(fee_management, 2),
                 "fee_dmrv": round(fee_dmrv, 2),
+                "fee_onboarding_lca": round(fee_onboarding_lca, 2),
+                "fee_csink_cert": round(fee_csink_cert, 2),
                 "opex_est": round(opex_est, 2),
                 "annual_net_profit": round(annual_net_profit, 2),
                 "breakeven_months": round(breakeven_months, 1) if breakeven_months else None,
@@ -141,6 +148,8 @@ class CalculatorService:
                 "fee_saas": round(fee_saas, 2),
                 "fee_management": round(fee_management, 2),
                 "fee_dmrv": round(fee_dmrv, 2),
+                "fee_onboarding_lca": round(fee_onboarding_lca, 2),
+                "fee_csink_cert": round(fee_csink_cert, 2),
                 "service_cost": round(service_cost, 2),
                 "kiln_name": selected["name"],
                 "recommended_id": recommended["id"],
