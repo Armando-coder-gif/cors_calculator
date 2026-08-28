@@ -160,7 +160,11 @@
 <body>
 
     <div class="header">
+        {% if logo_b64 %}
+        <img src="{{ logo_b64 }}" alt="AgroCognitive" style="height: 80px; margin-bottom: 10px;">
+        {% else %}
         <h1>AgroCognitive</h1>
+        {% endif %}
         <p>{{ t.pdf_title }} &mdash; {{ t.pdf_subtitle }}</p>
     </div>
 
