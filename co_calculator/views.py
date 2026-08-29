@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 from datetime import date
@@ -69,6 +70,14 @@ def _fmt(value):
     return formatted.replace(",", "X").replace(".", ",").replace("X", ".")
 
 
+def _get_logo_b64():
+    logo_path = Path(settings.BASE_DIR) / "co_calculator" / "static" / "pics" / "AgroCognitive - Original Version White.jpg"
+    if logo_path.exists():
+        data = logo_path.read_bytes()
+        return f"data:image/jpeg;base64,{base64.b64encode(data).decode()}"
+    return ""
+
+
 def _pdf_safe_translations(t):
     """Replace Unicode subscripts with HTML <sub> for xhtml2pdf compatibility."""
     result = {}
@@ -118,6 +127,8 @@ def _report_context(data):
         "subscription_cost": _fmt(abat["fee_saas"]),
         "management_cost": _fmt(abat["fee_management"]),
         "dmrv_cost": _fmt(abat["fee_dmrv"]),
+        "onboarding_lca_cost": _fmt(abat["fee_onboarding_lca"]),
+        "csink_cert_cost": _fmt(abat["fee_csink_cert"]),
         "kiln_name": abat["kiln_name"],
         "kiln_annual_cost": _fmt(abat["kiln_annual_cost"]),
         "amortization_years": abat["amortization_years"],
@@ -128,6 +139,7 @@ def _report_context(data):
         "fbb_value": _fmt(calc["fbb_value"]),
         "annual_net_profit": _fmt(roi["annual_net_profit"]),
         "chart_image": data.get("chart_image", ""),
+        "logo_b64": _get_logo_b64(),
         "date": date.today().strftime("%d/%m/%Y"),
         "t": t,
     }

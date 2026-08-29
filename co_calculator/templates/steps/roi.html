@@ -4,6 +4,35 @@
         Retorno sobre la Inversión (ROI)
     </h2>
 
+    <!-- FBB Commercialization Toggle -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body py-3">
+            <div class="form-check form-switch d-flex align-items-center gap-2">
+                <input class="form-check-input" type="checkbox" role="switch" id="fbbCommercializeToggle">
+                <label class="form-check-label fw-semibold" for="fbbCommercializeToggle" data-i18n="fbb_commercialize_question">
+                    ¿Va a comercializar el FBB producido?
+                </label>
+            </div>
+            <div id="fbbSalePctContainer" class="mt-3" style="display:none;">
+                <label for="fbbSalePct" class="form-label fw-semibold" data-i18n="fbb_sale_pct_label">
+                    Porcentaje de producción destinado a la venta
+                </label>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="text-muted small text-nowrap" data-i18n="fbb_slider_min">0% venta</span>
+                    <input type="range" class="form-range flex-grow-1" id="fbbSalePct" min="0" max="100" value="100" step="5">
+                    <span class="text-muted small text-nowrap" data-i18n="fbb_slider_max">100% venta</span>
+                    <span id="fbbSalePctValue" class="badge bg-agro fs-6" style="min-width:55px;">100%</span>
+                </div>
+                <div class="d-flex justify-content-between mt-1">
+                    <small class="text-muted" id="fbbSaleSummary"></small>
+                </div>
+            </div>
+            <div id="fbbModeDescription" class="mt-2 text-muted small" data-i18n="fbb_mode_savings">
+                El FBB producido se usará internamente como ahorro en fertilizantes.
+            </div>
+        </div>
+    </div>
+
     <!-- ROI Dashboard -->
     <div class="card border-0 shadow-sm">
 
@@ -17,6 +46,30 @@
             <div class="alert alert-light border mb-3">
                 <strong data-i18n="roi_investment_selected">Inversión Seleccionada:</strong>
                 <span id="roiKilnName">—</span> (<span id="roiKilnCapex">$0</span> USD)
+            </div>
+
+            <!-- Income breakdown: CORCs vs FBB -->
+            <div id="roiIncomeBreakdown" class="row g-3 mb-3" style="display:none;">
+                <div class="col-md-4">
+                    <div class="border rounded p-3 text-center">
+                        <div class="text-muted small" data-i18n="roi_total_income">Ingreso total anual</div>
+                        <div class="fw-bold fs-5" id="roiTotalIncome">$0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 text-center">
+                        <div class="text-muted small">CORCs</div>
+                        <div class="fw-bold fs-5" style="color:rgba(164,198,53,1)" id="roiCorcsIncome">$0</div>
+                        <div class="small text-muted" id="roiCorcsPct">0%</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 text-center">
+                        <div class="text-muted small" id="roiFbbLabel" data-i18n="roi_fbb_income">FBB (ingreso)</div>
+                        <div class="fw-bold fs-5" style="color:rgba(255,152,0,1)" id="roiFbbIncome">$0</div>
+                        <div class="small text-muted" id="roiFbbPct">0%</div>
+                    </div>
+                </div>
             </div>
 
             <canvas id="roiChart" height="200"></canvas>
@@ -36,15 +89,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <details class="mt-3">
-                <summary class="fw-semibold" data-i18n="roi_fee_breakdown">Desglose de Costos AgroCognitive</summary>
-                <ul class="list-unstyled mt-2 ms-3">
-                    <li><span data-i18n="abatement_subscription">Suscripción trazabilidad agrícola</span>: <span id="roiFeeSaas">$0</span>/año</li>
-                    <li><span data-i18n="abatement_management">Servicio gestión de biofábrica</span>: <span id="roiFeeManagement">$0</span>/ton biochar</li>
-                    <li><span data-i18n="abatement_dmrv">Suscripción trazabilidad de BCR (dMRV)</span>: <span id="roiFeeDmrv">$0</span>/tons CO₂ₑ</li>
-                </ul>
-            </details>
 
             <div id="roiSummaryMsg" class="alert alert-success mt-3 fw-semibold" style="display:none;"></div>
 
