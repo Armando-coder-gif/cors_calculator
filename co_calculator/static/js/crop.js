@@ -80,6 +80,7 @@ function selectKiln(card) {
     card.style.borderColor = "var(--primary)";
     selectedKilnId = card.dataset.kilnId;
     checkKilnWarning();
+    checkCropFormReady();
 }
 
 function checkKilnWarning() {
@@ -96,8 +97,21 @@ function getSelectedKilnId() {
     return selectedKilnId;
 }
 
+function checkCropFormReady() {
+    const crop = document.getElementById("cropType").value;
+    const tons = parseFloat(document.getElementById("tons").value);
+    const hectares = parseFloat(document.getElementById("hectares").value);
+    const btn = document.getElementById("calculateBtn");
+    if (!btn) return;
+    btn.disabled = !(crop && tons > 0 && hectares > 0 && selectedKilnId);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     loadCountries();
     formatKilnNumbers();
     initKilnSelector();
+
+    document.getElementById("cropType").addEventListener("change", checkCropFormReady);
+    document.getElementById("tons").addEventListener("input", checkCropFormReady);
+    document.getElementById("hectares").addEventListener("input", checkCropFormReady);
 });
