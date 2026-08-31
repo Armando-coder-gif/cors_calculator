@@ -121,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = f'{FORCE_SCRIPT_NAME.rstrip("/")}/static/' if FORCE_SCRIPT_NAME else '/static/'
+STATIC_URL = f'{FORCE_SCRIPT_NAME}/static/' if FORCE_SCRIPT_NAME else 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "co_calculator" / "static",
@@ -129,13 +129,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "static"
 
-# Use hashed static filenames in QA/production so browsers fetch new assets after deploys.
-if not DEBUG:
-    STORAGES = {
-        "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
-        },
-    }
 
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if origin.strip()]
 
