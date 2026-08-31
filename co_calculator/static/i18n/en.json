@@ -53,8 +53,8 @@
 
   "btn_back": "Back",
 
-  "chart_income": "Income or savings from the use of biochar-based biofertilizer",
-  "chart_fbb": "estimated FBB revenue",
+  "chart_income": "carbon credit revenue",
+  "chart_fbb": "revenue or savings from FBB sale or use",
   "chart_service": "AgroCognitive service",
   "chart_net": "project investment",
   "chart_title": "Annual Revenue Potential",
