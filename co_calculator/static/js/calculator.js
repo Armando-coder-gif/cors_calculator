@@ -144,6 +144,7 @@ function renderResults(result) {
 
     const calc = result.calculations;
     window._lastCalc = calc;
+    window._selectedKilnId = result.abatement?.selected_id || "";
 
     document.getElementById("moneyLeft").innerHTML =
         `$${fmtNum(calc.corcs_value)} ${i18n.t("money_suffix")}<span data-bs-toggle="tooltip" data-bs-placement="top" title="${i18n.t("asterisk_tooltip")}" style="cursor:help">*</span>`;
@@ -519,11 +520,13 @@ function renderFomoChartWithFbb(calculations, roi, fbbIncome, fbbSavings, commer
 
 function _getReportData() {
     const chartImage = window._fomoChartImage || "";
+    const kilnId = window._selectedKilnId || (typeof getSelectedKilnId === "function" ? (getSelectedKilnId() || "") : "");
 
     return {
         crop: document.getElementById("cropType").value,
         tons: document.getElementById("tons").value,
         hectares: document.getElementById("hectares").value,
+        kiln_id: kilnId,
         person_name: document.getElementById("personName").value,
         person_phone: document.getElementById("personPhone").value,
         company_name: document.getElementById("companyName").value,
