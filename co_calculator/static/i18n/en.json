@@ -171,6 +171,8 @@
   "metrics_explanation": "The fertilizer weight increases because we add organic matter (inoculation), while the CO₂ₑ weight is a chemical calculation of atomic mass equivalence.",
 
   "fbb_commercialize_question": "Will you commercialize the FBB produced?",
+  "fbb_yes": "Yes",
+  "fbb_no": "No",
   "fbb_sale_pct_label": "Percentage of production dedicated to sales",
   "fbb_mode_savings": "The FBB produced will be used internally as fertilizer savings.",
   "fbb_mode_income": "The FBB produced will be commercialized as additional income.",

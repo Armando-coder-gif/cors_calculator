@@ -4,14 +4,21 @@
         Retorno sobre la Inversión (ROI)
     </h2>
 
-    <!-- FBB Commercialization Toggle -->
+    <!-- FBB Commercialization Choice -->
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-body py-3">
-            <div class="form-check form-switch d-flex align-items-center gap-2">
-                <input class="form-check-input" type="checkbox" role="switch" id="fbbCommercializeToggle">
-                <label class="form-check-label fw-semibold" for="fbbCommercializeToggle" data-i18n="fbb_commercialize_question">
-                    ¿Va a comercializar el FBB producido?
-                </label>
+            <p class="fw-semibold mb-2" data-i18n="fbb_commercialize_question">
+                ¿Va a comercializar el FBB producido?
+            </p>
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fbbCommercialize" id="fbbCommercializeYes" value="yes">
+                    <label class="form-check-label" for="fbbCommercializeYes" data-i18n="fbb_yes">Sí</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fbbCommercialize" id="fbbCommercializeNo" value="no">
+                    <label class="form-check-label" for="fbbCommercializeNo" data-i18n="fbb_no">No</label>
+                </div>
             </div>
             <div id="fbbSalePctContainer" class="mt-3" style="display:none;">
                 <label for="fbbSalePct" class="form-label fw-semibold" data-i18n="fbb_sale_pct_label">
@@ -34,7 +41,7 @@
     </div>
 
     <!-- ROI Dashboard -->
-    <div class="card border-0 shadow-sm">
+    <div id="roiDashboard" class="card border-0 shadow-sm" style="display:none;">
 
         <div class="card-body py-4">
 
