@@ -222,6 +222,9 @@ function renderFomoChart(calculations, roi) {
         options: {
             indexAxis: "y",
             responsive: true,
+            animation: {
+                onComplete: function(ctx) { window._fomoChartImage = ctx.chart.toBase64Image(); }
+            },
             plugins: {
                 legend: { display: false },
                 title: {
@@ -515,8 +518,7 @@ function renderFomoChartWithFbb(calculations, roi, fbbIncome, fbbSavings, commer
 }
 
 function _getReportData() {
-    const chartCanvas = document.getElementById("fomoChart");
-    const chartImage = chartCanvas ? chartCanvas.toDataURL("image/png") : "";
+    const chartImage = window._fomoChartImage || "";
 
     return {
         crop: document.getElementById("cropType").value,
