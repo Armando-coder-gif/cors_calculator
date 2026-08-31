@@ -424,10 +424,10 @@ function recalcFbbScenario() {
     const fbbPctEl = document.getElementById("roiFbbPct");
 
     if (!commercialize) {
-        fbbLabelEl.textContent = i18n.t("roi_fbb_savings");
-        fbbIncomeEl.textContent = `$${fmtNum(fbbSavings)}`;
-        fbbIncomeEl.style.color = "rgba(76, 175, 80, 1)";
-        fbbPctEl.textContent = i18n.t("roi_fbb_not_in_roi");
+        fbbLabelEl.textContent = i18n.t("roi_fbb_income");
+        fbbIncomeEl.textContent = `$${fmtNum(0)}`;
+        fbbIncomeEl.style.color = "rgba(255, 152, 0, 1)";
+        fbbPctEl.textContent = "0%";
     } else {
         fbbLabelEl.textContent = i18n.t("roi_fbb_income");
         fbbIncomeEl.textContent = `$${fmtNum(fbbIncome)}`;
