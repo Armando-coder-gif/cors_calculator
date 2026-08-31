@@ -53,8 +53,8 @@
 
   "btn_back": "Back",
 
-  "chart_income": "Income or savings from the use of biochar-based biofertilizer",
-  "chart_fbb": "estimated FBB revenue",
+  "chart_income": "carbon credit revenue",
+  "chart_fbb": "revenue or savings from FBB sale or use",
   "chart_service": "AgroCognitive service",
   "chart_net": "project investment",
   "chart_title": "Annual Revenue Potential",
@@ -122,8 +122,8 @@
   "abatement_savings_vs_forestry": "BCR Savings vs Reforestation",
   "abatement_your_cost": "BCR Savings",
   "abatement_arbitrage": "Arbitrage Opportunity: Your removal pays for itself and generates profit.",
-  "abatement_show_breakdown": "I would like to see a breakdown of the annualized investment",
-  "abatement_show_revenue": "I would like to see the revenue detail for this annualized investment",
+  "abatement_show_breakdown": "I would like to see the annualized investment and expenses breakdown",
+  "abatement_show_revenue": "I would like to see the annualized revenue in detail",
   "abatement_agrocognitive_group": "AgroCognitive",
   "abatement_subscription": "Agricultural Traceability Subscription",
   "abatement_management": "Biofactory Management Service",

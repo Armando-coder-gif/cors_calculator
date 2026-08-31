@@ -52,8 +52,8 @@
 
   "btn_back": "Atrás",
 
-  "chart_income": "ingresos o ahorro por uso de biofertilizante base biochar",
-  "chart_fbb": "ingresos estimados por FBB",
+  "chart_income": "ingresos por créditos de carbono",
+  "chart_fbb": "ingresos o ahorro por venta o uso de FBB",
   "chart_service": "servicio AgroCognitive",
   "chart_net": "inversión en proyecto",
   "chart_title": "Potencial anual de ingresos",
@@ -121,8 +121,8 @@
   "abatement_savings_vs_forestry": "Ahorro BCR vs Reforestación",
   "abatement_your_cost": "AHORRO BCR",
   "abatement_arbitrage": "Oportunidad de Arbitraje: Tu remoción se paga sola y genera ganancia.",
-  "abatement_show_breakdown": "Me gustaría ver el detalle de la inversión necesaria anualizada",
-  "abatement_show_revenue": "Me gustaría ver el detalle de los ingresos por esta inversión anualizada",
+  "abatement_show_breakdown": "Me gustaría ver el detalle de la inversión y gastos necesarios anualizados",
+  "abatement_show_revenue": "Me gustaría ver en detalle los ingresos anualizados",
   "abatement_agrocognitive_group": "AgroCognitive",
   "abatement_subscription": "Suscripción trazabilidad agrícola",
   "abatement_management": "Servicio gestión de biofábrica",
