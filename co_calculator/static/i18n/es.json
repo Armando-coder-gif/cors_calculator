@@ -148,6 +148,7 @@
   "kiln_recommended": "Recomendado",
   "kiln_capacity": "Capacidad",
   "kiln_warning": "⚠️ Este horno no cubre tu capacidad actual. Considera uno de mayor capacidad.",
+  "kiln_price_note": "* Precios referenciales para LatAm (AgroCognitive no comercializa hardware de pirólisis)",
 
   "roi_title": "Retorno sobre la Inversión (ROI)",
   "roi_page_title": "Retorno sobre la Inversión (ROI)",

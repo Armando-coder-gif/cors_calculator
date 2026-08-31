@@ -149,6 +149,7 @@
   "kiln_recommended": "Recommended",
   "kiln_capacity": "Capacity",
   "kiln_warning": "⚠️ This kiln does not cover your current capacity. Consider a higher capacity option.",
+  "kiln_price_note": "* Reference prices for LatAm (AgroCognitive does not sell pyrolysis hardware)",
 
   "roi_title": "Return on Investment (ROI)",
   "roi_page_title": "Return on Investment (ROI)",
