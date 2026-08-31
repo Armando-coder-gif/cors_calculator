@@ -92,10 +92,11 @@ def _report_context(data):
     crop = data["crop"]
     tons = float(data["tons"])
     hectares = float(data["hectares"])
+    kiln_id = data.get("kiln_id") or None
     t = _pdf_safe_translations(_load_translations(data.get("lang", "es")))
 
     service = CalculatorService()
-    result = service.calculate(crop, tons, hectares)
+    result = service.calculate(crop, tons, hectares, kiln_id=kiln_id)
     calc = result["calculations"]
     abat = result["abatement"]
     roi = result["roi"]
