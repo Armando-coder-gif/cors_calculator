@@ -33,15 +33,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         el.style.display = this.checked ? "block" : "none";
     });
 
-    document.getElementById("fbbCommercializeToggle").addEventListener("change", function () {
-        const container = document.getElementById("fbbSalePctContainer");
-        const desc = document.getElementById("fbbModeDescription");
-        container.style.display = this.checked ? "block" : "none";
-        desc.textContent = this.checked
-            ? i18n.t("fbb_mode_income")
-            : i18n.t("fbb_mode_savings");
-        if (this.checked) updateFbbSliderSummary(parseInt(document.getElementById("fbbSalePct").value));
-        recalcFbbScenario();
+    document.querySelectorAll('input[name="fbbCommercialize"]').forEach(radio => {
+        radio.addEventListener("change", function () {
+            const commercialize = this.value === "yes";
+            const container = document.getElementById("fbbSalePctContainer");
+            const desc = document.getElementById("fbbModeDescription");
+            container.style.display = commercialize ? "block" : "none";
+            desc.textContent = commercialize
+                ? i18n.t("fbb_mode_income")
+                : i18n.t("fbb_mode_savings");
+            if (commercialize) updateFbbSliderSummary(parseInt(document.getElementById("fbbSalePct").value));
+            document.getElementById("roiDashboard").style.display = "block";
+            recalcFbbScenario();
+        });
     });
 
     document.getElementById("fbbSalePct").addEventListener("input", function () {
@@ -173,14 +177,13 @@ document.getElementById("co2Removed").textContent =
 
     window._lastRoi = result.roi;
 
-    // Reset FBB commercialization toggle
-    const toggle = document.getElementById("fbbCommercializeToggle");
-    toggle.checked = false;
+    // Reset FBB commercialization choice
+    document.querySelectorAll('input[name="fbbCommercialize"]').forEach(r => r.checked = false);
     document.getElementById("fbbSalePctContainer").style.display = "none";
     document.getElementById("fbbSalePct").value = 100;
     document.getElementById("fbbSalePctValue").textContent = "100%";
     document.getElementById("fbbModeDescription").textContent = i18n.t("fbb_mode_savings");
-    recalcFbbScenario();
+    document.getElementById("roiDashboard").style.display = "none";
 
 }
 
@@ -353,7 +356,8 @@ function renderRoi(roi) {
 }
 
 function getFbbSplit() {
-    const commercialize = document.getElementById("fbbCommercializeToggle").checked;
+    const selectedRadio = document.querySelector('input[name="fbbCommercialize"]:checked');
+    const commercialize = selectedRadio ? selectedRadio.value === "yes" : false;
     const salePct = commercialize ? parseInt(document.getElementById("fbbSalePct").value) : 0;
     return { commercialize, salePct };
 }
@@ -420,10 +424,10 @@ function recalcFbbScenario() {
     const fbbPctEl = document.getElementById("roiFbbPct");
 
     if (!commercialize) {
-        fbbLabelEl.textContent = i18n.t("roi_fbb_savings");
-        fbbIncomeEl.textContent = `$${fmtNum(fbbSavings)}`;
-        fbbIncomeEl.style.color = "rgba(76, 175, 80, 1)";
-        fbbPctEl.textContent = i18n.t("roi_fbb_not_in_roi");
+        fbbLabelEl.textContent = i18n.t("roi_fbb_income");
+        fbbIncomeEl.textContent = `$${fmtNum(0)}`;
+        fbbIncomeEl.style.color = "rgba(255, 152, 0, 1)";
+        fbbPctEl.textContent = "0%";
     } else {
         fbbLabelEl.textContent = i18n.t("roi_fbb_income");
         fbbIncomeEl.textContent = `$${fmtNum(fbbIncome)}`;

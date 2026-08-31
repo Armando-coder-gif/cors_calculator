@@ -148,6 +148,7 @@
   "kiln_recommended": "Recomendado",
   "kiln_capacity": "Capacidad",
   "kiln_warning": "⚠️ Este horno no cubre tu capacidad actual. Considera uno de mayor capacidad.",
+  "kiln_price_note": "* Precios referenciales para LatAm (AgroCognitive no comercializa hardware de pirólisis)",
 
   "roi_title": "Retorno sobre la Inversión (ROI)",
   "roi_page_title": "Retorno sobre la Inversión (ROI)",
@@ -169,6 +170,8 @@
   "metrics_explanation": "El peso del fertilizante aumenta porque le añadimos materia orgánica (inoculación), mientras que el peso del CO₂ₑ es un cálculo químico de masa atómica equivalente.",
 
   "fbb_commercialize_question": "¿Va a comercializar el FBB producido?",
+  "fbb_yes": "Sí",
+  "fbb_no": "No",
   "fbb_sale_pct_label": "Porcentaje de producción destinado a la venta",
   "fbb_mode_savings": "El FBB producido se usará internamente como ahorro en fertilizantes.",
   "fbb_mode_income": "El FBB producido se comercializará como ingreso adicional.",
