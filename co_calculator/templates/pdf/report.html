@@ -290,24 +290,22 @@
                 <td class="val" style="font-size: 10px; color: #666;">${{ dmrv_cost }} USD</td>
             </tr>
             <tr>
-                <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ t.abatement_onboarding_lca }}</td>
+                <td style="padding-left: 25px; font-size: 10px; color: #666;">
+                    {{ t.abatement_onboarding_lca }}<br>
+                    <span style="font-size: 9px; color: #999; font-style: italic;">{{ t.abatement_onboarding_lca_detail }}</span>
+                </td>
                 <td class="val" style="font-size: 10px; color: #666;">${{ onboarding_lca_cost }} USD</td>
-            </tr>
-            <tr>
-                <td style="padding-left: 35px; font-size: 9px; color: #999; font-style: italic;">{{ t.abatement_onboarding_lca_detail }}</td>
-                <td class="val" style="font-size: 9px; color: #999;"></td>
             </tr>
             <tr>
                 <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ t.abatement_csink_cert }}</td>
                 <td class="val" style="font-size: 10px; color: #666;">${{ csink_cert_cost }} USD</td>
             </tr>
             <tr>
-                <td><strong>{{ t.abatement_hardware }}</strong></td>
-                <td class="val">${{ kiln_annual_cost }} USD</td>
-            </tr>
-            <tr>
-                <td style="padding-left: 25px; font-size: 10px; color: #666;">{{ kiln_name }} ({{ amortization_years }} años)</td>
-                <td class="val" style="font-size: 10px; color: #666;">${{ kiln_annual_cost }}/año</td>
+                <td style="padding-left: 0; font-size: 10px; color: #666;">
+                    <strong style="color: #20232A; font-size: 12px;">{{ t.abatement_hardware }}</strong><br>
+                    <span style="padding-left: 15px; display: inline-block; font-size: 9px; color: #999; font-style: italic;">{{ kiln_name }} ({{ amortization_years }} años)</span>
+                </td>
+                <td class="val" style="font-size: 10px; color: #666;">${{ kiln_annual_cost }} USD</td>
             </tr>
             <tr>
                 <td>{{ t.abatement_labor }}</td>
