@@ -183,6 +183,8 @@ def send_pdf_email(request):
 
     pdf = _build_pdf(data)
     company_name = data.get("company_name", "Cliente")
+    sender_email = (settings.DEFAULT_FROM_EMAIL or settings.EMAIL_HOST_USER or "").strip()
+    cc_recipients = [sender_email] if sender_email and sender_email.lower() != email_to.lower() else []
 
     email = EmailMessage(
         subject="Tu diagnóstico financiero — AgroCognitive",
@@ -194,6 +196,7 @@ def send_pdf_email(request):
             "— Equipo AgroCognitive"
         ),
         to=[email_to],
+        cc=cc_recipients,
     )
     email.attach("diagnostico_agrocognitive.pdf", pdf, "application/pdf")
     email.send()
