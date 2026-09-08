@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pycountry
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
@@ -15,6 +16,9 @@ from xhtml2pdf import pisa
 from .services.calculator import CalculatorService
 from .constants.crops import CROPS
 from .constants.economic import KILNS
+
+from django.shortcuts import render
+from django.views.decorators.clickjacking import xframe_options_exempt  # 1. Importar el decorador
 
 _I18N_DIR = Path(settings.BASE_DIR) / "co_calculator" / "static" / "i18n"
 
@@ -26,6 +30,8 @@ def _load_translations(lang):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+
+@xframe_options_exempt
 def index(request):
    return render(request, "../templates/index.html", {
         "crops": CROPS,
@@ -41,7 +47,7 @@ def countries(request):
     data.sort(key=lambda c: c["name"])
     return JsonResponse(data, safe=False)
 
-
+@csrf_exempt
 def calculate(request):
 
     crop = request.POST.get("crop", "")
@@ -145,7 +151,7 @@ def _report_context(data):
         "t": t,
     }
 
-
+@csrf_exempt
 def _build_pdf(data):
     context = _report_context(data)
 
@@ -156,7 +162,7 @@ def _build_pdf(data):
     buffer.close()
     return pdf
 
-
+@csrf_exempt
 def download_pdf(request):
     data = json.loads(request.body)
     pdf = _build_pdf(data)
@@ -165,7 +171,7 @@ def download_pdf(request):
     response["Content-Disposition"] = 'attachment; filename="diagnostico_agrocognitive.pdf"'
     return response
 
-
+@csrf_exempt
 def preview_report(request):
     data = json.loads(request.body)
     context = _report_context(data)
@@ -173,7 +179,7 @@ def preview_report(request):
     html_string = render_to_string("pdf/report.html", context)
     return HttpResponse(html_string)
 
-
+@csrf_exempt
 def send_pdf_email(request):
     data = json.loads(request.body)
     email_to = data.get("company_email", "")
