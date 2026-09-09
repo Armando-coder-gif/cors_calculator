@@ -49,20 +49,60 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        window.APP_URLS = {
-            staticUrl: "{% static '' %}",
-            countriesApi: "{% url 'countries' %}",
-            calculate: "{% url 'calculate' %}",
-            previewReport: "{% url 'preview_report' %}",
-            downloadPdf: "{% url 'download_pdf' %}",
-            sendPdfEmail: "{% url 'send_pdf_email' %}"
-        };
-    </script>
+    // 1. Leer siempre el parámetro de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const langFromUrl = urlParams.get('lang');
+
+    // Si viene en la URL, tiene prioridad absoluta y sobreescribe el storage
+    if (langFromUrl) {
+        localStorage.setItem('calculator_lang', langFromUrl);
+        localStorage.setItem('lang', langFromUrl);
+        localStorage.setItem('selectedLanguage', langFromUrl);
+    }
+
+    const currentLang = langFromUrl || localStorage.getItem('calculator_lang') || 'es';
+
+    window.APP_URLS = {
+        staticUrl: "{% static '' %}",
+        countriesApi: "{% url 'countries' %}",
+        calculate: "{% url 'calculate' %}",
+        previewReport: "{% url 'preview_report' %}",
+        downloadPdf: "{% url 'download_pdf' %}",
+        sendPdfEmail: "{% url 'send_pdf_email' %}",
+        initialLang: currentLang
+    };
+</script>
 
     <script src="{% static 'js/i18n.js' %}"></script>
+    <script>
+        // Forzar la aplicación del idioma detectado al iniciar
+        if (typeof changeLanguage === 'function') {
+            changeLanguage(window.APP_URLS.initialLang);
+        } else if (typeof setLanguage === 'function') {
+            setLanguage(window.APP_URLS.initialLang);
+        } else if (typeof applyTranslations === 'function') {
+            applyTranslations(window.APP_URLS.initialLang);
+        }
+    </script>
     <script src="{% static 'js/stepper.js' %}"></script>
     <script src="{% static 'js/crop.js' %}"></script>
     <script src="{% static 'js/calculator.js' %}"></script>
+
+    <!-- 2. Notificador de altura al iframe padre en Astro -->
+    <script>
+        function sendHeightToParent() {
+            // Medir el contenedor real para no incluir espacios fantasma
+            const contentEl = document.querySelector('main') || document.body;
+            const height = contentEl.getBoundingClientRect().height;
+            window.parent.postMessage({ frameHeight: Math.ceil(height) + 10 }, '*');
+        }
+
+        window.addEventListener('load', () => setTimeout(sendHeightToParent, 100));
+        window.addEventListener('resize', sendHeightToParent);
+
+        const heightObserver = new MutationObserver(() => setTimeout(sendHeightToParent, 50));
+        heightObserver.observe(document.body, { childList: true, subtree: true, attributes: true });
+    </script>
 
 </body>
 

@@ -1,8 +1,32 @@
+// Función para sobreescribir las cookies y que no fuercen español
+function setLanguageCookie(lang) {
+    document.cookie = `django_language=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+    document.cookie = `lang=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+}
+
+const getInitialLanguage = () => {
+    // 1. La URL manda por encima de todo
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLang = urlParams.get("lang");
+    if (urlLang) {
+        localStorage.setItem("lang", urlLang);
+        setLanguageCookie(urlLang);
+        return urlLang;
+    }
+
+    // 2. Cookie como respaldo
+    const match = document.cookie.match(/(?:^|;\s*)(?:django_language|lang)=([^;]+)/);
+    const cookieLang = match ? match[1] : null;
+
+    return cookieLang || (window.APP_URLS && window.APP_URLS.initialLang) || localStorage.getItem("lang") || "es";
+};
+
 const i18n = {
-    _lang: localStorage.getItem("lang") || "es",
+    _lang: getInitialLanguage(),
     _translations: {},
 
     async init() {
+        this._lang = getInitialLanguage();
         await this.load(this._lang);
         this.apply();
         this._updateToggle();
@@ -13,6 +37,7 @@ const i18n = {
         this._translations = await res.json();
         this._lang = lang;
         localStorage.setItem("lang", lang);
+        setLanguageCookie(lang);
     },
 
     t(key) {
@@ -81,12 +106,9 @@ const i18n = {
     _updateToggle() {
         const btn = document.getElementById("langToggle");
         if (!btn) return;
-        const flag = btn.querySelector(".lang-flag");
         const text = btn.querySelector(".lang-text");
-        if (this._lang === "es") {
-            text.textContent = "EN";
-        } else {
-            text.textContent = "ES";
+        if (text) {
+            text.textContent = this._lang === "es" ? "EN" : "ES";
         }
     }
 };

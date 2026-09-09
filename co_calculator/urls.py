@@ -33,4 +33,5 @@ urlpatterns = [
     # Ruta manual para servir estáticos (Django ya recortó el prefijo)
     # =================================================================
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR / 'co_calculator' / 'static'}),
+    path("send-report-sender/", views.send_report_to_sender, name="send_report_sender"),
 ]
