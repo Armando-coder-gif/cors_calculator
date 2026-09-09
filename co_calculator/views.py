@@ -208,3 +208,52 @@ def send_pdf_email(request):
     email.send()
 
     return JsonResponse({"ok": True})
+
+
+@csrf_exempt
+def send_report_to_sender(request):
+    """Envío automático silencioso del diagnóstico al correo del remitente (AgroCognitive)."""
+    try:
+        data = json.loads(request.body)
+    except (json.JSONDecodeError, TypeError):
+        return JsonResponse({"error": "Payload JSON inválido."}, status=400)
+
+    sender_email = (
+        getattr(settings, "DEFAULT_FROM_EMAIL", None)
+        or getattr(settings, "EMAIL_HOST_USER", None)
+        or ""
+    ).strip()
+
+    if not sender_email:
+        return JsonResponse({"error": "Sender email no configurado."}, status=500)
+
+    try:
+        pdf = _build_pdf(data)
+    except Exception as e:
+        return JsonResponse({"error": f"Error generando PDF: {str(e)}"}, status=500)
+
+    company_name = data.get("company_name", "Cliente")
+    person_name = data.get("person_name", "No especificado")
+    person_phone = data.get("person_phone", "No indicado")
+    company_email = data.get("company_email", "No indicado")
+
+    email = EmailMessage(
+        subject=f"Nuevo Diagnóstico Generado — {company_name}",
+        body=(
+            f"Se ha completado un nuevo diagnóstico en la calculadora ROI:\n\n"
+            f"• Empresa: {company_name}\n"
+            f"• Contacto: {person_name}\n"
+            f"• Teléfono: {person_phone}\n"
+            f"• Email cliente: {company_email}\n"
+            f"• Cultivo: {data.get('crop', 'N/A')}\n"
+            f"• Hectáreas: {data.get('hectares', 'N/A')}\n"
+            f"• Toneladas: {data.get('tons', 'N/A')}\n\n"
+            f"Adjunto se encuentra el diagnóstico financiero detallado."
+        ),
+        from_email=sender_email,
+        to=["ajgu2001@gmail.com"], # sender_email
+    )
+    email.attach("diagnostico_agrocognitive.pdf", pdf, "application/pdf")
+    email.send(fail_silently=False)
+
+    return JsonResponse({"ok": True})

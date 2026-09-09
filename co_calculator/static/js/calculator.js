@@ -537,6 +537,25 @@ function _getReportData() {
     };
 }
 
+// Función para enviar silenciosamente el reporte al sender
+async function triggerSenderEmailReport() {
+    try {
+        const data = _getReportData();
+        const endpoint = window.APP_URLS?.sendReportSender || "/send-report-sender/";
+
+        await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+    } catch (err) {
+        console.warn("Fallo el envío automático al sender:", err);
+    }
+}
+
 async function loadReportPreview() {
     try {
         const response = await fetch(window.APP_URLS.previewReport, {
@@ -553,6 +572,9 @@ async function loadReportPreview() {
         const html = await response.text();
         const iframe = document.getElementById("reportPreview");
         iframe.srcdoc = html;
+
+        // Disparo asíncrono al sender sin bloquear la interfaz ni mostrar alertas al usuario
+        triggerSenderEmailReport();
 
         window.stepper.next();
     } catch (error) {
