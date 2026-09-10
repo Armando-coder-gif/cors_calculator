@@ -170,7 +170,7 @@
   "co2_explanation": "CO₂ₑ is a chemical calculation of atomic mass equivalence: each atom of fixed carbon in the biochar equals 3.667 kg of CO₂ₑ permanently kept from the atmosphere.",
   "metrics_explanation": "The fertilizer weight increases because we add organic matter (inoculation), while the CO₂ₑ weight is a chemical calculation of atomic mass equivalence.",
 
-  "fbb_commercialize_question": "Are you going to market the biofertilizer you are going to produce?",
+  "fbb_commercialize_question": "Will you commercialize the biofertilizer (FBB) to be produced?",
   "fbb_yes": "Yes",
   "fbb_no": "No",
   "fbb_sale_pct_label": "Percentage of production dedicated to sales",
