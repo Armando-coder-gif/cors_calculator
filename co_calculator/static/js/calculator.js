@@ -740,7 +740,7 @@ function renderAbatement(abatement) {
                 legend: { display: false },
                 tooltip: {
                     callbacks: {
-                        label: ctx => `$${fmtNum(ctx.raw)} USD/${i18n.t("unit_tons")} CO₂ₑ`
+                        label: ctx => `$${fmtNum(ctx.raw)} USD/tCO₂ₑ`
                     }
                 }
             },
