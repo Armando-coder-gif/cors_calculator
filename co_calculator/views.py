@@ -251,7 +251,7 @@ def send_report_to_sender(request):
             f"Adjunto se encuentra el diagnóstico financiero detallado."
         ),
         from_email=sender_email,
-        to=["ajgu2001@yahoo.com"], #sender_email
+        to=[sender_email],
     )
     email.attach("diagnostico_agrocognitive.pdf", pdf, "application/pdf")
     email.send(fail_silently=False)
